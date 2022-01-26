@@ -1,6 +1,6 @@
 {
-  "title": "Why Kaniko ? Getting started with it.",
-  "description": "Kaniko is a tool to build Docker image without using the Docker Daemon, thus making available Docker builds directly inside K8S Cluster.",
+  "title": "Démarrer du bon pied avec Kaniko",
+  "description": "Kaniko est un outil open source permettant de constuire des images de conteneurs depuis un conteneur, sans interagir avec le démon Docker.",
   "details": {
     "assets": {
         "host01": [
