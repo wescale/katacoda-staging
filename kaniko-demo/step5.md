@@ -65,6 +65,6 @@ curl http://$CLUSTER_IP:5000/v2/my-super-kaniko-image/manifests/latest
 
 Nous pouvons même l'exécuter :
 ```
-docker pull http://$CLUSTER_IP:5000/my-super-kaniko-image
+docker pull $CLUSTER_IP:5000/my-super-kaniko-image
 docker run my-super-kaniko-image
 ```{{execute}}
