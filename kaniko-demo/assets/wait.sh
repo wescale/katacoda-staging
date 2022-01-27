@@ -21,9 +21,11 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
+  echo "K8S Ready"
+  echo $(kubectl get node --selector='!node-role.kubernetes.io/master')
   ssh $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}) 'mkdir -p /root/.kube'
   scp /root/.kube/config $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}):/root/.kube/config
-  echo "K8S Ready"
+
 }
 
 show_progress
