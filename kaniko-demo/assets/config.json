@@ -1,0 +1,7 @@
+{
+	"auths": {
+		"docker-registry:5000": {
+			"auth": "bG9naW46cGFzc3dvcmQ="
+		}
+	}
+}

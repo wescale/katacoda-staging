@@ -2,10 +2,9 @@
 
 Utilisons maintenant Kaniko directement sur notre cluster
 
-Pour la démonstration, nous allons héberger notre propre registry privée, directement sur le cluster, dont nous listons les images :
+Pour la démonstration, nous allons héberger notre propre registry privée, directement sur le cluster. Vérifions les images disponibles en local :
 ```sh
-docker login docker-registry:5000 -u login -p password
-docker images ls
+docker images | grep my-super-kaniko-image
 ```{{execute HOST1}}
 
 Créons notre Dockerfile. Pour la démo, nous le stockons dans une ConfigMap K8S.
@@ -17,7 +16,7 @@ EOF
 
 `kubectl create configmap kaniko-demo --from-file=Dockerfile`{{execute HOST1}}
 
-Créons maintenant un pod Kaniko, qui utilise cette ConfigMap, et qui stocke l'image batie dans notre registry privée.
+Créons maintenant un pod Kaniko, qui utilise cette ConfigMap, et qui stocke l'image batie dans notre registry privée. On a préalablement créé un secret qui contient le login / mot de passe de la registry.
 
 ```sh
 cat << EOF > kaniko.yaml
@@ -32,17 +31,22 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     args: ["--dockerfile=/workspace/Dockerfile",
             "--context=dir://workspace",
-            "--destination=docker-registry.default.svc:5000/my-super-kaniko-image:latest",
-            "--insecure"]
+            "--destination=docker-registry:5000/my-super-kaniko-image:latest",
+            "--skip-tls-verify"]
     volumeMounts:
       - name: kaniko-dockerfile
         mountPath: /workspace/Dockerfile
         subPath: Dockerfile
+      - name: docker-config
+        mountPath: /kaniko/.docker
   restartPolicy: Never
   volumes:
     - name: kaniko-dockerfile
       configMap:
         name: kaniko-demo
+    - name: docker-config
+      secret:
+        secretName: kaniko-docker-auth
 EOF
 ```{{execute HOST2}}
 
@@ -58,12 +62,13 @@ kubectl logs -f kaniko
 
 Interrogeons enfin notre registry privée pour valider que notre conteneur est bien disponible
 ```
-docker images ls
+docker login docker-registry:5000 -u login -p password
+docker pull docker-registry:5000/my-super-kaniko-image:latest
 ```{{execute HOST1}}
 
 Nous pouvons même l'exécuter :
 ```
-docker run my-super-kaniko-image
+docker run docker-registry:5000/my-super-kaniko-image
 ```{{execute HOST1}}
 
 Mission accomplie !

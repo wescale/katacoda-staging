@@ -77,3 +77,5 @@ echo $(kubectl get svc -A | grep -E "docker-registry.*5000" | awk '{print $4"  d
 
 mkdir -p /etc/docker/certs.d/docker-registry:5000
 cp registry/certs/tls.crt /etc/docker/certs.d/docker-registry:5000/.
+
+kubectl create secret generic kaniko-docker-auth --from-file=config.json
