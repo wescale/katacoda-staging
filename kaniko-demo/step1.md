@@ -7,16 +7,16 @@ Utilisons un Dockerfile simple (voire simpliste):
 FROM alpine
 CMD ["/bin/echo", "\u001b[31mIt is alive !!!\u001b[m\r\n"]
 EOF
-`{{execute}}
+`{{execute HOST2}}
 
 
 Et construisons l'image qu'il définit :
-`docker build -t my-super-image .`{{execute}}
+`docker build -t my-super-image .`{{execute HOST2}}
 
 L'image existe maintenant localement, et nous pouvons l'exécuter :
 ```sh
 clear
 docker run my-super-image
-```{{execute}}
+```{{execute HOST2}}
 
 Yeah !

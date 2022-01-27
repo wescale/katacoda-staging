@@ -10,9 +10,9 @@ Essayons cet outil localement.
 FROM alpine
 CMD ["/bin/echo", "\u001b[31mIt is alive and built by Kaniko!!!\u001b[m\r\n"]
 EOF
-`{{execute}}
+`{{execute HOST2}}
 
-`cat Dockerfile`{{execute}}
+`cat Dockerfile`{{execute HOST2}}
 
 Construisons notre image avec Kaniko, qui dispose d'un conteneur officiel, héberger sur la registry Google :
 ```
@@ -22,13 +22,13 @@ docker run \
   --destination=my-new-super-image:latest \
   --no-push \
   --tarPath=/workspace/my-new-super-image.tar
-```{{execute}}
+```{{execute HOST2}}
 
 Nous avons utilisé des options particulières pour exporter l'image localement sous forme de tar, et ne pas la pousser dans une registry (à des fins d'exemple).
 Nous pouvons maintenant charger ce tar dans notre démon Docker local et l'exécuter
 ```
 docker load --input my-new-super-image.tar
 docker run  my-new-super-image
-```{{execute}}
+```{{execute HOST2}}
 
 Retour au point de départ, nous sommes capables de construire des images localement, mais cette fois avec Kaniko.

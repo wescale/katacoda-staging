@@ -6,16 +6,16 @@ Pour la démonstration, nous allons héberger notre propre registry privée, dir
 ```sh
 export CLUSTER_IP=$(kubectl get services docker-registry -o jsonpath='{.spec.clusterIP}')
 curl http://$CLUSTER_IP:5000/v2/_catalog
-```{{execute}}
+```{{execute HOST1}}
 
 Créons notre Dockerfile. Pour la démo, nous le stockons dans une ConfigMap K8S.
 `cat << EOF > Dockerfile
 FROM alpine
 CMD ["/bin/echo", "\u001b[31mIt is alive and built by Kaniko on K8S!!!\u001b[m\r\n"]
 EOF
-`{{execute}}
+`{{execute HOST1}}
 
-`kubectl create configmap kaniko-demo --from-file=Dockerfile`{{execute}}
+`kubectl create configmap kaniko-demo --from-file=Dockerfile`{{execute HOST1}}
 
 Créons maintenant un pod Kaniko, qui utilise cette ConfigMap, et qui stocke l'image batie dans notre registry privée.
 
@@ -44,29 +44,28 @@ spec:
       configMap:
         name: kaniko-demo
 EOF
-```{{execute}}
+```{{execute HOST1}}
 
 
 Exécutons ce pod sur K8S :
-`kubectl apply -f kaniko.yaml`{{execute}}
+`kubectl apply -f kaniko.yaml`{{execute HOST1}}
 
 Patientons le temps que le conteneur soit prêt et inspectons ses logs :
 ```
 kubectl wait --timeout=90s --for condition=containersready pod kaniko
 kubectl logs -f kaniko
-```{{execute}}
+```{{execute HOST1}}
 
 Interrogeons enfin notre registry privée pour valider que notre conteneur est bien disponible
 ```
 export CLUSTER_IP=$(kubectl get services docker-registry -o jsonpath='{.spec.clusterIP}')
 curl http://$CLUSTER_IP:5000/v2/_catalog
 curl http://$CLUSTER_IP:5000/v2/my-super-kaniko-image/manifests/latest
-```{{execute}}
+```{{execute HOST1}}
 
 Nous pouvons même l'exécuter (en ajoutant une option "insecure" pour notre registry privée) :
 ```
-service docker restart
 docker run $CLUSTER_IP:5000/my-super-kaniko-image
-```{{execute}}
+```{{execute HOST1}}
 
 Mission accomplie !

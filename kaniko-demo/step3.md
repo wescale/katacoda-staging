@@ -25,17 +25,17 @@ spec:
     hostPath:
       path: /var/run/docker.sock
 EOF
-```{{execute}}
+```{{execute HOST1}}
 
 et exécutons le sur K8S :
 
-`kubectl apply -f docker-ind.yaml`{{execute}}
+`kubectl apply -f docker-ind.yaml`{{execute HOST1}}
 
 Attendons que le pod soit dans un état stable :
-`kubectl wait --timeout=90s --for condition=containersready pod docker`{{execute}}
+`kubectl wait --timeout=90s --for condition=containersready pod docker`{{execute HOST1}}
 
 Et exécutons un shell dans le conteneur *docker* :
-`kubectl exec -ti docker -- sh`{{execute}}
+`kubectl exec -ti docker -- sh`{{execute HOST2}}
 
 Construisons notre image à l'intérieur du conteneur :
 ```sh
@@ -46,7 +46,7 @@ CMD ["/bin/echo", "\u001b[31mIt is alive DinD !!!\u001b[m\r\n"]
 EOF
 docker build -t my-super-image .
 docker run -ti my-super-image
-```{{execute}}
+```{{execute HOST2}}
 
 Cela fonctionne ! Problème réglé !
 
@@ -58,21 +58,21 @@ vous voulez le constater par vous mêmes ? Alors appliquons la méthode Saint Th
 
 Sur notre cluster K8S, un pod proposant des citations de la séries *Friends* s'exécute.
 Affichons ses logs dans un nouvel onglet :
-`sleep 1; kubectl logs -f friends`{{execute T2}}
+`sleep 1; kubectl logs -f friends`{{execute HOST1}}
 
 Retournons sur le premier onglet, à l'intérieur de notre conteneur *docker*. Nous pouvons requêter le démon du noeud K8S, via la Socket montée en volume. Cherchons notre conteneur *friends* :
-`docker ps --filter="ancestor=plopezfr/friends-quotes:1.0"`{{execute T1}}
+`docker ps --filter="ancestor=plopezfr/friends-quotes:1.0"`{{execute HOST2}}
 Le conteneur remonte bien dans la liste des conteneurs en cours d'exécution,  nous avons donc accès à tous les conteneurs du noeud.
 
 Nous pouvons même le *terminer* :
-`docker kill $(docker ps -a -q --filter="ancestor=plopezfr/friends-quotes:1.0" --format="{{.ID}}")`{{execute T1}}
+`docker kill $(docker ps -a -q --filter="ancestor=plopezfr/friends-quotes:1.0" --format="{{.ID}}")`{{execute HOST2}}
 
 Sur le second onglet, les logs se sont interrompues sans explication. Et le statut du pod est édifiant :
-`kubectl get pods`{{execute T2}}
+`kubectl get pods`{{execute HOST1}}
 
 Du coup, la technique DinD est plutôt à proscrire.
 
 Fermons le second terminal, sortons du conteneur *docker* (en tapant <kbd>exit</kbd>) et faisons un brin de ménage :
 ```sh
-kubectl delete -f docker-ind.yaml
-```{{execute}}
+kubectl delete -f docker-ind.yaml && clear
+```{{execute HOST1}}
