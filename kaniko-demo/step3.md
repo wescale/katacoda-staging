@@ -10,7 +10,7 @@ cat << EOF > docker-ind.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: docker
+  name: docker-ind
 spec:
   containers:
   - name: docker
@@ -32,10 +32,10 @@ et exécutons le sur K8S :
 `kubectl apply -f docker-ind.yaml`{{execute HOST2}}
 
 Attendons que le pod soit dans un état stable :
-`kubectl wait --timeout=90s --for condition=containersready pod docker`{{execute HOST1}}
+`kubectl wait --timeout=90s --for condition=containersready pod docker-ind`{{execute HOST1}}
 
 Et exécutons un shell dans le conteneur *docker* :
-`kubectl exec -ti docker -- sh`{{execute HOST2}}
+`kubectl exec -ti docker-ind -- sh`{{execute HOST2}}
 
 Construisons notre image à l'intérieur du conteneur :
 ```sh

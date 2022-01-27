@@ -22,7 +22,7 @@ show_progress()
   printf "    \b\b\b\b"
   echo ""
   echo "K8S Ready, waiting for nodes to join Cluster"
-  kubectl wait --for=condition=Ready nodes --all
+  kubectl wait --for=condition=Ready nodes --all --timeout=120s
   ssh -q $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}) 'mkdir -p /root/.kube'
   scp -q /root/.kube/config $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}):/root/.kube/config
 

@@ -4,8 +4,8 @@ Utilisons maintenant Kaniko directement sur notre cluster
 
 Pour la démonstration, nous allons héberger notre propre registry privée, directement sur le cluster, dont nous listons les images :
 ```sh
-export CLUSTER_IP=$(kubectl get services docker-registry -o jsonpath='{.spec.clusterIP}')
-curl http://$CLUSTER_IP:5000/v2/_catalog
+docker login docker-registry:5000 -u login -p password
+docker images ls
 ```{{execute HOST1}}
 
 Créons notre Dockerfile. Pour la démo, nous le stockons dans une ConfigMap K8S.
@@ -58,14 +58,12 @@ kubectl logs -f kaniko
 
 Interrogeons enfin notre registry privée pour valider que notre conteneur est bien disponible
 ```
-export CLUSTER_IP=$(kubectl get services docker-registry -o jsonpath='{.spec.clusterIP}')
-curl http://$CLUSTER_IP:5000/v2/_catalog
-curl http://$CLUSTER_IP:5000/v2/my-super-kaniko-image/manifests/latest
+docker images ls
 ```{{execute HOST1}}
 
-Nous pouvons même l'exécuter (en ajoutant une option "insecure" pour notre registry privée) :
+Nous pouvons même l'exécuter :
 ```
-docker run $CLUSTER_IP:5000/my-super-kaniko-image
-```{{execute HOST2}}
+docker run my-super-kaniko-image
+```{{execute HOST1}}
 
 Mission accomplie !
