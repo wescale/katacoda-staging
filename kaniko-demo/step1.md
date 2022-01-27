@@ -5,7 +5,7 @@ Utilisons un Dockerfile simple (voire simpliste):
 
 `cat << EOF > Dockerfile
 FROM alpine
-CMD ["/bin/echo", "It is alive !!!"]
+CMD ["/bin/echo", "\u001b[31mIt is alive !!!\u001b[m\r\n"]
 EOF
 `{{execute}}
 
