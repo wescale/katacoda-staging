@@ -1,9 +1,9 @@
-# Une méthode dangereuse, mais qui fonction
+# Une méthode dangereuse, mais qui fonctionne
 
-Docker Daemon is running on the nodes of K8S cluster. Docker CLI sends orders tu Docker Daemon trhough a Socket. So if we mount the socket inside the docker container, we should be able to build.
-This technique is called DinD (Docker in Docker)
+Le démon Docker tourne actuellement sur les noeuds du cluster K8S. La CLI Docker interagit avec ce démon via une Socket. Si nous récupérons cette Socket dans le conteneur, la client du conteneur *docker* sera en mesure d'interagir avec un démon, et donc de construire notre image.
+Cette technique est connue sous le nom de DinD (Docker in Docker).
 
-First we create a pod running docker, and we add a sleep command to have time to enter it :
+Testons cette approche, en créant un pod, qui monte la Socket en tant que volume :
 ```sh
 cat << EOF > docker-ind.yaml
 ---
@@ -27,49 +27,52 @@ spec:
 EOF
 ```{{execute}}
 
-and run it on K8S :
+et exécutons le sur K8S :
 
 `kubectl apply -f docker-ind.yaml`{{execute}}
 
-We wait for the pod to be up and running
+Attendons que le pod soit dans un état stable :
 `kubectl wait --for condition=containersready pod docker`{{execute}}
 
-Then, we exevute a shell into the image
+Et exécutons un shell dans le conteneur *docker* :
 `kubectl exec -ti docker -- sh`{{execute}}
 
-and we try to build our image inside the containers
+Construisons notre image à l'intérieur du conteneur :
 ```sh
 cd /tmp
 cat << EOF > Dockerfile
 FROM alpine
-CMD ["/bin/echo", "It is alive !!!"]
+CMD ["/bin/echo", "\u001b[31mIt is alive DinD !!!\u001b[m\r\n"]
 EOF
 docker build -t my-super-image .
 docker run -ti my-super-image
 ```{{execute}}
 
-This is working as exepected ! Problem solved ... ?
+Cela fonctionne ! Problème réglé !
 
-Not quite.
-First, docker daemon will soon be removed from K8S distributions.
-Then, it is a major security threat : accessing docker daemon from within a container could lead to messy stuff.
+Pas vraiment.
+Tout d'abord parce que Docker ne fera plus partie des futures distributions K8S.
+Ensuite, parce que la technique DinD pose une faille de sécurité majeure : accéder au démon Docker de l'hôte depuis un conteneur peut conduire à des effets de bords a minima génants.
 
-Want to see it by yourself ? A pod is running a container quoting the sitcom *Friends*
-You can display its logs in a second tab :
+vous voulez le constater par vous mêmes ? Alors appliquons la méthode Saint Thomas (qui ne croit que ce qu'il voit).
+
+Sur notre cluster K8S, un pod proposant des citations de la séries *Friends* s'exécute.
+Affichons ses logs dans un nouvel onglet :
 `sleep 1; kubectl logs -f friends`{{execute T2}}
 
-Go back to the first tab. You can find the running container by querying the Docker Daemon, through the socket :
+Retournons sur le premier onglet, à l'intérieur de notre conteneur *docker*. Nous pouvons requêter le démon du noeud K8S, via la Socket montée en volume. Cherchons notre conteneur *friends* :
 `docker ps --filter="ancestor=plopezfr/friends-quotes:1.0"`{{execute T1}}
+Le conteneur remonte bien dans la liste des conteneurs en cours d'exécution,  nous avons donc accès à tous les conteneurs du noeud.
 
-You can even kill this container :
+Nous pouvons même le *terminer* :
 `docker kill $(docker ps -a -q --filter="ancestor=plopezfr/friends-quotes:1.0" --format="{{.ID}}")`{{execute T1}}
 
-Check pod status :
+Sur le second onglet, les logs se sont interrompues sans explication. Et le statut du pod est édifiant :
 `kubectl get pods`{{execute T2}}
 
-Not that great...
+Du coup, la technique DinD est plutôt à proscrire.
 
-You can close Terminal 2, exit the container (type `exit`) and clean it :
+Fermons le second terminal, sortons du conteneur *docker* (en tapant <kbd>exit</kbd>) et faisons un brin de ménage :
 ```sh
 kubectl delete -f docker-ind.yaml
 ```{{execute}}

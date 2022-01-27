@@ -46,7 +46,7 @@ docker build -t my-super-image .
 
 Cela conduit à une erreur. Pourquoi ? Parce que le démon Docker ne s'exécute pas dans le conteneur. Celui contient seulement la CLI.
 
-Quittez le conteneur (en tapant <kbd>exit</kbd>) et dupprimez le pod :
+Quittons le conteneur (en tapant <kbd>exit</kbd>) et supprimons le pod :
 ```sh
 kubectl delete -f docker.yaml
 ```{{execute}}
