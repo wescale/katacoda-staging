@@ -25,11 +25,11 @@ spec:
     hostPath:
       path: /var/run/docker.sock
 EOF
-```{{execute HOST1}}
+```{{execute HOST2}}
 
 et exécutons le sur K8S :
 
-`kubectl apply -f docker-ind.yaml`{{execute HOST1}}
+`kubectl apply -f docker-ind.yaml`{{execute HOST2}}
 
 Attendons que le pod soit dans un état stable :
 `kubectl wait --timeout=90s --for condition=containersready pod docker`{{execute HOST1}}
@@ -75,4 +75,4 @@ Du coup, la technique DinD est plutôt à proscrire.
 Fermons le second terminal, sortons du conteneur *docker* (en tapant <kbd>exit</kbd>) et faisons un brin de ménage :
 ```sh
 kubectl delete -f docker-ind.yaml && clear
-```{{execute HOST1}}
+```{{execute HOST2}}

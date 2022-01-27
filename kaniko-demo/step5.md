@@ -44,11 +44,11 @@ spec:
       configMap:
         name: kaniko-demo
 EOF
-```{{execute HOST1}}
+```{{execute HOST2}}
 
 
 Exécutons ce pod sur K8S :
-`kubectl apply -f kaniko.yaml`{{execute HOST1}}
+`kubectl apply -f kaniko.yaml`{{execute HOST2}}
 
 Patientons le temps que le conteneur soit prêt et inspectons ses logs :
 ```
@@ -66,6 +66,6 @@ curl http://$CLUSTER_IP:5000/v2/my-super-kaniko-image/manifests/latest
 Nous pouvons même l'exécuter (en ajoutant une option "insecure" pour notre registry privée) :
 ```
 docker run $CLUSTER_IP:5000/my-super-kaniko-image
-```{{execute HOST1}}
+```{{execute HOST2}}
 
 Mission accomplie !

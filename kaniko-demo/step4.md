@@ -12,8 +12,6 @@ CMD ["/bin/echo", "\u001b[31mIt is alive and built by Kaniko!!!\u001b[m\r\n"]
 EOF
 `{{execute HOST2}}
 
-`cat Dockerfile`{{execute HOST2}}
-
 Construisons notre image avec Kaniko, qui dispose d'un conteneur officiel, héberger sur la registry Google :
 ```
 docker run \
@@ -27,6 +25,7 @@ docker run \
 Nous avons utilisé des options particulières pour exporter l'image localement sous forme de tar, et ne pas la pousser dans une registry (à des fins d'exemple).
 Nous pouvons maintenant charger ce tar dans notre démon Docker local et l'exécuter
 ```
+clear
 docker load --input my-new-super-image.tar
 docker run  my-new-super-image
 ```{{execute HOST2}}

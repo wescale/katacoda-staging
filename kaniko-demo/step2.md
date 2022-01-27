@@ -22,11 +22,11 @@ spec:
     args: ["sleep", "10000"]
   restartPolicy: Never
 EOF
-```{{execute HOST1}}
+```{{execute HOST2}}
 
 et nous l'exécutons sur notre cluster :
 
-`kubectl apply -f docker.yaml`{{execute HOST1}}
+`kubectl apply -f docker.yaml`{{execute HOST2}}
 
 Le conteneur démarre, attendons qu'il soit disponible :
 `kubectl wait --timeout=90s --for condition=containersready pod docker`{{execute HOST1}}
@@ -50,3 +50,4 @@ Quittons le conteneur (en tapant <kbd>exit</kbd>) et supprimons le pod :
 ```sh
 kubectl delete -f docker.yaml && clear
 ```{{execute HOST2}}
+
