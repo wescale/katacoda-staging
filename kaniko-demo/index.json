@@ -32,7 +32,8 @@
       {
         "title": "Constuire une image Docker sur K8S en utilisant Kaniko",
         "code": "foreground.sh",
-        "text": "step5.md"
+        "text": "step5.md",
+        "courseData": "add-insecure-registry.sh"
       }
     ],
     "intro": {

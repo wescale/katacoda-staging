@@ -2,7 +2,7 @@
 
 Utilisons maintenant Kaniko directement sur notre cluster
 
-Pour la démonstration, nous allons héberger notre propre registry privée, directement sur le cluster :
+Pour la démonstration, nous allons héberger notre propre registry privée, directement sur le cluster, dont nous listons les images :
 ```sh
 export CLUSTER_IP=$(kubectl get services docker-registry -o jsonpath='{.spec.clusterIP}')
 curl http://$CLUSTER_IP:5000/v2/_catalog
@@ -63,8 +63,10 @@ curl http://$CLUSTER_IP:5000/v2/_catalog
 curl http://$CLUSTER_IP:5000/v2/my-super-kaniko-image/manifests/latest
 ```{{execute}}
 
-Nous pouvons même l'exécuter :
+Nous pouvons même l'exécuter (en ajoutant une option "insecure" pour notre registry privée) :
 ```
-docker pull $CLUSTER_IP:5000/my-super-kaniko-image
-docker run my-super-kaniko-image
+service docker restart
+docker run $CLUSTER_IP:5000/my-super-kaniko-image
 ```{{execute}}
+
+Mission accomplie !
