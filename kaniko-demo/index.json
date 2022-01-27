@@ -16,7 +16,7 @@
       {
         "title": "Construire une image Docker sur K8S",
         "text": "step2.md",
-        "code": "launch.sh"
+        "code": "/usr/bin/launch.sh"
       },
       {
         "title": "Constuire une image Docker sur K8S en utilisant le démon",
