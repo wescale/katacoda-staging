@@ -29,7 +29,7 @@ et nous l'exécutons sur notre cluster :
 `kubectl apply -f docker.yaml`{{execute}}
 
 Le conteneur démarre, attendons qu'il soit disponible :
-`kubectl wait --for condition=containersready pod docker`{{execute}}
+`kubectl wait --timeout=90s --for condition=containersready pod docker`{{execute}}
 
 Exécutons un shell dans le conteneur :
 `kubectl exec -ti docker -- sh`{{execute}}

@@ -32,7 +32,7 @@ et exécutons le sur K8S :
 `kubectl apply -f docker-ind.yaml`{{execute}}
 
 Attendons que le pod soit dans un état stable :
-`kubectl wait --for condition=containersready pod docker`{{execute}}
+`kubectl wait --timeout=90s --for condition=containersready pod docker`{{execute}}
 
 Et exécutons un shell dans le conteneur *docker* :
 `kubectl exec -ti docker -- sh`{{execute}}

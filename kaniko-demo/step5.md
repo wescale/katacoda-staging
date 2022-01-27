@@ -52,7 +52,7 @@ Exécutons ce pod sur K8S :
 
 Patientons le temps que le conteneur soit prêt et inspectons ses logs :
 ```
-kubectl wait --for condition=containersready pod kaniko
+kubectl wait --timeout=90s --for condition=containersready pod kaniko
 kubectl logs -f kaniko
 ```{{execute}}
 
