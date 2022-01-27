@@ -26,6 +26,7 @@ openssl req -x509 -newkey rsa:4096 -days 365 -nodes -sha256 -keyout registry/cer
 SECRETMANIFEST="secrets-auth.yaml"
 
 cat << EOF > "$SECRETMANIFEST"
+---
 apiVersion: v1
 kind: Secret
 metadata:
@@ -40,6 +41,7 @@ AUTHFILE="registry/auth/htpasswd"
 docker run --rm --entrypoint htpasswd registry:2.6.2 -Bbn "login" "password" > "$AUTHFILE"
 
 cat << EOF >> "$SECRETMANIFEST"
+---
 apiVersion: v1
 kind: Secret
 metadata:
@@ -51,6 +53,7 @@ data:
 EOF
 
 cat << EOF >> "$SECRETMANIFEST"
+---
 apiVersion: v1
 kind: Secret
 metadata:
@@ -63,3 +66,14 @@ EOF
 kubectl apply -f secrets-auth.yaml
 
 kubectl apply -f registry.yaml
+
+clusterIP=""
+while [ -z $clusterIP ]; do
+  clusterIP=$(kubectl get svc docker-registry -o jsonpath='{.spec.clusterIP}')
+  [ -z "$clusterIP" ] && sleep 10
+done
+
+echo $(kubectl get svc -A | grep -E "docker-registry.*5000" | awk '{print $4"  docker-registry"}') >> /etc/hosts
+
+mkdir -p /etc/docker/certs.d/docker-registry:5000
+cp registry/certs/tls.crt /etc/docker/certs.d/docker-registry:5000/.
