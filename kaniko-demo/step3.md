@@ -54,7 +54,7 @@ Pas vraiment.
 Tout d'abord parce que Docker ne fera plus partie des futures distributions K8S.
 Ensuite, parce que la technique DinD pose une faille de sécurité majeure : accéder au démon Docker de l'hôte depuis un conteneur peut conduire à des effets de bords a minima génants.
 
-vous voulez le constater par vous mêmes ? Alors appliquons la méthode Saint Thomas (qui ne croit que ce qu'il voit).
+Vous voulez le constater par vous mêmes ? Alors appliquons la méthode Saint Thomas (qui ne croit que ce qu'il voit).
 
 Sur notre cluster K8S, un pod proposant des citations de la séries *Friends* s'exécute.
 Affichons ses logs dans un nouvel onglet :
@@ -62,17 +62,17 @@ Affichons ses logs dans un nouvel onglet :
 
 Retournons sur le premier onglet, à l'intérieur de notre conteneur *docker*. Nous pouvons requêter le démon du noeud K8S, via la Socket montée en volume. Cherchons notre conteneur *friends* :
 `docker ps --filter="ancestor=plopezfr/friends-quotes:1.0"`{{execute HOST2}}
-Le conteneur remonte bien dans la liste des conteneurs en cours d'exécution,  nous avons donc accès à tous les conteneurs du noeud.
+Le conteneur remonte bien dans la liste des conteneurs en cours d'exécution, nous avons donc accès à tous les conteneurs du noeud.
 
 Nous pouvons même le *terminer* :
 `docker kill $(docker ps -a -q --filter="ancestor=plopezfr/friends-quotes:1.0" --format="{{.ID}}")`{{execute HOST2}}
 
-Sur le second onglet, les logs se sont interrompues sans explication. Et le statut du pod est édifiant :
+Sur le second onglet, les logs se sont interrompus sans explication. Et le statut du pod est édifiant :
 `kubectl get pods`{{execute HOST1}}
 
 Du coup, la technique DinD est plutôt à proscrire.
 
-Fermons le second terminal, sortons du conteneur *docker* (en tapant <kbd>exit</kbd>) et faisons un brin de ménage :
+Sortons du conteneur *docker* (en tapant <kbd>exit</kbd>) et faisons un brin de ménage :
 ```sh
 kubectl delete -f docker-ind.yaml && clear
 ```{{execute HOST2}}
