@@ -1,22 +1,23 @@
-# The right way, on K8S
+# Kaniko sur K8S
 
-We can now do the same thing on K8S.
+Utilisons maintenant Kaniko directement sur notre cluster
 
-We have a private registry running on K8S for demo purpose :
+Pour la démonstration, nous allons héberger notre propre registry privée, directement sur le cluster :
 ```sh
 export CLUSTER_IP=$(kubectl get services docker-registry -o jsonpath='{.spec.clusterIP}')
 curl http://$CLUSTER_IP:5000/v2/_catalog
 ```{{execute}}
 
-First we create our file. For demo purpose we will store it into a config map.
-
+Créons notre Dockerfile. Pour la démo, nous le stockons dans une ConfigMap K8S.
 `cat << EOF > Dockerfile
 FROM alpine
-CMD ["/bin/echo", "It is alive and built by Kaniko on K8S !!!"]
+CMD ["/bin/echo", "\u001b[31mIt is alive and built by Kaniko on K8S!!!\u001b[m\r\n"]
 EOF
 `{{execute}}
 
 `kubectl create configmap kaniko-demo --from-file=Dockerfile`{{execute}}
+
+Créons maintenant un pod Kaniko, qui utilise cette ConfigMap, et qui stocke l'image batie dans notre registry privée.
 
 ```sh
 cat << EOF > kaniko.yaml
@@ -45,16 +46,25 @@ spec:
 EOF
 ```{{execute}}
 
+
+Exécutons ce pod sur K8S :
 `kubectl apply -f kaniko.yaml`{{execute}}
 
-Check that the image is created
+Patientons le temps que le conteneur soit prêt et inspectons ses logs :
 ```
 kubectl wait --for condition=containersready pod kaniko
 kubectl logs -f kaniko
 ```{{execute}}
 
+Interrogeons enfin notre registry privée pour valider que notre conteneur est bien disponible
 ```
 export CLUSTER_IP=$(kubectl get services docker-registry -o jsonpath='{.spec.clusterIP}')
 curl http://$CLUSTER_IP:5000/v2/_catalog
 curl http://$CLUSTER_IP:5000/v2/my-super-kaniko-image/manifests/latest
+```{{execute}}
+
+Nous pouvons même l'exécuter :
+```
+docker pull http://$CLUSTER_IP:5000/my-super-kaniko-image
+docker run my-super-kaniko-image
 ```{{execute}}
