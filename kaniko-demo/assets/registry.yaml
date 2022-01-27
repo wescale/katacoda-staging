@@ -1,42 +1,55 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: docker-registry
+  name: "docker-registry-deploy"
 spec:
-  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
-      app: docker-registry
-  template:
+      app: registry
+  replicas: 1 
+  template: 
     metadata:
       labels:
-        app: docker-registry
+        app: registry
     spec:
       containers:
-        - name: docker-registry
-          image: registry:2.6.2
-          env:
-            - name: REGISTRY_HTTP_SECRET
-              value: azerty
-            - name: REGISTRY_HTTP_ADDR
-              value: ":5000"
-            - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
-              value: "/tmp"
-          ports:
-          - name: http
-            containerPort: 5000
+      - name: registry
+        image: registry:2.6.2
+        volumeMounts:
+        - name: certs-vol
+          mountPath: "/certs"
+          readOnly: true
+        - name: auth-vol
+          mountPath: "/auth"
+          readOnly: true
+        env:
+        - name: REGISTRY_AUTH
+          value: "htpasswd"
+        - name: REGISTRY_AUTH_HTPASSWD_REALM
+          value: "Registry Realm"
+        - name: REGISTRY_AUTH_HTPASSWD_PATH
+          value: "/auth/htpasswd"
+        - name: REGISTRY_HTTP_TLS_CERTIFICATE
+          value: "/certs/tls.crt"
+        - name: REGISTRY_HTTP_TLS_KEY
+          value: "/certs/tls.key"
+      volumes:
+      - name: certs-vol
+        secret:
+          secretName: certs-secret-docker-registry
+      - name: auth-vol
+        secret:
+          secretName: auth-secret-docker-registry
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: docker-registry
-  labels:
-    app: docker-registry
 spec:
   selector:
-    app: docker-registry
+    app: registry
   ports:
-  - name: http
-    port: 5000
-# http://docker-registry.default.svc:5000
+  - port: 5000
+    targetPort: 5000
