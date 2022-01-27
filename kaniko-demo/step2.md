@@ -1,14 +1,13 @@
-# Not working :'(
+# La méthode qui échoue
 
-Imagine now that you need to build your image in a distant CI (incredible...)
+Généralement, la construction d'images se fait au sein de l'intégration continue, et non pas locallement.
+La méthode classique consiste à utiliser un Worker, piloté par la CI, qui héberge le démon Docker. On se retrouve donc dans un cas similaire à celui d'une construction locale, et tout fonctionne comme attendu.
 
-The common way is to have an independent CI runner, hosting the Docker Daemon, and doing the exact same thing you did on your local computer.
+Mais a t'on vraiment besoin d'une autre machine, d'une autre infrastructure, quand notre but est de déployer sur un cluster K8S ? Ne pourrait on pas plutot utiliser les ressources à notre disposition pour faire le build ?
 
-But why is there a need for another machine / service, if we plan to run our container on K8S. Couldn't we use the existing K8S infrastructure to build our container upon ?
+D'ailleurs, Docker propose une image officielle... docker ! Utilisons là pour construire notre image directement sur K8S !
 
-There is an official Docker image, so let's use it.
-
-First we create a pod running docker, and we add a sleep command to have time to enter it :
+En premier lieu, nous allons déployer un pod qui contient l'image *docker*, et un simple *sleep* pour que la t^che ne se termine pas immédiatement :
 ```sh
 cat << EOF > docker.yaml
 ---
@@ -25,29 +24,29 @@ spec:
 EOF
 ```{{execute}}
 
-and run it on K8S :
+et nous l'exécutons sur notre cluster :
 
 `kubectl apply -f docker.yaml`{{execute}}
 
-We wait for the pod to be up and running
+Le conteneur démarre, attendons qu'il soit disponible :
 `kubectl wait --for condition=containersready pod docker`{{execute}}
 
-Then, we exevute a shell into the image
+Exécutons un shell dans le conteneur :
 `kubectl exec -ti docker -- sh`{{execute}}
 
-and we try to build our image inside the containers
+et construisons notre image comme nous l'avons fait à l'étape précédente :
 ```sh
 cd /tmp
 cat << EOF > Dockerfile
 FROM alpine
-CMD ["/bin/echo", "It is alive !!!"]
+CMD ["/bin/echo", "\u001b[31mIt is alive !!!\u001b[m\r\n"]
 EOF
 docker build -t my-super-image .
 ```{{execute}}
 
-You should see an error. Why ? Because Docker Daemon is not running inside this container. Docker container only contains docker CLI.
+Cela conduit à une erreur. Pourquoi ? Parce que le démon Docker ne s'exécute pas dans le conteneur. Celui contient seulement la CLI.
 
-Exit the container (type `exit`)
+Quittez le conteneur (en tapant <kbd>exit</kbd>) et dupprimez le pod :
 ```sh
 kubectl delete -f docker.yaml
 ```{{execute}}

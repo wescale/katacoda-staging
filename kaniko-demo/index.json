@@ -15,7 +15,7 @@
         "text": "step1.md"
       },
       {
-        "title": "Tenter de construire une image Docker sur K8S",
+        "title": "Construire une image Docker sur K8S",
         "text": "step2.md",
         "code": "waitForKub.sh"
       },

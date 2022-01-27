@@ -1,4 +1,4 @@
-# A dangerous way
+# Une méthode dangereuse, mais qui fonction
 
 Docker Daemon is running on the nodes of K8S cluster. Docker CLI sends orders tu Docker Daemon trhough a Socket. So if we mount the socket inside the docker container, we should be able to build.
 This technique is called DinD (Docker in Docker)
