@@ -14,6 +14,9 @@ Et construisons l'image qu'il définit :
 `docker build -t my-super-image .`{{execute}}
 
 L'image existe maintenant localement, et nous pouvons l'exécuter :
-`docker run my-super-image`{{execute}}
+```sh
+clear
+docker run my-super-image
+```{{execute}}
 
 Yeah !
