@@ -11,26 +11,26 @@
     },
     "steps": [
       {
-        "title": "Build a Docker image locally",
+        "title": "Constuire une image Docker localement",
         "text": "step1.md"
       },
       {
-        "title": "Build a Docker on K8S, first try",
+        "title": "Tenter de construire une image Docker sur K8S",
         "text": "step2.md",
         "code": "waitForKub.sh"
       },
       {
-        "title": "Build a Docker on K8S, second try",
+        "title": "Constuire une image Docker sur K8S en utilisant le démon",
         "text": "step3.md",
         "courseData": "friends.sh"
       },
       {
-        "title": "Build a Docker on K8S, the right way",
+        "title": "Constuire une image Docker localement en utilisant Kaniko",
         "code": "foreground.sh",
         "text": "step4.md"
       },
       {
-        "title": "Build a Docker on K8S, the right way",
+        "title": "Constuire une image Docker sur K8S en utilisant Kaniko",
         "code": "foreground.sh",
         "text": "step5.md"
       }
@@ -47,7 +47,7 @@
   "environment": {
     "uilayout": "terminal",
     "uisettings": "docker",
-    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+    "uimessage1": "\u001b[32mYTerminal interactif.\u001b[m\r\n"
   },
   "backend": {
     "imageid": "kubernetes-cluster-running:1.18"

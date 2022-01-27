@@ -12,4 +12,5 @@ De cette manière, il n'est pas nécessaire de disposer de machines tierces pour
 
 - Construire une image localement
 - Construire une image sur K8S, de la mauvaise manière
+- Construire une image localement, en utilisant Kaniko
 - Construire une image sur K8S, en utilisant Kaniko

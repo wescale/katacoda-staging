@@ -1,7 +1,7 @@
-This is the baseline when you work with containers.
-You buils them locally, using the Docker Daemon. And everything if fine as long as you do it on your own computer.
+Constuire une image localement est généralement la première chose que l'on apprend en utilisant Docker.
+La ligne de commande (CLI) interagit avec le démon Docker local, et permet d'enchaine les instructions contenues dans le Dockerfile pour constuire une image.
 
-Everything starts with a very simple Dockerfile :
+Utilisons un Dockerfile simple (voire simpliste):
 
 `cat << EOF > Dockerfile
 FROM alpine
@@ -9,12 +9,11 @@ CMD ["/bin/echo", "It is alive !!!"]
 EOF
 `{{execute}}
 
-`cat Dockerfile`{{execute}}
 
-First, we build it :
+Et construisons l'image qu'il définit :
 `docker build -t my-super-image .`{{execute}}
 
-Then, we run it :
+L'image existe maintenant localement, et nous pouvons l'exécuter :
 `docker run my-super-image`{{execute}}
 
 Yeah !
