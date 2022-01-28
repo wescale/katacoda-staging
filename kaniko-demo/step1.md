@@ -1,5 +1,5 @@
 Constuire une image localement est généralement la première chose que l'on apprend en utilisant Docker.
-La ligne de commande (CLI) interagit avec le démon Docker local, et permet d'enchaine les instructions contenues dans le Dockerfile pour constuire une image.
+La ligne de commande (CLI) interagit avec le démon Docker local, et permet d'enchainer les instructions contenues dans le Dockerfile pour construire une image.
 
 Utilisons un Dockerfile simple (voire simpliste):
 

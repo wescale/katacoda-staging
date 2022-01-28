@@ -1,6 +1,6 @@
 # Kaniko sur K8S
 
-Utilisons maintenant Kaniko directement sur notre cluster
+Utilisons maintenant Kaniko directement sur notre cluster.
 
 Pour la démonstration, nous allons héberger notre propre registry privée, directement sur le cluster. Vérifions les images disponibles en local :
 ```sh
@@ -60,7 +60,7 @@ kubectl wait --timeout=90s --for condition=containersready pod kaniko
 kubectl logs -f kaniko
 ```{{execute HOST1}}
 
-Interrogeons enfin notre registry privée pour valider que notre conteneur est bien disponible
+Interrogeons enfin notre registry privée pour valider que notre conteneur est bien disponible :
 ```
 docker login docker-registry:5000 -u login -p password
 docker pull docker-registry:5000/my-super-kaniko-image:latest
