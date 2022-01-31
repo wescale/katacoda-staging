@@ -1,0 +1,49 @@
+{
+  "title": "TFSec - Basic",
+  "description": "Try out TFSec.",
+  "difficulty": "Beginner",
+  "time": "5 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Installer TFSec",
+        "text": "step1.md",
+        "verify": "scripts/step1-verify.sh"
+      },
+      {
+        "title": "Essayer TFSec",
+        "text": "step2.md",
+        "verify": "scripts/step2-verify.sh"
+      },
+      {
+        "title": "Corriger le problème",
+        "text": "step3.md",
+        "verify": "scripts/step3-verify.sh"
+      },
+      {
+        "title": "Corriger le problème - alternative",
+        "text": "step4.md",
+        "verify": "scripts/step4-verify.sh",
+        "courseData": "scripts/step4-coursedata.sh"
+      }
+    ],
+    "assets": {
+      "host01": [
+          {"file": "main.tf", "target": "/tmp/"}
+      ]
+    },
+    "intro": {
+      "text": "intro.md",
+      "credits": "WeScale"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal"
+  },
+  "backend": {
+    "imageid": "bash1804"
+  }
+}
