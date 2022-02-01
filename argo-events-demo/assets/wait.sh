@@ -43,13 +43,13 @@ show_progress()
 
   sleep 2
 
-  wget https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-sa.yaml
+  wget -q https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-sa.yaml
 
   kubectl apply -f argo-server-sa.yaml
 
   kubectl apply -f deployment.yaml
 
-  wget https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-service.yaml
+  wget -q https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-service.yaml
 
   sleep 2
 

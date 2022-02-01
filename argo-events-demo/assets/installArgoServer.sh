@@ -6,7 +6,7 @@ helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --version='<4'
 
-wget https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-sa.yaml
+wget -q https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-sa.yaml
 
 kubectl apply -f argo-server-sa.yaml
 
@@ -61,7 +61,7 @@ EOF
 
 kubectl apply -f deployment.yaml
 
-wget https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-service.yaml
+wget -q https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-service.yaml
 
 kubectl apply -f argo-server-service.yaml
 
