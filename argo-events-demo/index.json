@@ -13,7 +13,7 @@
       {
         "title": "Argo events",
         "text": "step1.md",
-        "course": "waitForKub.sh"
+        "code": "waitForKub.sh"
       }
     ],
     "intro": {
