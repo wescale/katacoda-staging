@@ -23,28 +23,35 @@ show_progress()
   echo ""
   echo "K8S Ready, waiting for nodes to join Cluster"
 
+  sleep 2
+
   kubectl wait --for=condition=Ready nodes --all --timeout=120s
   ssh -q $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}) 'mkdir -p /root/.kube'
   scp -q /root/.kube/config $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}):/root/.kube/config
 
+  sleep 2
 
   echo "Nodes Ready, waiting ingress deployment"
 
   kubectl create namespace ingress-nginx
 
+  sleep 2
+
   helm upgrade --install ingress-nginx ingress-nginx \
     --repo https://kubernetes.github.io/ingress-nginx \
     --namespace ingress-nginx --version='<4'
+
+  sleep 2
 
   wget https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-sa.yaml
 
   kubectl apply -f argo-server-sa.yaml
 
-
-
   kubectl apply -f deployment.yaml
 
   wget https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-service.yaml
+
+  sleep 2
 
   kubectl apply -f argo-server-service.yaml
 
