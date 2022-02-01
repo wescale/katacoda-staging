@@ -9,7 +9,7 @@
   },
     "steps": [
       {
-        "title": "Atgo events"",
+        "title": "Argo events",
         "text": "step1.md",
         "courseData": "waitForKub.sh"
       }
