@@ -51,6 +51,8 @@ show_progress()
   --timeout=120s
 
   kubectl apply -f ingress.yaml
+
+  sleep 20
 }
 
 show_progress
