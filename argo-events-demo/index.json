@@ -9,7 +9,7 @@
   },
     "steps": [
       {
-        "title": "Build a Docker image locally",
+        "title": "Atgo events"",
         "text": "step1.md",
         "courseData": "waitForKub.sh"
       }
@@ -22,11 +22,11 @@
     }
   },
   "environment": {
-    "uilayout": "terminal-terminal",
+    "uilayout": "terminal-iframe-split",
     "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n",
-    "uimessage2": "\u001b[32mTerminal interactif - K8S Node.\u001b[m\r\n"
-  },
+},
   "backend": {
-    "imageid": "kubernetes-cluster-running:1.18"
+    "imageid": "kubernetes-cluster-running:1.18",
+    "port": 80
   }
 }
