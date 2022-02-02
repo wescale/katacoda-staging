@@ -1,3 +1,6 @@
+`clear && kubectl exec $(kubectl get pods -l app=argo-server -o=jsonpath='{.items[0].metadata.name}') -- argo auth token && printf "\n\n"`{{execute HOST1}}
+
+
 Pour commencer, nous allons installer ArgoEvents, depuis les fichiers officiels, dans son propre namespace :
 `kubectl create namespace argo-events
 `{{execute HOST1}}
@@ -36,21 +39,21 @@ spec:
 EOF
 ```{{execute}}
 
-kubectl --namespace argo-events apply \
-    --filename event-source.yaml
+`kubectl --namespace argo-events apply \
+    --filename event-source.yaml`{{execute HOST1}}
 
-kubectl --namespace argo-events \
-    get eventsources
-
-
-kubectl --namespace argo-events \
-    get services
-
-kubectl --namespace argo-events \
-    get pods
+`kubectl --namespace argo-events \
+    get eventsources`{{execute HOST1}}
 
 
+`kubectl --namespace argo-events \
+    get services`{{execute HOST1}}
 
+`kubectl --namespace argo-events \
+    get pods`{{execute HOST1}}
+
+
+```
 cat << EOF > ingress.yaml
 ---
 apiVersion: networking.k8s.io/v1beta1
@@ -68,17 +71,19 @@ spec:
           serviceName: webhook-eventsource-svc
           servicePort: 15000
 EOF
+```{{execute HOST1}}
 
-kubectl apply -f ingress.yaml
+`kubectl apply -f ingress.yaml{{execute HOST1}}
 
-curl -X POST \
+`curl -X POST \
     -H "Content-Type: application/json" \
     -d '{"message":"My first message"}' \
-    http://controlplane/notify-me
+    http://controlplane/notify-me`{{execute HOST1}}
 
 #file
 #calendar
 
+```
 cat << EOF > sensor.yaml
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -121,28 +126,25 @@ spec:
               dataKey: body
             dest: spec.containers.0.args.1
 EOF
+```{{execute HOST1}}
 
-kubectl --namespace argo-events apply \
-    --filename sensor.yaml
+`kubectl --namespace argo-events apply \
+    --filename sensor.yaml`{{execute HOST1}}
 
-curl -X POST \
+
+`curl -X POST \
     -H "Content-Type: application/json" \
     -d '{"message":"My first message"}' \
-    http://controlplane/notify-me
+    http://controlplane/notify-me`{{execute HOST1}}
 
-kubectl --namespace argo-events get pods
 
-kubectl --namespace argo-events logs \
-    --selector app=echo-payload
+`kubectl --namespace argo-events get pods`{{execute HOST1}}
 
-kubectl --namespace argo-events \
+
+`kubectl --namespace argo-events logs \
+    --selector app=echo-payload`{{execute HOST1}}
+
+
+`kubectl --namespace argo-events \
     delete pods \
-    --selector app=echo-payload
-
-First, we build it :
-`docker build -t my-super-image .`{{execute}}
-
-Then, we run it :
-`docker run my-super-image`{{execute}}
-
-Yeah !
+    --selector app=echo-payload`{{execute HOST1}}
