@@ -53,7 +53,7 @@ EOF
     get pods`{{execute HOST1}}
 
 
-```
+```sh
 cat << EOF > ingress.yaml
 ---
 apiVersion: networking.k8s.io/v1beta1
@@ -83,7 +83,7 @@ EOF
 #file
 #calendar
 
-```
+```sh
 cat << EOF > sensor.yaml
 ---
 apiVersion: argoproj.io/v1alpha1
