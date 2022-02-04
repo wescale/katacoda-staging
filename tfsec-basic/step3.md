@@ -1,10 +1,14 @@
 # Corriger le problème
 
-Ouvrez dans un nouvel onglet le lien de la documentation TFSec : <a href="https://aquasecurity.github.io/tfsec/v1.0.2/checks/aws/kms/auto-rotate-keys/" target="_blank">Documentation TFSec - aws/kms/auto-rotate-keys</a>
+Ouvrez dans un nouvel onglet le lien de la documentation TFSec :
+ <a href="https://aquasecurity.github.io/tfsec/v1.0.2/checks/aws/kms/auto-rotate-keys/" target="_blank">Documentation TFSec - aws/kms/auto-rotate-keys</a>
 
-Vous y obtenez de nombreuses informations, dont le moyen de corriger le problème détecté.
+Vous y obtenez de nombreuses informations, dont le moyen de corriger le problème détecté :
 
 ![Secure Example]](assets/secure-example.png)
 
-Corrigez le problème :
-`sed -i 's/\#FIXIT/enable_key_rotation     = true/' main.tf`{{execute}}
+> **NB** : La documentation nous informe que la bonne pratique de sécurité est d'activer la rotation automatique des clés.
+
+Corrigez le problème comme indiqué dans la documentation :
+`sed -i 's/true/false/' main.tf`{{execute}}
+

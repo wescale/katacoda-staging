@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -q "true" main.tf && echo "done"
+tfsec . &> /dev/null && echo "done"
