@@ -11,7 +11,8 @@
       }
     ],
     "intro": {
-      "text": "intro.md"
+      "text": "intro.md",
+      "credits": "Formation créée par [WeScale](https://training.wescale.fr)"
     },
     "finish": {
       "text": "finish.md"
