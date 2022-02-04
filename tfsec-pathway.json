@@ -1,0 +1,18 @@
+{
+    "title": "TFSec de A à Z",
+    "description": "Apprenez à sécuriser vos infrastructures Terraform avec TFSec !",
+    "icon": "fa-unlock-alt",
+    "courses":
+    [
+      {
+        "course_id": "tfsec-basic",
+        "title": "TFSec - Simple, basique",
+        "description": "Venez apprendre à sécuriser vos infrastructures Terraform avec TFSec !"
+      },
+      {
+        "course_id": "tfsec-advanced",
+        "title": "TFSec - Avancé",
+        "description": "Venez approfondir votre maîtrise de TFSec !"
+      }
+    ]
+}
