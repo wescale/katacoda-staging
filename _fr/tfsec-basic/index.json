@@ -1,0 +1,45 @@
+{
+  "title": "TFSec - Simple, basique",
+  "description": "Venez apprendre à sécuriser vos infrastructures Terraform avec TFSec !",
+  "difficulty": "Beginner",
+  "time": "5 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Etape 1 - Installer TFSec",
+        "text": "step1.md",
+        "verify": "scripts/step1-verify.sh"
+      },
+      {
+        "title": "Etape 2 - Essayer TFSec",
+        "text": "step2.md",
+        "courseData": "scripts/step2-coursedata.sh",
+        "verify": "scripts/step2-verify.sh"
+      },
+      {
+        "title": "Etape 3 - Corriger le problème",
+        "text": "step3.md",
+        "verify": "scripts/step3-verify.sh"
+      },
+      {
+        "title": "Etape 4 - Faire abstraction du problème",
+        "text": "step4.md",
+        "courseData": "scripts/step4-coursedata.sh",
+        "verify": "scripts/step4-verify.sh"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "Formation créée par [WeScale](https://training.wescale.fr)"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal"
+  },
+  "backend": {
+    "imageid": "bash1804"
+  }
+}
