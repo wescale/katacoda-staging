@@ -22,8 +22,8 @@ spec:
                 - ALL
           args: [ server ]
           env:
-          - name: BASE_HREF
-            value: /argo/
+          #- name: BASE_HREF
+          #  value: /argo/
           ports:
             - name: web
               containerPort: 2746

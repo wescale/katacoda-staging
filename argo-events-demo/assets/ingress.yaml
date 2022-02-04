@@ -13,8 +13,5 @@ spec:
           - backend:
               serviceName: argo-server
               servicePort: 2746
-            path: /argo/(.*)
-          - backend:
-              serviceName: argo-server
-              servicePort: 2746
-            path: /argo
+            #path: /argo(/|$)(.*)
+            path: /(.*)
