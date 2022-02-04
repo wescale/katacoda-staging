@@ -10,11 +10,6 @@
         "text": "step1.md"
       }
     ],
-    "assets": {
-      "host01": [
-          {}
-      ]
-    },
     "intro": {
       "text": "intro.md"
     },
