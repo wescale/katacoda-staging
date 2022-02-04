@@ -19,7 +19,7 @@
       {
         "title": "Etape 3 - Corriger le problème",
         "text": "step3.md",
-        "verify": "scripts/step3-verify.sh",
+        "verify": "scripts/step3-verify.sh"
       },
       {
         "title": "Etape 4 - Faire abstraction du problème",
