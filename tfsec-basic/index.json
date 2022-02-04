@@ -13,24 +13,24 @@
       {
         "title": "Etape 2 - Essayer TFSec",
         "text": "step2.md",
+        "courseData": "scripts/step2-coursedata.sh",
         "verify": "scripts/step2-verify.sh"
       },
       {
         "title": "Etape 3 - Corriger le problème",
         "text": "step3.md",
         "verify": "scripts/step3-verify.sh",
-        "courseData": "scripts/step3-coursedata.sh"
       },
       {
         "title": "Etape 4 - Faire abstraction du problème",
         "text": "step4.md",
-        "verify": "scripts/step4-verify.sh",
-        "courseData": "scripts/step4-coursedata.sh"
+        "courseData": "scripts/step4-coursedata.sh",
+        "verify": "scripts/step4-verify.sh"
       }
     ],
     "intro": {
       "text": "intro.md",
-      "credits": "[WeScale](https://training.wescale.fr)"
+      "credits": "Formation créée par [WeScale](https://training.wescale.fr)"
     },
     "finish": {
       "text": "finish.md"
