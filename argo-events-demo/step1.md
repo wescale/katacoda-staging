@@ -73,7 +73,7 @@ spec:
 EOF
 ```{{execute HOST1}}
 
-`kubectl apply -f ingress.yaml{{execute HOST1}}
+`kubectl apply -f ingress.yaml`{{execute HOST1}}
 
 `curl -X POST \
     -H "Content-Type: application/json" \

@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: argo-server
+  name: pulsar
   annotations:
     ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/backend-protocol: https # ingress-nginx
@@ -11,10 +11,7 @@ spec:
     - http:
         paths:
           - backend:
-              serviceName: argo-server
-              servicePort: 2746
-            path: /argo/(.*)
-          - backend:
-              serviceName: argo-server
-              servicePort: 2746
-            path: /argo
+              serviceName: pulsar
+              servicePort: 8080
+            #path: /argo(/|$)(.*)
+            path: /pulsar
