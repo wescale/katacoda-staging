@@ -28,11 +28,6 @@
         "courseData": "scripts/step4-coursedata.sh"
       }
     ],
-    "assets": {
-      "host01": [
-          {}
-      ]
-    },
     "intro": {
       "text": "intro.md",
       "credits": "[WeScale](https://training.wescale.fr)"
