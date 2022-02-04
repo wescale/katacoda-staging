@@ -14,4 +14,4 @@ spec:
               serviceName: argo-server
               servicePort: 2746
             #path: /argo(/|$)(.*)
-            path: /(.*)
+            path: /
