@@ -260,7 +260,7 @@ cat << EOF > slack-trigger.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: webhook
+  name: redis-sensor
 spec:
   dependencies:
     - name: redis-notification
@@ -270,7 +270,7 @@ spec:
     - template:
         name: slack-trigger
         slack:
-          channel: weshare
+          channel: test-weshare
           slackToken:
             key: token
             name: slack-secret
@@ -283,3 +283,5 @@ EOF
 ```{{execute HOST1}}
 
 `kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
+
+`kubectl exec $(kubectl get pods -l app=redis -o jsonpath="{.items[0].metadata.name}") -- redis-cli publish NOTIFY "Test de Julien"`{{execute HOST1}}
