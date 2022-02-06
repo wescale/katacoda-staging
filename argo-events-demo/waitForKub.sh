@@ -1,2 +1,2 @@
 #/bin/bash
-sleep 1; ./wait.sh
+sleep 2; ./wait.sh

@@ -1,5 +1,14 @@
+Veuillez patienter en attendant que nous installions les éléments suivants :
+Nginx Ingress Controller
+Argo Server
+
+Tout d'abord, nous allons nous authentifier auprès de Argo Server. Rafraichissez la fenêtre supérieure (lien Try Again ou bouton Display Port). Exécutez la ligne ci après.
+
 `clear && kubectl exec $(kubectl get pods -l app=argo-server -o=jsonpath='{.items[0].metadata.name}') -- argo auth token && printf "\n\n"`{{execute HOST1}}
 
+et copiez / collez le résultat ("Bearer xxx...xxx...") dans la case du milieu  (argo auth token), puis cliquez sur login.
+Fermez les deux fenêtres d'information et cliquez sur "Event Flow" (ajouter une image).
+Dans la ligne de commande de droite, modifiez le namespace "undefined" pour argo-events. Validez avec entrée.
 
 Pour commencer, nous allons installer ArgoEvents, depuis les fichiers officiels, dans son propre namespace :
 `kubectl create namespace argo-events
@@ -11,13 +20,13 @@ Pour commencer, nous allons installer ArgoEvents, depuis les fichiers officiels,
 
 # Argo Events, SA, ClusterRoles, Sensor Controller, EventBus Controller and EventSource Controller.
 
-# View stuff
-
 Installons aussi l'eventbus, afin de permettre la circulation des évènements au sein du système.
 
 `kubectl --namespace argo-events apply \
     --filename https://raw.githubusercontent.com/argoproj/argo-events/stable/examples/eventbus/native.yaml
 `{{execute HOST1}}
+
+Il est temps de créer notre premier évènement.
 
 ```sh
 cat << EOF > event-source.yaml
@@ -42,6 +51,11 @@ EOF
 `kubectl --namespace argo-events apply \
     --filename event-source.yaml`{{execute HOST1}}
 
+  
+Vous devriez voir apparaitre votre premier Event, qui est un webhook. Depuis l'interface graphique, vous pouvez accéder au descrupteur, ainsi qu'aux logs.
+
+On peut confirmer à l'aide de la ligne de commande.
+
 `kubectl --namespace argo-events \
     get eventsources`{{execute HOST1}}
 
@@ -52,6 +66,8 @@ EOF
 `kubectl --namespace argo-events \
     get pods`{{execute HOST1}}
 
+
+Nous allons exposer notre webhook via un ingress.
 
 ```sh
 cat << EOF > ingress.yaml
@@ -75,13 +91,21 @@ EOF
 
 `kubectl apply -f ingress.yaml`{{execute HOST1}}
 
+Nous pouvons maintenant envoyer des évènements à notre hook.
+
 `curl -X POST \
     -H "Content-Type: application/json" \
     -d '{"message":"My first message"}' \
     http://controlplane/notify-me`{{execute HOST1}}
 
+En consultant les logs de notre pod, on constate que l'évènement est reçu.
+`kubectl logs -n argo-events $(kubectl --namespace argo-events get pods -l eventsource-name=webhook -o jsonpath="{.items[0].metadata.name}")`{{execute HOST1}}
+
 #file
 #calendar
+
+
+Pour l'instant, cet évènement ne déclenche aucune réaction/ Pour cela, il nous faut le lien à un sensor (qui détecte ses occurences) et à ou plusieurs triggers, les actions déclenchées sur réception.
 
 ```sh
 cat << EOF > sensor.yaml
@@ -131,6 +155,10 @@ EOF
 `kubectl --namespace argo-events apply \
     --filename sensor.yaml`{{execute HOST1}}
 
+Dans l'interface graphique, on constate que la chaine se complète.
+
+
+Renvoyons un évènement à notre webhook :
 
 `curl -X POST \
     -H "Content-Type: application/json" \
@@ -138,8 +166,11 @@ EOF
     http://controlplane/notify-me`{{execute HOST1}}
 
 
+On constate que de nouveux pods sont créés
+
 `kubectl --namespace argo-events get pods`{{execute HOST1}}
 
+Et qu'ils ont correctement réagi à nos évènements.
 
 `kubectl --namespace argo-events logs \
     --selector app=echo-payload`{{execute HOST1}}
@@ -148,6 +179,8 @@ EOF
 `kubectl --namespace argo-events \
     delete pods \
     --selector app=echo-payload`{{execute HOST1}}
+
+TO BE REDACTED
 
 ```sh
 cat << EOF > redis.yaml
