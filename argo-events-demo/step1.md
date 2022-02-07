@@ -278,11 +278,11 @@ spec:
         - src:
             dependencyName: redis-notification
             dataKey: body
-          dest: slack.channel
+          dest: slack.message
 EOF
 ```{{execute HOST1}}
 
-`kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1
+`kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
 
 Insérer le secret.
 
