@@ -15,6 +15,10 @@
         "text": "step1.md",
         "code": "waitForKub.sh",
         "courseData": "downloadDockerImages.sh"
+      },
+      {
+        "title": "Minio",
+        "text": "step2.md"
       }
     ],
     "intro": {
