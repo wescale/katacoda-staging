@@ -254,6 +254,10 @@ EOF
 
 `kubectl apply --namespace argo-events --filename redis-event.yaml`{{execute HOST1}}
 
+
+Insérer le secret.
+
+
 ```sh
 cat << EOF > slack-trigger.yaml
 ---
@@ -283,7 +287,5 @@ EOF
 ```{{execute HOST1}}
 
 `kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
-
-Insérer le secret.
 
 `kubectl exec $(kubectl get pods -l app=redis -o jsonpath="{.items[0].metadata.name}") -- redis-cli publish NOTIFY "Test de Julien"`{{execute HOST1}}
