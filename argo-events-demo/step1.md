@@ -51,7 +51,7 @@ EOF
 `kubectl --namespace argo-events apply \
     --filename event-source.yaml`{{execute HOST1}}
 
-  
+
 Vous devriez voir apparaitre votre premier Event, qui est un webhook. Depuis l'interface graphique, vous pouvez accéder au descrupteur, ainsi qu'aux logs.
 
 On peut confirmer à l'aide de la ligne de commande.
@@ -282,6 +282,8 @@ spec:
 EOF
 ```{{execute HOST1}}
 
-`kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
+`kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1
+
+Insérer le secret.
 
 `kubectl exec $(kubectl get pods -l app=redis -o jsonpath="{.items[0].metadata.name}") -- redis-cli publish NOTIFY "Test de Julien"`{{execute HOST1}}
