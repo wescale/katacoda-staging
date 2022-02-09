@@ -46,9 +46,9 @@ docker build -t my-super-image .
 
 Cela conduit à une erreur. Pourquoi ? Parce que le démon Docker ne s'exécute pas dans le conteneur. Celui ci contient seulement la CLI.
 
-U+FE0F
+⚠️
 Quittons le conteneur (en tapant :triangular_flag_on_post:<kbd>exit</kbd>:triangular_flag_on_post:)
-U+FE0F
+⚠️
 
  et supprimons le pod :
 ```sh
