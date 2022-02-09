@@ -72,9 +72,8 @@ Sur le second onglet, les logs se sont interrompus sans explication. Et le statu
 
 Du coup, la technique DinD est plutôt à proscrire.
 
-:warning:
-Sortons du conteneur *docker* (en tapant :triangular_flag_on_post:<kbd>exit</kbd>:triangular_flag_on_post:)
-:warning:
+⚠️ Sortons du conteneur *docker* (en tapant <kbd>exit</kbd>)⚠️
+🚩 N'oubliez pas cette étape, sinon le reste du scénario sera dysfonctionnel.
 
  et faisons un brin de ménage :
 ```sh
