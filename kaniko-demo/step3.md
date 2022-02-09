@@ -72,7 +72,11 @@ Sur le second onglet, les logs se sont interrompus sans explication. Et le statu
 
 Du coup, la technique DinD est plutôt à proscrire.
 
-Sortons du conteneur *docker* (en tapant <kbd>exit</kbd>) et faisons un brin de ménage :
+:warning:
+Sortons du conteneur *docker* (en tapant :triangular_flag_on_post:<kbd>exit</kbd>:triangular_flag_on_post:)
+:warning:
+
+ et faisons un brin de ménage :
 ```sh
 kubectl delete -f docker-ind.yaml && clear
 ```{{execute HOST2}}

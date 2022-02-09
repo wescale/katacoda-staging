@@ -16,7 +16,7 @@ EOF
 
 `kubectl create configmap kaniko-demo --from-file=Dockerfile`{{execute HOST1}}
 
-Créons maintenant un pod Kaniko, qui utilise cette ConfigMap, et qui stocke l'image batie dans notre registry privée. On a préalablement créé un secret qui contient le login / mot de passe de la registry.
+Créons maintenant un pod Kaniko, qui utilise cette ConfigMap, et qui stocke l'image bâtie dans notre registry privée. On a préalablement créé un secret qui contient le login / mot de passe de la registry.
 
 ```sh
 cat << EOF > kaniko.yaml
