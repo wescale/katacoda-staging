@@ -1,6 +1,6 @@
 # Construire des images de conteneurs directement sur Kubernetes, avec Kaniko
 
-Kaniko est un outil open source, développé par Google (mais qui ne bénéficie pas de support officiel). Il permet de construire des images Docker, directement sur K8S, sans intergair directement avc le démon Docker et sans disposer de privilèges élevés.
+Kaniko est un outil open source, développé par Google (mais qui ne bénéficie pas de support officiel). Il permet de construire des images Docker, directement sur K8S, sans interagir directement avec le démon Docker et sans disposer de privilèges élevés.
 
 
 ## Description

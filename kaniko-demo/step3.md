@@ -34,7 +34,7 @@ et exécutons le sur K8S :
 Attendons que le pod soit dans un état stable :
 `kubectl wait --timeout=90s --for condition=containersready pod docker-ind`{{execute HOST1}}
 
-Et exécutons un shell dans le conteneur *docker* :
+Et exécutons un shell dans le conteneur *docker*, pour lancer notre build :
 `kubectl exec -ti docker-ind -- sh`{{execute HOST2}}
 
 Construisons notre image à l'intérieur du conteneur :
@@ -52,9 +52,9 @@ Cela fonctionne ! Problème réglé !
 
 Pas vraiment.
 Tout d'abord parce que Docker ne fera plus partie des futures distributions K8S.
-Ensuite, parce que la technique DinD pose une faille de sécurité majeure : accéder au démon Docker de l'hôte depuis un conteneur peut conduire à des effets de bords a minima génants.
+Ensuite, parce que la technique DinD pose une faille de sécurité majeure : accéder au démon Docker de l'hôte depuis un conteneur peut conduire à des effets de bords a minima gênants.
 
-Vous voulez le constater par vous mêmes ? Alors appliquons la méthode Saint Thomas (qui ne croit que ce qu'il voit).
+Vous voulez le constater par vous-même ? Alors appliquons la méthode Saint Thomas (qui ne croit que ce qu'il voit).
 
 Sur notre cluster K8S, un pod proposant des citations de la séries *Friends* s'exécute.
 Affichons ses logs dans un nouvel onglet :
