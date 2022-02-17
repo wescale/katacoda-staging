@@ -14,7 +14,7 @@ metadata:
 spec:
   containers:
   - name: docker
-    image: docker
+    image: rg.fr-par.scw.cloud/katacoda/docker:latest
     args: ["sleep", "10000"]
     volumeMounts:
     - mountPath: /var/run/docker.sock
@@ -41,7 +41,7 @@ Construisons notre image à l'intérieur du conteneur :
 ```sh
 cd /tmp
 cat << EOF > Dockerfile
-FROM alpine
+FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive DinD !!!\u001b[m\r\n"]
 EOF
 docker build -t my-super-image .
@@ -61,7 +61,7 @@ Affichons ses logs dans un nouvel onglet :
 `sleep 1; kubectl logs -f friends`{{execute HOST1}}
 
 Retournons sur le premier onglet, à l'intérieur de notre conteneur *docker*. Nous pouvons requêter le démon du noeud K8S, via la Socket montée en volume. Cherchons notre conteneur *friends* :
-`docker ps --filter="ancestor=plopezfr/friends-quotes:1.0"`{{execute HOST2}}
+`docker ps --filter="ancestor=rg.fr-par.scw.cloud/katacoda/friends-quotes:latest"`{{execute HOST2}}
 Le conteneur remonte bien dans la liste des conteneurs en cours d'exécution, nous avons donc accès à tous les conteneurs du noeud.
 
 Nous pouvons même le *terminer* :

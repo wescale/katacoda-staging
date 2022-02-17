@@ -18,7 +18,7 @@ metadata:
 spec:
   containers:
   - name: docker
-    image: docker
+    image: rg.fr-par.scw.cloud/katacoda/docker:latest
     args: ["sleep", "10000"]
   restartPolicy: Never
 EOF
@@ -38,7 +38,7 @@ et construisons notre image comme nous l'avons fait à l'étape précédente :
 ```sh
 cd /tmp
 cat << EOF > Dockerfile
-FROM alpine
+FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive !!!\u001b[m\r\n"]
 EOF
 docker build -t my-super-image .

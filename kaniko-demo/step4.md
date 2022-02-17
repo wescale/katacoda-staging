@@ -7,7 +7,7 @@ Cela permet donc de constuire des images Docker en toute sécurité, même au se
 Essayons cet outil localement.
 
 `cat << EOF > Dockerfile
-FROM alpine
+FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive and built by Kaniko!!!\u001b[m\r\n"]
 EOF
 `{{execute HOST2}}

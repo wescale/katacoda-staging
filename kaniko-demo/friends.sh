@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: friends
-    image: plopezfr/friends-quotes:1.0
+    image: rg.fr-par.scw.cloud/katacoda/friends-quotes:latest
   restartPolicy: Never
 EOF
 

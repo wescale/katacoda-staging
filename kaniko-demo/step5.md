@@ -9,7 +9,7 @@ docker images | grep my-super-kaniko-image
 
 Créons notre Dockerfile. Pour la démo, nous le stockons dans une ConfigMap K8S.
 `cat << EOF > Dockerfile
-FROM alpine
+FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive and built by Kaniko on K8S!!!\u001b[m\r\n"]
 EOF
 `{{execute HOST1}}

@@ -4,7 +4,7 @@ La ligne de commande (CLI) interagit avec le démon Docker local, et permet d'en
 Utilisons un Dockerfile simple (voire simpliste):
 
 `cat << EOF > Dockerfile
-FROM alpine
+FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive !!!\u001b[m\r\n"]
 EOF
 `{{execute HOST2}}
