@@ -53,5 +53,5 @@ Cela conduit à une erreur. Pourquoi ? Parce que le démon Docker ne s'exécute 
  et supprimons le pod :
 ```sh
 kubectl delete -f docker.yaml &
-clear
+sleep 1 && clear
 ```{{execute HOST2}}

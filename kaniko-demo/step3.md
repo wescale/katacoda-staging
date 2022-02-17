@@ -79,5 +79,5 @@ Du coup, la technique DinD est plutôt à proscrire.
  et faisons un brin de ménage :
 ```sh
 kubectl delete -f docker-ind.yaml &
-clear
+sleep 2 && clear
 ```{{execute HOST2}}
