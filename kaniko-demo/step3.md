@@ -65,7 +65,7 @@ Retournons sur le premier onglet, à l'intérieur de notre conteneur *docker*. N
 Le conteneur remonte bien dans la liste des conteneurs en cours d'exécution, nous avons donc accès à tous les conteneurs du noeud.
 
 Nous pouvons même le *terminer* :
-`docker kill $(docker ps -a -q --filter="ancestor=plopezfr/friends-quotes:1.0" --format="{{.ID}}")`{{execute HOST2}}
+`docker kill $(docker ps -a -q --filter="ancestor=rg.fr-par.scw.cloud/katacoda/friends-quotes:latest" --format="{{.ID}}")`{{execute HOST2}}
 
 Sur le second onglet, les logs se sont interrompus sans explication. Et le statut du pod est édifiant :
 `kubectl get pods`{{execute HOST1}}
@@ -78,5 +78,6 @@ Du coup, la technique DinD est plutôt à proscrire.
 
  et faisons un brin de ménage :
 ```sh
-kubectl delete -f docker-ind.yaml && clear
+kubectl delete -f docker-ind.yaml &
+clear
 ```{{execute HOST2}}
