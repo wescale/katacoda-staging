@@ -1,1 +1,1 @@
-# katacoda-staging
+# Katacoda Staging WeScale
