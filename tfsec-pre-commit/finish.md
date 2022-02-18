@@ -1,23 +1,20 @@
-**BRAVO !** Vous avez fini ce premier cours sur TFSec !
+**BRAVO !** Vous avez terminé ce scénario sur TFSec avec pre-commit !
 
-<<<<<<< HEAD
 Merci d'avoir suivi ce cours, j'espère qu'il vous a plu !
-
-Si vous souhaitez continuer à monter en compétence sur TFSec vous pouvez suivre le module avancé : **SOON**
-=======
-Merci d'avoir suivi ce scénario, nous espérons qu'il vous a plu !
 
 ## Conclusion
 
-Nous avons vu que TFSec est un outil simple d'installation et d'exploitation.
+Nous avons vu que Pre-commit est un outil qui permet d'automatiser les scans TFSec côté client comme garde-fou bloquant.
 
-Pour en savoir plus consultez la documentation officielle [TFSec](https://aquasecurity.github.io/tfsec/v1.1.5/).
+Pour en savoir plus, consultez les documentations officielles [TFSec](https://aquasecurity.github.io/tfsec/v1.1.5/) et [Pre-commit](https://pre-commit.com/)].
 
 ## Pour aller plus loin
 
-Vous souhaitez en savoir plus sur sur TFSec ? Nous avons rédigé un article de découverte du sujet !
+Vous souhaitez en savoir plus sur sur TFSec et Pre-commit ? Nous avons rédigé des articles sur ces sujets !
 
-**AJOUTER ARTICLE ICI**
+- **Stéphane Teyssier** vous parle de **Pre-commit** et des ses intégrations **Terraform** : [Vers l'Infrastructure Craftsmanship avec les Git Hooks](https://blog.wescale.fr/vers-linfrastructure-craftsmanship-avec-les-git-hooks/)
+- Vous pouvez aussi retrouver l'article associé à ce Katacoda : **AJOUTER ARTICLE ICI**
+
 
 ## Découvrez WeScale
 Retrouvez toute notre actualité :
@@ -33,5 +30,3 @@ Twitter : [https://twitter.com/YesWeScale](https://twitter.com/YesWeScale)
 LinkedIn : [https://www.linkedin.com/company/wescale](https://www.linkedin.com/company/wescale)  
 
 Git : [https://github.com/WeScale](https://github.com/WeScale)  
-
->>>>>>> 763f617dc53de4783109874c266e710746065bc9
