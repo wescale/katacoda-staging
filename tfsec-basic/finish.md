@@ -1,10 +1,5 @@
 **BRAVO !** Vous avez fini ce premier cours sur TFSec !
 
-<<<<<<< HEAD
-Merci d'avoir suivi ce cours, j'espère qu'il vous a plu !
-
-Si vous souhaitez continuer à monter en compétence sur TFSec vous pouvez suivre le module avancé : **SOON**
-=======
 Merci d'avoir suivi ce scénario, nous espérons qu'il vous a plu !
 
 ## Conclusion
@@ -34,4 +29,3 @@ LinkedIn : [https://www.linkedin.com/company/wescale](https://www.linkedin.com/c
 
 Git : [https://github.com/WeScale](https://github.com/WeScale)  
 
->>>>>>> 763f617dc53de4783109874c266e710746065bc9

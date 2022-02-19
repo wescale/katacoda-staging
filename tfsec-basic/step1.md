@@ -3,11 +3,7 @@ Il existe plusieurs façons d'installer **TFSec** (brew,choco, scoop). Pour ce t
 # Installer le binaire TFSec
 
 Téléchargez le binaire de TFSec et accordez lui les droits d'exécution :
-<<<<<<< HEAD
-`curl -o /usr/local/bin/tfsec -L -J -O https://github.com/aquasecurity/tfsec/releases/download/v1.0.2/tfsec-linux-amd64 && chmod u+x /usr/local/bin/tfsec`{{execute}}
-=======
 `curl -o /usr/local/bin/tfsec -L -J -O https://github.com/aquasecurity/tfsec/releases/download/v1.1.5/tfsec-linux-amd64 && chmod u+x /usr/local/bin/tfsec`{{execute}}
->>>>>>> 763f617dc53de4783109874c266e710746065bc9
 
 Vérifiez que TFSec est bien installé :
 `tfsec --version`{{execute}}
@@ -15,10 +11,6 @@ Vérifiez que TFSec est bien installé :
 Vous devriez obtenir :
 ```
 $ tfsec --version
-<<<<<<< HEAD
-v1.0.2
-```
-=======
 v1.1.5
 ```
 
@@ -41,4 +33,3 @@ Vérifiez la signature :
 Vous devriez obtenir le résultat suivant :
 
 ![Check Signature](assets/check-signature-ok.png)
->>>>>>> 763f617dc53de4783109874c266e710746065bc9
