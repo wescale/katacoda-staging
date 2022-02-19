@@ -3,6 +3,7 @@
   "description": "Venez apprendre à sécuriser vos infrastructures Terraform avec TFSec !",
   "difficulty": "Beginner",
   "time": "5 minutes",
+  "icon": "fa-unlock-alt",
   "details": {
     "steps": [
       {
