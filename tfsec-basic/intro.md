@@ -1,4 +1,4 @@
-Bienvenue dans ce cours **[TFSec](https://aquasecurity.github.io/tfsec/v1.0.2/)** !
+Bienvenue dans ce cours **[TFSec](https://aquasecurity.github.io/tfsec/v1.1.5/)** !
 
 L'une des qualités intrinsèques de l'**IaC** est qu'elle rend l'infrastructure auditable dès sa rédaction.
 
