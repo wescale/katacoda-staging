@@ -14,7 +14,7 @@
         "title": "Argo events",
         "text": "step1.md",
         "code": "waitForKub.sh",
-        "courseData": "downloadDockerImages.sh"
+        "courseData": "background.sh"
       },
       {
         "title": "Minio",
