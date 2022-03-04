@@ -20,6 +20,8 @@ kubectl port-forward $POD_NAME 9000 --namespace default &
 wget https://dl.min.io/client/mc/release/linux-amd64/mc
 chmod +x mc
 
+sleep 5;
+
 ./mc config host add minio http://localhost:9000 $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootUser}" | base64 --decode) $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootPassword}" | base64 --decode)
 
 cat << EOF > secret-minio.yaml
@@ -33,3 +35,5 @@ metadata:
   name: artifacts-minio
   namespace: argo-events
 EOF
+
+kubectl apply -n argo-events -f secret-minio.yaml
