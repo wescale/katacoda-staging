@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: flask
-          image: rg.fr-par.scw.cloud/katacoda/flask-argo:1.0.0
+          image: rg.fr-par.scw.cloud/katacoda/flask-argo:1.0.5
           ports:
             - name: web
               containerPort: 5000
