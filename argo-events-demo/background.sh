@@ -3,6 +3,8 @@
 docker pull alpine
 docker pull redis
 
+docker pull rg.fr-par.scw.cloud/katacoda/flask-argo:1.0.0
+
 helm repo add minio https://charts.min.io/
 
 helm install  --set persistence.enabled=false \
@@ -13,16 +15,10 @@ helm install  --set persistence.enabled=false \
 minio \
 minio/minio
 
-export POD_NAME=$(kubectl get pods --namespace default -l "release=minio" -o jsonpath="{.items[0].metadata.name}")
-
-kubectl port-forward $POD_NAME 9000 --namespace default &
-
 wget https://dl.min.io/client/mc/release/linux-amd64/mc
 chmod +x mc
 
 sleep 5;
-
-./mc config host add minio http://localhost:9000 $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootUser}" | base64 --decode) $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootPassword}" | base64 --decode)
 
 cat << EOF > secret-minio.yaml
 ---

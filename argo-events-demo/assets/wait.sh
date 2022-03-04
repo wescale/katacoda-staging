@@ -40,6 +40,7 @@ show_progress()
   kubectl apply -f argo-server-sa.yaml
 
   kubectl apply -f deployment.yaml
+  kubectl apply -f deployment-flask.yaml
 
   wget -q https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-service.yaml
 
