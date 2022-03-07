@@ -10,7 +10,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
+          - path: /flask
             backend:
               serviceName: flask-service
               servicePort: 5000
