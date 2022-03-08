@@ -11,7 +11,7 @@ Fermez les deux fenêtres d'information et cliquez sur "Event Flow" (ajouter une
 Dans la ligne de commande de droite, modifiez le namespace "undefined" pour argo-events. Validez avec entrée.
 
 Pour commencer, nous allons installer ArgoEvents, depuis les fichiers officiels, dans son propre namespace :
-`kubectl create namespace argo-events
+`kubectl get namespace argo-events
 `{{execute HOST1}}
 
 `kubectl apply \

@@ -79,7 +79,7 @@ spec:
             spec:
               containers:
               - name: url-downloader
-                image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.1
+                image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.2
                 args: [""]
                 env:
                  - name: MINIO_ACCESS_KEY
@@ -108,8 +108,8 @@ EOF
 
 `curl -X POST \
     -H "Content-Type: application/json" \
-    -d '{"message":"My first message"}' \
-    http://controlplane/download-inside-out-file`{{execute HOST1}}
+    -d '{"url":"https://static.wikia.nocookie.net/pixar/images/0/06/Io_Sadness_standard2.jpg/revision/latest/scale-to-width-down/200"}' \
+    http://controlplane/download-inside-out`{{execute HOST1}}
 
 Créer un évènement minio
 
