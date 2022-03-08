@@ -82,7 +82,7 @@ spec:
   - host: controlplane
     http:
       paths:
-      - path: /
+      - path: /notify-me
         backend:
           serviceName: webhook-eventsource-svc
           servicePort: 15000

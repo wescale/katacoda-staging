@@ -15,7 +15,7 @@ spec:
   webhook:
     download-inside-out-file:
       port: "15001"
-      endpoint: /download-inside-out-file
+      endpoint: /download-inside-out
       method: POST
 EOF
 ```{{execute}}
@@ -35,7 +35,7 @@ spec:
   - host: controlplane
     http:
       paths:
-      - path: /
+      - path: /download-inside-out
         backend:
           serviceName: download-inside-out-file-eventsource-svc
           servicePort: 15001
@@ -58,7 +58,7 @@ spec:
     serviceAccountName: argo-events-sa
   dependencies:
   - name: url-downloader
-    eventSourceName: webhook
+    eventSourceName: download-inside-out-file
     eventName: download-inside-out-file
   triggers:
   - template:
@@ -79,7 +79,7 @@ spec:
             spec:
               containers:
               - name: url-downloader
-                image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.0
+                image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.1
                 args: [""]
                 env:
                  - name: MINIO_ACCESS_KEY
@@ -104,7 +104,12 @@ EOF
 ```{{execute HOST1}}
 
 `kubectl --namespace argo-events apply \
-    --filename sensor.yaml`{{execute HOST1}}
+    --filename url-downloader.yaml`{{execute HOST1}}
+
+`curl -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"message":"My first message"}' \
+    http://controlplane/download-inside-out-file`{{execute HOST1}}
 
 Créer un évènement minio
 
