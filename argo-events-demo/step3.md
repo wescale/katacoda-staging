@@ -226,7 +226,7 @@ spec:
 EOF
 ```{{execute HOST1}}
 
-`kubectl apply --namespace argo-events --filename redis-event.yaml`{{execute HOST1}}
+`kubectl apply --namespace argo-events --filename redis-tesseract.yaml`{{execute HOST1}}
 
 Déclencher un appel http
 
@@ -237,7 +237,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: redis-sensor
-spec:
   dependencies:
     - name: redis-tesseract
       eventSourceName: redis
@@ -246,7 +245,7 @@ spec:
   - template:
       name: change-background
       http:
-        url: http://flask-service.default.svc:5000/admin
+        url: https://mockbin.org/bin/a25759ff-0471-43f8-8074-8a92458f56d7
         payload:
           - src:
               dependencyName: redis-tesseract
@@ -256,4 +255,4 @@ spec:
 EOF
 ```{{execute HOST1}}
 
-`kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
+`kubectl apply --namespace argo-events --filename redis-trigger.yaml`{{execute HOST1}}
