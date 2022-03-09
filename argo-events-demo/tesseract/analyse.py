@@ -10,8 +10,8 @@ r = redis.Redis(host='redis.default.svc', port=6379, db=0)
 
 client = Minio(
     "minio-svc.default:9000",
-    access_key=os.environ.get('MINIO_USER'),
-    secret_key=os.environ.get('MINIO_PASSWORD'),
+    access_key=os.environ.get('MINIO_ACCESS_KEY'),
+    secret_key=os.environ.get('MINIO_SECRET_KEY'),
     secure=False
 )
 
@@ -67,20 +67,20 @@ im2 = img.copy()
 # to pytesseract for extracting text from it
 # Extracted text is then written into the text file
 for cnt in contours:
-	x, y, w, h = cv2.boundingRect(cnt)
+    x, y, w, h = cv2.boundingRect(cnt)
 
 	# Drawing a rectangle on copied image
-	rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 	# Cropping the text block for giving input to OCR
-	cropped = im2[y:y + h, x:x + w]
+    cropped = im2[y:y + h, x:x + w]
 
 	# Open the file in append mode
 	#file = open("recognized.txt", "a")
 
 	# Apply OCR on the cropped image
-	text = pytesseract.image_to_string(cropped)
-	lines = text.split('\n')
-	for line in lines:
-  		if len(line.strip())>= 3:
-			r.publish('tesseract', line)
+    text = pytesseract.image_to_string(cropped)
+    lines = text.split('\n')
+    for line in lines:
+        if len(line.strip())>= 3:
+            r.publish('tesseract', line)

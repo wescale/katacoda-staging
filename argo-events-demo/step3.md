@@ -178,9 +178,22 @@ spec:
             spec:
               containers:
               - name: tesseract
-                image: rg.fr-par.scw.cloud/katacoda/tesseract:1.0.2
-                command: ["python", "app.py"]
+                image: rg.fr-par.scw.cloud/katacoda/tesseract:1.0.3
+                command: ["python3", "analyse.py"]
                 args: [""]
+                env:
+                 - name: MINIO_ACCESS_KEY
+                   valueFrom:
+                     secretKeyRef:
+                       name: artifacts-minio
+                       key: accesskey
+                 - name: MINIO_SECRET_KEY
+                   valueFrom:
+                     secretKeyRef:
+                       name: artifacts-minio
+                       key: secretkey
+                 - name: MINIO_URL
+                   value: http://minio-svc.default:9000
               restartPolicy: Never
         parameters:
           - src:
