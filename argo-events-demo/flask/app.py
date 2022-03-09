@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import flask
 
 import os
@@ -11,6 +11,11 @@ app_blueprint = flask.Blueprint("blueprint", __name__)
 
 image_name = 'sadness'
 
+@app_blueprint.before_request
+def log_request_info():
+    app.logger.info('Headers: %s', request.headers)
+    app.logger.info('Body: %s', request.get_data())
+
 @app_blueprint.route('/')
 def show_index():
     global image_name
@@ -20,6 +25,7 @@ def show_index():
 @app_blueprint.route('/admin', methods=['POST'])
 def change_image():
     global image_name
+    app.logger.info('Request: %s', request)
     request_data = request.get_json()
 
     image_name = request_data['emotion']
@@ -30,4 +36,4 @@ def change_image():
 
 if __name__ == '__main__':
     app.register_blueprint(app_blueprint, url_prefix="/flask")
-    app.run(host='0.0.0.0', ssl_context='adhoc')
+    app.run(host='0.0.0.0', ssl_context='adhoc', debug=True)

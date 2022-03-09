@@ -246,13 +246,13 @@ spec:
   - template:
       name: change-background
       http:
-      url: http://flask-service.svc:5000/admin
-      payload:
-        - src:
-            dependencyName: redis-tesseract
-            dataKey: body
-          dest: emotion
-      method: POST
+        url: http://flask-service.default.svc:5000/admin
+        payload:
+          - src:
+              dependencyName: redis-tesseract
+              dataKey: body
+            dest: emotion
+        method: POST
 EOF
 ```{{execute HOST1}}
 
