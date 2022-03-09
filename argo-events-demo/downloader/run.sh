@@ -1,11 +1,12 @@
 #!/bin/bash
-echo "export MINIO_URL=${MINIO_URL}"
-echo "export MINIO_ACCESS=${MINIO_ACCESS_KEY}"
-echo "export MINIO_SECRET_KEY=${MINIO_SECRET_KEY}"
-echo "message = ${1}"
-echo "S3V4"
+# echo "export MINIO_URL=${MINIO_URL}"
+# echo "export MINIO_ACCESS=${MINIO_ACCESS_KEY}"
+# echo "export MINIO_SECRET_KEY=${MINIO_SECRET_KEY}"
+# echo "message = ${1}"
+
 ./mc config host add minio $MINIO_URL $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
 uuid=$(uuidgen)
-url=$(echo "'${1}'" | jq '.url')
-wget $url -O $uuid
+
+echo $1
+wget $1 -O $uuid
 ./mc cp $uuid minio/input

@@ -79,8 +79,9 @@ spec:
             spec:
               containers:
               - name: url-downloader
-                image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.14
-                args: [""]
+                image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.16
+                args: ["tbd at runtime"]
+                command: ["sh", "/run.sh"]
                 env:
                  - name: MINIO_ACCESS_KEY
                    valueFrom:
@@ -98,7 +99,7 @@ spec:
         parameters:
           - src:
               dependencyName: url-downloader
-              dataKey: body
+              dataKey: body.url
             dest: spec.containers.0.args.0
 EOF
 ```{{execute HOST1}}
@@ -111,9 +112,85 @@ EOF
     -d '{"url":"https://static.wikia.nocookie.net/pixar/images/0/06/Io_Sadness_standard2.jpg/revision/latest/scale-to-width-down/200"}' \
     http://controlplane/download-inside-out`{{execute HOST1}}
 
+`./mc ls minio/input`{{execute HOST1}}
+
 Créer un évènement minio
+```sh
+cat << EOF > event-minio.yaml
+---
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: minio
+spec:
+  minio:
+    image:
+      bucket:
+        name: input
+      endpoint: minio-svc.default:9000
+      events:
+        - s3:ObjectCreated:Put
+        - s3:ObjectRemoved:Delete
+      insecure: true
+      accessKey:
+        key: accesskey
+        name: artifacts-minio
+      secretKey:
+        key: secretkey
+        name: artifacts-minio
+EOF
+```{{execute HOST1}}
+
+`kubectl apply -n argo-events -f event-minio.yaml`{{execute HOST1}}
 
 Analyser l'image et émettre un pubish Redis
+
+```sh
+cat << EOF > trigger-minio-tesseract.yaml
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: minio
+spec:
+  template:
+    serviceAccountName: argo-events-sa
+  dependencies:
+    - name: tesseract
+      eventSourceName: minio
+      eventName: image
+  triggers:
+  - template:
+      name: tesseract
+      k8s:
+        group: ""
+        version: v1
+        resource: pods
+        operation: create
+        source:
+          resource:
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              generateName: tesseract-
+              labels:
+                app: tesseract
+            spec:
+              containers:
+              - name: tesseract
+                image: rg.fr-par.scw.cloud/katacoda/tesseract:1.0.2
+                command: ["python", "app.py"]
+                args: [""]
+              restartPolicy: Never
+        parameters:
+          - src:
+              dependencyName: tesseract
+              dataKey: notification.0.s3
+            dest: spec.containers.0.args.0
+EOF
+```{{execute HOST1}}
+
+`kubectl apply -n argo-events -f trigger-minio.yaml`{{execute HOST1}}
 
 Créer un évènement Redis
 

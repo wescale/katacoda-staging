@@ -83,9 +83,4 @@ for cnt in contours:
 	lines = text.split('\n')
 	for line in lines:
   		if len(line.strip())>= 3:
-				.publish('tesseract', line)
-				#file.write(line)
-    			#file.write("\n")
-
-	# Close the file
-	#file.close
+			r.publish('tesseract', line)

@@ -71,7 +71,7 @@ spec:
               restartPolicy: Never
         # The container args from the workflow are overridden by the s3 notification key
         parameters:
-          - source:
+          - src:
               dependencyName: echo-payload
               dataKey: notification.0.s3
             dest: spec.containers.0.args.1
