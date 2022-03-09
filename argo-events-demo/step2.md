@@ -67,18 +67,14 @@ spec:
               - name: alpine
                 image: alpine
                 command: ["echo"]
-                args: ["J'ai reçu un nouveau fichier:\n", "", ""]
+                args: ["J'ai reçu un nouveau fichier:\n", ""]
               restartPolicy: Never
         # The container args from the workflow are overridden by the s3 notification key
         parameters:
-          - bucket:
+          - source:
               dependencyName: echo-payload
-              dataKey: notification.0.s3.bucket
+              dataKey: notification.0.s3
             dest: spec.containers.0.args.1
-          - file:
-              dependencyName: echo-payload
-              dataKey: notification.0.s3.object.key
-            dest: spec.containers.0.args.2
 EOF
 ```{{execute HOST1}}
 

@@ -79,7 +79,7 @@ spec:
             spec:
               containers:
               - name: url-downloader
-                image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.2
+                image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.14
                 args: [""]
                 env:
                  - name: MINIO_ACCESS_KEY
