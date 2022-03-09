@@ -237,6 +237,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: redis-sensor
+spec:
+  template:
+    container:
+      env:
+        - name: DEBUG_LOG
+          value: "true"
   dependencies:
     - name: redis-tesseract
       eventSourceName: redis
@@ -245,7 +251,7 @@ metadata:
   - template:
       name: change-background
       http:
-        url: https://mockbin.org/bin/a25759ff-0471-43f8-8074-8a92458f56d7
+        url: http://flask-service.default.svc.cluster.local:5000/flask/admin
         payload:
           - src:
               dependencyName: redis-tesseract
@@ -255,4 +261,4 @@ metadata:
 EOF
 ```{{execute HOST1}}
 
-`kubectl apply --namespace argo-events --filename redis-trigger.yaml`{{execute HOST1}}
+`kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}

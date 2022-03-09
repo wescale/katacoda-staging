@@ -24,6 +24,8 @@ spec:
           env:
           #- name: BASE_HREF
           #  value: /argo/
+            - name : ARGO_SECURE
+              value : false
           ports:
             - name: web
               containerPort: 2746
