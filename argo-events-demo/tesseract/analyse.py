@@ -6,10 +6,10 @@ from minio import Minio
 import os, sys
 import json
 
-r = redis.Redis(host='redis.default.svc', port=6379, db=0)
+r = redis.Redis(host=os.environ.get('REDIS_HOST'), port=6379, db=0)
 
 client = Minio(
-    "minio-svc.default:9000",
+    os.environ.get('MINIO_URL'),
     access_key=os.environ.get('MINIO_ACCESS_KEY'),
     secret_key=os.environ.get('MINIO_SECRET_KEY'),
     secure=False

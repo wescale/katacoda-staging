@@ -17,10 +17,13 @@ def show_index():
     full_filename = os.path.join(app.config['INSIDE_OUT_FOLDER'], image_name + '.jpg')
     return render_template("index.html", user_image = full_filename)
 
-@app_blueprint.route('/admin/<emotion>')
-def change_image(emotion):
+@app_blueprint.route('/admin', methods=['POST'])
+def change_image():
     global image_name
-    image_name = emotion
+    request_data = request.get_json()
+
+    image_name = request_data['emotion']
+
     data = {"status": "success"}
     return data, 200
 
