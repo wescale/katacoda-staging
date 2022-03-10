@@ -22,7 +22,7 @@ def change_image():
     global image_name
     request_data =  request.get_data()
 
-    image_name = json.loads(request_data)['emotion']
+    image_name = json.loads(request_data)['emotion'].lower()
 
     data = {"status": "success"}
     return data, 200
