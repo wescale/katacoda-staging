@@ -14,7 +14,9 @@
           {"file": "disgust.jpg"},
           {"file": "fear.jpg"},
           {"file": "joy.jpg"},
-          {"file": "sadness.jpg"}
+          {"file": "sadness.jpg"},
+          {"file": "downloader/Dockerfile", "target":"downloader/Dockerfile"},
+          {"file": "downloader/run.sh", "target":"downloader/run.sh"}
       ]
   },
     "steps": [
@@ -28,8 +30,16 @@
         "text": "2-webhook.md"
       },
       {
-        "title": "Découvrir d'autres events : Redis et Minio",
+        "title": "Découvrir d'autres events : Redis",
         "text": "3-redis.md"
+      },
+      {
+        "title": "Découvrir d'autres events : Minio",
+        "text": "4-minio.md"
+      },
+      {
+        "title": "Une architecture complexe",
+        "text": "5-complex.md"
       }
     ],
     "intro": {

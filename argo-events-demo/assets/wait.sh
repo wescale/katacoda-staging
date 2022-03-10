@@ -54,6 +54,10 @@ show_progress()
   kubectl apply -f ingress.yaml
 
   until kubectl get ingress --output=jsonpath='{.items[0].status.loadBalancer}' | grep "ingress"; do : sleep 1 ; done
+
+  kubectl create namespace argo-events
+
+  sleep 5 
 }
 
 show_progress

@@ -153,10 +153,11 @@ spec:
               restartPolicy: Never
         parameters:
           - src:
-              dependencyName: echo-payload
+              dependencyName: redis-notification
               dataKey: body
             dest: spec.containers.0.args.1
 EOF
+```{{execute HOST1}}
 
 `kubectl apply --namespace argo-events --filename echo-trigger.yaml`{{execute HOST1}}
 
@@ -170,3 +171,6 @@ Si vous aide en mode Slack, vous devriez voir apparaitre un message dans le topi
 
 Sinon, allez voir les logs du conteneur echo :
 `kubectl --namespace argo-events logs --selector app=echo-payload`{{execute HOST1}}
+
+Avant de poursuivre, faisons un peu de ménage
+`kubectl --namespace argo-events delete pods --selector app=echo-payload`{{execute HOST1}}

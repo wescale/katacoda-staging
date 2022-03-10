@@ -32,6 +32,4 @@ metadata:
   namespace: argo-events
 EOF
 
-kubectl create namespace argo-events
-
 kubectl apply -n argo-events -f secret-minio.yaml
