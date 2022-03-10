@@ -80,9 +80,10 @@ EOF
 `kubectl apply --namespace argo-events --filename redis-event.yaml`{{execute HOST1}}
 
 
-Insérer le secret.
+Si vous souhaitez poursuivre cette démonstration, vous aurez besoin d'un compte Slack et d'insérer votre Slack Token dans un secret appelé slack-secret.
+A defaut, nous vous proposons une version alternative qui réutilise le conteneur "echo-payload"
 
-
+## Version Slack
 ```sh
 cat << EOF > slack-trigger.yaml
 ---
@@ -99,7 +100,7 @@ spec:
     - template:
         name: slack-trigger
         slack:
-          channel: test-weshare
+          channel: katacoda-demo
           slackToken:
             key: token
             name: slack-secret
@@ -113,4 +114,59 @@ EOF
 
 `kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
 
+## Version Echo Payload
+
+```sh
+cat << EOF > echo-trigger.yaml
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: redis-sensor
+spec:
+  dependencies:
+    - name: redis-notification
+      eventSourceName: redis
+      eventName: redis-notify
+  triggers:
+  - template:
+      name: echo-payload
+      k8s:
+        group: ""
+        version: v1
+        resource: pods
+        operation: create
+        source:
+          resource:
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              generateName: echo-payload-
+              labels:
+                app: echo-payload
+            spec:
+              containers:
+              - name: alpine
+                image: alpine
+                command: ["echo"]
+                args: ["J'ai reçu un nouveau message dans Redis:\n", ""]
+              restartPolicy: Never
+        parameters:
+          - src:
+              dependencyName: echo-payload
+              dataKey: body
+            dest: spec.containers.0.args.1
+EOF
+
+`kubectl apply --namespace argo-events --filename echo-trigger.yaml`{{execute HOST1}}
+
+## Tronc commun
+
+Envoyons un message dans un topic Redis.
+
 `kubectl exec $(kubectl get pods -l app=redis -o jsonpath="{.items[0].metadata.name}") -- redis-cli publish NOTIFY "Test de Julien"`{{execute HOST1}}
+
+Si vous aide en mode Slack, vous devriez voir apparaitre un message dans le topic katacoda-demo.
+
+Sinon, allez voir les logs du conteneur echo :
+`kubectl --namespace argo-events logs --selector app=echo-payload`{{execute HOST1}}

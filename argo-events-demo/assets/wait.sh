@@ -53,7 +53,7 @@ show_progress()
 
   kubectl apply -f ingress.yaml
 
-  sleep 20
+  until kubectl get ingress --output=jsonpath='{.items[0].status.loadBalancer}' | grep "ingress"; do : sleep 1 ; done
 }
 
 show_progress
