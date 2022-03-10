@@ -34,7 +34,7 @@
     ],
     "intro": {
       "text": "intro.md",
-      "code": "waitForKub.sh",
+      "code": "waitForKub.sh"
     },
     "finish": {
       "text": "finish.md"
