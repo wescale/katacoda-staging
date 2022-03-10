@@ -1,5 +1,9 @@
-TO BE REDACTED
+Après ce premier évènement, nous allons compléter notre panoplie, avec deux types d'évènements représentatifs.
 
+Commençons par un éveènement de type Publish / Subscribe.
+Pour des questions de simplicité d'installation, notre choix se porte sur l'évènement Pub/Sub au sein de Redis (mais d'autres types sont disponibles : Nats, Kafka, Pulsar...)
+
+Commençons par installer redis, en tant que service.
 ```sh
 cat << EOF > redis.yaml
 ---
@@ -52,6 +56,9 @@ EOF
 ```{{execute HOST1}}
 
 `kubectl apply --filename redis.yaml`{{execute HOST1}}
+
+
+Comme pour le webhook, nous commencerons par l'évènement à capter.
 
 ```sh
 cat << EOF > redis-event.yaml

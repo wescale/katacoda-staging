@@ -28,8 +28,8 @@
         "text": "2-webhook.md"
       },
       {
-        "title": "Minio",
-        "text": "step3.md"
+        "title": "Découvrir d'autres events : Redis et Minio",
+        "text": "3-redis.md"
       }
     ],
     "intro": {
@@ -42,7 +42,7 @@
   },
   "environment": {
     "uilayout": "terminal-iframe-split",
-    "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n"
+    "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n",
 },
   "backend": {
     "imageid": "kubernetes-cluster-running:1.18",
