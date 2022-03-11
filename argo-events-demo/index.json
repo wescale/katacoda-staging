@@ -1,6 +1,6 @@
 {
-  "title": "Argo events : Cloud Native Events asynchronous devlopment",
-  "description": "Kaniko is a tool to build Docker image without using the Docker Daemon, thus making available Docker builds directly inside K8S Cluster.",
+  "title": "Argo events : une architecture asynchrone, orientée évènements, sauce Cloud Native",
+  "description": "Argo Events permet d'apporter une mécanique évènementielle de manière simple et contrôlée au sein de votre cluster Kubernetes.",
   "details": {
     "assets": {
       "host01": [

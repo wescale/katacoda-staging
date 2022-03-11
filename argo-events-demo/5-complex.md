@@ -191,7 +191,7 @@ En entrée, nous téléchargeons le fichier depuis minio, et en sortie nous post
 
 Le code est disponible ici :<br/>
 `cat tesseract/Dockerfile`{{execute HOST1}}<br/>
-`cat tesseract/analyse.py`{{execute HOST1}}$
+`cat tesseract/analyse.py`{{execute HOST1}}
 
 En lui même, le trigger n'est pas plus complexe que notre conteneur "echo-payload".
 
@@ -293,7 +293,7 @@ EOF
 Pour la dernière étape de notre architecture, nous allons utiliser un trigger HTTP. La syntaxe est des plus simple, le tout est de savoir ce que nous allons en faire.
 
 Nous avons préalablement déployé un simple serveur web Flask, capable d'afficher les 5 émotions de Vice et Versa.
-Ce serveur est disponible via un ingress [ici] (https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/flask).
+Ce serveur est disponible via un ingress [ici](https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/flask).
 Par défaut, il affiche la tristesse, à nous de changer cela !
 
 `cat flask/Dockerfile`{{execute HOST1}}<br/>
@@ -337,7 +337,7 @@ spec:
 EOF
 ```{{execute HOST1}}
 
-`kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
+`kubectl apply --namespace argo-events --filename redis-trigger.yaml`{{execute HOST1}}
 
 et procédons au test final !
 ![Joy](./assets/joy.jpg)<br/>
