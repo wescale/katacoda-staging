@@ -263,9 +263,9 @@ Comme nous ne sommes pas forcément confiant, postons Peur : `curl -X POST -H "C
 
 Le message FEAR devrait apparaitre dans Redis.
 
+# Créer un évènement de souscription Redis
 
-
-Créer un évènement Redis
+Nous sommes bientôt à la fin de la chaîne. Créons un évènement sur réception de message dans la file tesseract. Là encore, rien de stupéfiant par rapport à ce que nous avons déjà vu.
 
 ```sh
 cat << EOF > redis-tesseract.yaml
@@ -286,7 +286,23 @@ EOF
 
 `kubectl apply --namespace argo-events --filename redis-tesseract.yaml`{{execute HOST1}}
 
-Déclencher un appel http
+# La dernière marche : créer un trigger http
+
+Pour la dernière étape de notre architecture, nous allons utiliser un trigger HTTP. La syntaxe est des plus simple, le tout est de savoir ce que nous allons en faire.
+
+Nous avons préalablement déployé un simple serveur web Flask, capable d'afficher les 5 émotions de Vice et Versa.
+Ce serveur est disponible via un ingress [ici] (https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/flask).
+Par défaut, il affiche la tristesse, à nous de changer cela !
+
+`cat flask/Dockerfile`{{execute HOST1}}
+`cat flask/app.py`{{execute HOST1}}
+`cat deployment-flask.yaml`{{execute HOST1}}
+
+Ce serveur expose une url d'administration sur /admin, qui traite un json simple contenant l'émotion que l'on veut afficher, et change ainsi l'image par défaut. Nous allons lui envoyer l'émotion décryptée par Tesseract, et qui transite par Redis.
+
+Le résultat devrait être visible en quelques secondes, le temps que tous les conteneurs et tous les triggers s'exécutent.
+
+Déployons le trigger :
 
 ```sh
 cat << EOF > redis-trigger.yaml
@@ -321,4 +337,6 @@ EOF
 
 `kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
 
-https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
+et procédons au test final !
+![Joy](./assets/joy.jpg)
+Joie : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/75/Io_Joy_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
