@@ -165,7 +165,7 @@ EOF
 
 Envoyons un message dans un topic Redis.
 
-`kubectl exec $(kubectl get pods -l app=redis -o jsonpath="{.items[0].metadata.name}") -- redis-cli publish NOTIFY "Test de Julien"`{{execute HOST1}}
+`until kubectl --namespace argo-events get pods --selector sensor-name=redis-sensor --field-selector=status.phase=Running | grep "redis-sensor"; do : sleep 1 ; done && sleep 3 && kubectl exec $(kubectl get pods -l app=redis -o jsonpath="{.items[0].metadata.name}") -- redis-cli publish NOTIFY "Test de Julien"`{{execute HOST1}}
 
 Si vous aide en mode Slack, vous devriez voir apparaitre un message dans le topic katacoda-demo.
 

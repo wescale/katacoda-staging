@@ -94,7 +94,7 @@ La chaine étant complète, déposons un fichier dans notre bucket :
 
 `touch start.txt`{{execute HOST1}}
 
-`./mc cp start.txt minio/input`{{execute HOST1}}
+`until kubectl --namespace argo-events get pods --selector sensor-name=minio --field-selector=status.phase=Running | grep "minio"; do : sleep 1 ; done && sleep 3 && ./mc cp start.txt minio/input`{{execute HOST1}}
 
 `kubectl --namespace argo-events logs --selector app=echo-payload`{{execute HOST1}}
 

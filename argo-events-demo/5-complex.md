@@ -64,9 +64,8 @@ EOF
 
 Créons le trigger correspondant à ce webhook, qui va télécharger le fichier via un simple curl et le poster dans Minio via la CLI mc, sous un UUID générique. Ce conteneur a été précédement construit et déployé sur notre registry.
 
-Vous pouvez en consulter le code ici :
-
-`cat downloader/Dockerfile`{{execute HOST1}}
+Vous pouvez en consulter le code ici :<br/>
+`cat downloader/Dockerfile`{{execute HOST1}}<br/>
 `cat downloader/run.sh`{{execute HOST1}}
 
 ```sh
@@ -129,23 +128,25 @@ EOF
 
 `kubectl --namespace argo-events apply --filename url-downloader.yaml`{{execute HOST1}}
 
+Attendons que le sensor soit disponible
+`until kubectl --namespace argo-events get pods --selector sensor-name=url-downloader --field-selector=status.phase=Running | grep "url-downloader"; do : sleep 1 ; done && sleep 3 && echo "Sensor ready"`{{execute HOST1}}
 
 En fonction de votre humeur du moment, vous pouvez envoyer la photo de votre choix au **downloader**
 
-![Sadness](./assets/sadness.jpg)
-Tristesse : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/0/06/Io_Sadness_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+![Sadness](./assets/sadness.jpg)<br/>
+Tristesse : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/0/06/Io_Sadness_standard2.jpg/revision/latest/scale-to-width-down/200"}' http://controlplane/download-inside-out`{{execute HOST1}}
 
-![Joy](./assets/joy.jpg)
-Joie : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/75/Io_Joy_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+![Joy](./assets/joy.jpg)<br/>
+Joie : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/75/Io_Joy_standard2.jpg/revision/latest/scale-to-width-down/200"}' http://controlplane/download-inside-out`{{execute HOST1}}
 
-![Fear](./assets/fear.jpg)
-Peur : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/79/Io_Fear_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+![Fear](./assets/fear.jpg)<br/>
+Peur : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/79/Io_Fear_standard2.jpg/revision/latest/scale-to-width-down/200"}' http://controlplane/download-inside-out`{{execute HOST1}}
 
-![Anger](./assets/anger.jpg)
-Colère : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/7a/Io_Anger_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+![Anger](./assets/anger.jpg)<br/>
+Colère : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/7a/Io_Anger_standard2.jpg/revision/latest/scale-to-width-down/200"}' http://controlplane/download-inside-out`{{execute HOST1}}
 
-![Disgust](./assets/disgust.jpg)
-Dégout : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/9/98/Io_Disgust_standard2.jpg/revision/latest/scale-to-width-down/200`{{execute HOST1}}
+![Disgust](./assets/disgust.jpg)<br/>
+Dégout : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/9/98/Io_Disgust_standard2.jpg/revision/latest/scale-to-width-down/200"}' http://controlplane/download-inside-out`{{execute HOST1}}
 
 Vérifions qu'un fichier a bien été téléchargé dans notre bucket :
 
@@ -188,8 +189,8 @@ EOF
 Là encore, nous allons utiliser un conteneur spéciliasé, en utilisant les logiciels opensource OpenCV (pour amplifier les contrastes des images) et Tesseract pour réaliser la reconnaissance de caractère.
 En entrée, nous téléchargeons le fichier depuis minio, et en sortie nous postons le résultat dans Redis. En utilisant les services exposés par le cluster.
 
-Le code est disponible ici :
-`cat tesseract/Dockerfile`{{execute HOST1}}
+Le code est disponible ici :<br/>
+`cat tesseract/Dockerfile`{{execute HOST1}}<br/>
 `cat tesseract/analyse.py`{{execute HOST1}}$
 
 En lui même, le trigger n'est pas plus complexe que notre conteneur "echo-payload".
@@ -200,7 +201,7 @@ cat << EOF > trigger-minio-tesseract.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: minio
+  name: minio-tesseract
 spec:
   template:
     serviceAccountName: argo-events-sa
@@ -259,7 +260,8 @@ EOF
 Pour tester que la chaine se complète, on peut utiliser la CLI redis dans un nouvel onglet :
 `kubectl exec $(kubectl get pods -l app=redis -o jsonpath="{.items[0].metadata.name}") -- redis-cli subscribe tesseract`{{execute T2}}
 
-Comme nous ne sommes pas forcément confiant, postons Peur : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/79/Io_Fear_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute T1}}
+Comme nous ne sommes pas forcément confiant, postons Peur : <br/>
+`until kubectl --namespace argo-events get pods --selector sensor-name=minio-tesseract --field-selector=status.phase=Running | grep "minio-tesseract"; do : sleep 1 ; done && sleep 3 && curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/79/Io_Fear_standard2.jpg/revision/latest/scale-to-width-down/200"}' http://controlplane/download-inside-out`{{execute T1}}
 
 Le message FEAR devrait apparaitre dans Redis.
 
@@ -294,8 +296,8 @@ Nous avons préalablement déployé un simple serveur web Flask, capable d'affic
 Ce serveur est disponible via un ingress [ici] (https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/flask).
 Par défaut, il affiche la tristesse, à nous de changer cela !
 
-`cat flask/Dockerfile`{{execute HOST1}}
-`cat flask/app.py`{{execute HOST1}}
+`cat flask/Dockerfile`{{execute HOST1}}<br/>
+`cat flask/app.py`{{execute HOST1}}<br/>
 `cat deployment-flask.yaml`{{execute HOST1}}
 
 Ce serveur expose une url d'administration sur /admin, qui traite un json simple contenant l'émotion que l'on veut afficher, et change ainsi l'image par défaut. Nous allons lui envoyer l'émotion décryptée par Tesseract, et qui transite par Redis.
@@ -310,7 +312,7 @@ cat << EOF > redis-trigger.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: redis-sensor
+  name: redis-flask-sensor
 spec:
   template:
     container:
@@ -338,5 +340,5 @@ EOF
 `kubectl apply --namespace argo-events --filename slack-trigger.yaml`{{execute HOST1}}
 
 et procédons au test final !
-![Joy](./assets/joy.jpg)
-Joie : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/75/Io_Joy_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+![Joy](./assets/joy.jpg)<br/>
+Joie : `until kubectl --namespace argo-events get pods --selector sensor-name=redis-flask-sensor --field-selector=status.phase=Running | grep "redis-flask-sensor"; do : sleep 1 ; done && sleep 3 && curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/75/Io_Joy_standard2.jpg/revision/latest/scale-to-width-down/200"}' http://controlplane/download-inside-out`{{execute HOST1}}
