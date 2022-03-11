@@ -15,8 +15,10 @@
           {"file": "fear.jpg"},
           {"file": "joy.jpg"},
           {"file": "sadness.jpg"},
-          {"file": "downloader/Dockerfile", "target":"downloader/Dockerfile"},
-          {"file": "downloader/run.sh", "target":"downloader/run.sh"}
+          {"file": "downloader/Dockerfile", "target":"downloader/"},
+          {"file": "downloader/run.sh", "target":"downloader/"},
+          {"file": "tesseract/Dockerfile", "target":"tesseract/"},
+          {"file": "tesseract/analyse.py", "target":"tesseract/"}
       ]
   },
     "steps": [

@@ -3,10 +3,8 @@ Pour cela, nous avons installé en arrière plan le projet open source Minio.
 
 Pour des besoin de démonstration, nous allons exposer le service Minio directement sur le cluster, ceci afin de bénéficier simplement de la commande line. En revanche, pour le reste des opérations, nous passerons par le service Minio exposé en interne.
 
-On récupère le nom du pod
-`export POD_NAME=$(kubectl get pods --namespace default -l "release=minio" -o jsonpath="{.items[0].metadata.name}")`{{execute HOST1}}
-et on réalise un port forward.
-`kubectl port-forward $POD_NAME 9000 --namespace default &`{{execute HOST1}}
+On récupère le nom du pod et on réalise un port forward.
+`kubectl port-forward $(kubectl get pods --namespace default -l "release=minio" -o jsonpath="{.items[0].metadata.name}") 9000 &`{{execute HOST1}}
 
 On configure ensuite la CLI afin que notre stockage local soit identifié par l'alias **minio**. Pour cela, on utilise le secret créer lors de l'installation de Minio.
 `./mc config host add minio http://localhost:9000 $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootUser}" | base64 --decode) $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootPassword}" | base64 --decode)`{{execute HOST1}}

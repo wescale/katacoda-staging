@@ -7,11 +7,6 @@ WebHook -> conteneur de téléchargement et dépot dans S3 -> conteneur OCR et n
 (remplacer par un joli dessin)
 
 Pour réduire la variance des résultats, nous nous limiterons à 5 images prétestées, qui donne d'excellent résultats au passage par l'OCR. Nous utiliserons les cinq émotions du film Vice et Versa de Pixar.
-![Sadness](./assets/sadness.jpg)
-![Joy](./assets/joy.jpg)
-![Fear](./assets/fear.jpg)
-![Disgust](./assets/disgust.jpg)
-![Anger](./assets/anger.jpg)
 
 Vous êtes prêts ? C'est parti !
 
@@ -65,12 +60,14 @@ EOF
 
 `kubectl apply -f ingress-inside-out-download.yaml`{{execute HOST1}}
 
-Créons le trigger correspondant à ce webhook, qui va télécharger le fichier via un simple curl et le poster dans Minio via la CLI mc. Ce conteneur a été précédement construit et déployé sur notre registry.
+# Créer un trigger permettant de télécharger le fichier de le stocker dans Minio
+
+Créons le trigger correspondant à ce webhook, qui va télécharger le fichier via un simple curl et le poster dans Minio via la CLI mc, sous un UUID générique. Ce conteneur a été précédement construit et déployé sur notre registry.
 
 Vous pouvez en consulter le code ici :
+
 `cat downloader/Dockerfile`{{execute HOST1}}
 `cat downloader/run.sh`{{execute HOST1}}
-
 
 ```sh
 cat << EOF > url-downloader.yaml
@@ -106,7 +103,7 @@ spec:
               containers:
               - name: url-downloader
                 image: rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.16
-                args: ["tbd at runtime"]
+                args: ["to be determined at runtime"]
                 command: ["sh", "/run.sh"]
                 env:
                  - name: MINIO_ACCESS_KEY
@@ -130,17 +127,34 @@ spec:
 EOF
 ```{{execute HOST1}}
 
-`kubectl --namespace argo-events apply \
-    --filename url-downloader.yaml`{{execute HOST1}}
+`kubectl --namespace argo-events apply --filename url-downloader.yaml`{{execute HOST1}}
 
-`curl -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"url":"https://static.wikia.nocookie.net/pixar/images/0/06/Io_Sadness_standard2.jpg/revision/latest/scale-to-width-down/200"}' \
-    http://controlplane/download-inside-out`{{execute HOST1}}
+
+En fonction de votre humeur du moment, vous pouvez envoyer la photo de votre choix au **downloader**
+
+![Sadness](./assets/sadness.jpg)
+Tristesse : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/0/06/Io_Sadness_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+
+![Joy](./assets/joy.jpg)
+Joie : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/75/Io_Joy_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+
+![Fear](./assets/fear.jpg)
+Peur : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/79/Io_Fear_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+
+![Anger](./assets/anger.jpg)
+Colère : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/7a/Io_Anger_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute HOST1}}
+
+![Disgust](./assets/disgust.jpg)
+Dégout : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/9/98/Io_Disgust_standard2.jpg/revision/latest/scale-to-width-down/200`{{execute HOST1}}
+
+Vérifions qu'un fichier a bien été téléchargé dans notre bucket :
 
 `./mc ls minio/input`{{execute HOST1}}
 
-Créer un évènement minio
+# Créer un évènement sur réception dans un bucket Minio
+
+Rien de très nouveau ici, on peut utiliser le même évènement que précédement.
+
 ```sh
 cat << EOF > event-minio.yaml
 ---
@@ -169,7 +183,16 @@ EOF
 
 `kubectl apply -n argo-events -f event-minio.yaml`{{execute HOST1}}
 
-Analyser l'image et émettre un pubish Redis
+# Créer un trigger permettant d'analyse une image en mode OCR et de publier le résultat dans Redis.
+
+Là encore, nous allons utiliser un conteneur spéciliasé, en utilisant les logiciels opensource OpenCV (pour amplifier les contrastes des images) et Tesseract pour réaliser la reconnaissance de caractère.
+En entrée, nous téléchargeons le fichier depuis minio, et en sortie nous postons le résultat dans Redis. En utilisant les services exposés par le cluster.
+
+Le code est disponible ici :
+`cat tesseract/Dockerfile`{{execute HOST1}}
+`cat tesseract/analyse.py`{{execute HOST1}}$
+
+En lui même, le trigger n'est pas plus complexe que notre conteneur "echo-payload".
 
 ```sh
 cat << EOF > trigger-minio-tesseract.yaml
@@ -232,6 +255,15 @@ EOF
 ```{{execute HOST1}}
 
 `kubectl apply -n argo-events -f trigger-minio-tesseract.yaml`{{execute HOST1}}
+
+Pour tester que la chaine se complète, on peut utiliser la CLI redis dans un nouvel onglet :
+`kubectl exec $(kubectl get pods -l app=redis -o jsonpath="{.items[0].metadata.name}") -- redis-cli subscribe tesseract`{{execute T2}}
+
+Comme nous ne sommes pas forcément confiant, postons Peur : `curl -X POST -H "Content-Type: application/json" -d '{"url":"https://static.wikia.nocookie.net/pixar/images/7/79/Io_Fear_standard2.jpg/revision/latest/scale-to-width-down/200"} http://controlplane/download-inside-out`{{execute T1}}
+
+Le message FEAR devrait apparaitre dans Redis.
+
+
 
 Créer un évènement Redis
 
