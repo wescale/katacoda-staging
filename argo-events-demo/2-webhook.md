@@ -23,7 +23,7 @@ EOF
 
 `kubectl --namespace argo-events apply --filename event-source.yaml`{{execute HOST1}}
 
-Vous devriez voir apparaitre votre premier Event. Depuis l'interface graphique, vous pouvez accéder au descripteur, ainsi qu'aux logs.
+Vous devriez voir apparaître votre premier Event. Depuis l'interface graphique, vous pouvez accéder au descripteur, ainsi qu'aux logs.
 
 On peut confirmer à l'aide de la ligne de commande.
 
@@ -35,7 +35,7 @@ On peut confirmer à l'aide de la ligne de commande.
 `kubectl --namespace argo-events get pods`{{execute HOST1}}
 
 
-Nous allons exposer notre webhook via un ingress.
+Nous allons exposer notre Webhook via un ingress.
 
 ```sh
 cat << EOF > ingress.yaml
@@ -120,7 +120,7 @@ EOF
 
 Dans l'interface graphique, on constate que la chaine se complète.
 
-Renvoyons un évènement à notre webhook quand il est prêt :
+Renvoyons un évènement à notre Webhook quand il est prêt :
 `until kubectl --namespace argo-events get pods --selector sensor-name=webhook --field-selector=status.phase=Running | grep "webhook-sensor"; do : sleep 1 ; done && sleep 3 && curl -X POST -H "Content-Type: application/json" -d '{"message":"My first message"}' http://controlplane/notify-me`{{execute HOST1}}
 
 On constate que de nouveux pods sont créés

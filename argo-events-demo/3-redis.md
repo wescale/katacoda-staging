@@ -3,7 +3,7 @@ Après ce premier évènement, nous allons compléter notre panoplie, avec deux 
 Commençons par un éveènement de type Publish / Subscribe.
 Pour des questions de simplicité d'installation, notre choix se porte sur l'évènement Pub/Sub au sein de Redis (mais d'autres types sont disponibles : Nats, Kafka, Pulsar...)
 
-Commençons par installer redis, en tant que service.
+Commençons par installer Redis, en tant que service.
 ```sh
 cat << EOF > redis.yaml
 ---

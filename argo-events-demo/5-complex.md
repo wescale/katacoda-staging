@@ -60,7 +60,7 @@ EOF
 
 `kubectl apply -f ingress-inside-out-download.yaml`{{execute HOST1}}
 
-# Créer un trigger permettant de télécharger le fichier de le stocker dans Minio
+# Créer un trigger permettant de télécharger le fichier et de le stocker dans Minio
 
 Créons le trigger correspondant à ce webhook, qui va télécharger le fichier via un simple curl et le poster dans Minio via la CLI mc, sous un UUID générique. Ce conteneur a été précédement construit et déployé sur notre registry.
 
@@ -288,7 +288,7 @@ EOF
 
 `kubectl apply --namespace argo-events --filename redis-tesseract.yaml`{{execute HOST1}}
 
-# La dernière marche : créer un trigger http
+# La dernière marche : créer un trigger HTTP
 
 Pour la dernière étape de notre architecture, nous allons utiliser un trigger HTTP. La syntaxe est des plus simple, le tout est de savoir ce que nous allons en faire.
 
