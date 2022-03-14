@@ -6,9 +6,10 @@ helm repo update >> /root/background.log
 sleep 5;
 
 helm install  --set persistence.enabled=false \
+ --set buckets[0].name=input,buckets[0].policy=none,buckets[0].purge=false \
  --set rootUser=rootuser,rootPassword=rootpass123 \
---set replicas=4 \
---set resources.requests.memory=500M \
+--set replicas=3 \
+--set resources.requests.memory=250M \
 minio \
 minio/minio >> /root/background.log
 
