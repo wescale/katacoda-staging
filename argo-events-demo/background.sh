@@ -6,7 +6,7 @@ helm install  --set persistence.enabled=false \
 --set replicas=4 \
 --set resources.requests.memory=500M \
 minio \
-minio/minio >> /root/background.log
+quay.io/minio/minio >> /root/background.log
 
 wget https://dl.min.io/client/mc/release/linux-amd64/mc >> /root/background.log
 chmod +x mc >> /root/background.log
