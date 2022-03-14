@@ -39,6 +39,7 @@
       },
       {
         "title": "Découvrir d'autres events : Minio",
+        "courseData": "prepareComplexArch.sh",
         "text": "4-minio.md"
       },
       {
