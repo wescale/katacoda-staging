@@ -1,6 +1,6 @@
-Veuillez patienter en attendant que nous installions les éléments suivants :<br/>
-Nginx Ingress Controller<br/>
-Argo Server<br/>
+Veuillez patienter en attendant que nous installions les éléments suivants :
+- Nginx Ingress Controller
+- Argo Server<br/>
 Katacoda prend parfois son temps, soyez patient !
 
 # C'est parti

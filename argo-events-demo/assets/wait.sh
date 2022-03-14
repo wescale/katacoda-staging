@@ -61,7 +61,7 @@ show_progress()
   --selector=app.kubernetes.io/component=controller \
   --timeout=120s
 
-  clear && echo -n "[Etape 9/10] Creation d'un ingress pour ArgoServer"
+  clear && echo -n "[Etape 9/10] Creation d'un ingress pour ArgoServer\n"
   kubectl apply -f ingress.yaml
 
   until kubectl get ingress --output=jsonpath='{.items[0].status.loadBalancer}' | grep "ingress"; do : sleep 1 ; done
@@ -71,7 +71,7 @@ show_progress()
 
   sleep 5
 
-  echo -n "Paramétrage effectué, paré au lancement"
+  echo -n "Paramétrage effectué, paré au lancement\n"
 }
 
 show_progress
