@@ -81,7 +81,8 @@ show_progress()
 
   sleep 5
 
-  echo -n "Paramétrage effectué, paré au lancement\n"
+  echo -n "Paramétrage effectué, paré au lancement"
+  echo -n ""
 }
 
 show_progress

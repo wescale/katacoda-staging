@@ -28,3 +28,5 @@ metadata:
 EOF
 
 kubectl apply -n argo-events -f secret-minio.yaml
+
+touch /root/backgroundDone.txt

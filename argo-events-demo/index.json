@@ -26,12 +26,13 @@
     "steps": [
       {
         "title": "Installer Argo events",
-        "text": "1-installation.md"
+        "text": "1-installation.md",
+        "courseData": "background.sh"
       },
       {
         "title": "Notre premier event",
         "text": "2-webhook.md",
-        "courseData": "background.sh"
+        "courseData": "prepareComplexArch.sh"
       },
       {
         "title": "Découvrir d'autres events : Redis",
@@ -39,7 +40,6 @@
       },
       {
         "title": "Découvrir d'autres events : Minio",
-        "courseData": "prepareComplexArch.sh",
         "text": "4-minio.md"
       },
       {
