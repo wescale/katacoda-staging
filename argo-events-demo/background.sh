@@ -1,10 +1,5 @@
 #/bin/bash
 
-docker pull alpine
-docker pull redis
-
-docker pull rg.fr-par.scw.cloud/katacoda/flask-argo:1.0.0
-
 helm repo add minio https://charts.min.io/
 
 helm install  --set persistence.enabled=false \

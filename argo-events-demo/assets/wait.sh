@@ -26,6 +26,13 @@ show_progress()
   echo ""
   clear && echo -n "[Etape 2/10] Les noeuds rejoignent le cluster K8S\n\n"
 
+  docker pull alpine
+  docker pull redis
+  docker pull quay.io/argoproj/argocli:latest
+  docker pull rg.fr-par.scw.cloud/katacoda/flask-argo:1.0.15
+  docker pull rg.fr-par.scw.cloud/katacoda/url-downloader:1.0.16
+  docker pull rg.fr-par.scw.cloud/katacoda/tesseract:1.0.5
+
   kubectl wait --for=condition=Ready nodes --all --timeout=120s
   ssh -q $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}) 'mkdir -p /root/.kube'
   scp -q /root/.kube/config $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}):/root/.kube/config
@@ -68,7 +75,6 @@ show_progress()
   kubectl apply -f ingress.yaml
 
   until kubectl get ingress --output=jsonpath='{.items[0].status.loadBalancer}' | grep "ingress"; do : sleep 1 ; done
-
 
   sleep 5
 
