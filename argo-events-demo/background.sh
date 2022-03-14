@@ -11,8 +11,6 @@ minio/minio >> /root/background.log
 wget https://dl.min.io/client/mc/release/linux-amd64/mc >> /root/background.log
 chmod +x mc >> /root/background.log
 
-./mc mb minio/input >> /root/background.log
-
 sleep 5;
 
 cat << EOF > secret-minio.yaml
