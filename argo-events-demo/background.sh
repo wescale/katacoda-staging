@@ -1,6 +1,5 @@
 #/bin/bash
-
-helm repo add minio https://charts.min.io/
+helm repo add minio https://charts.min.io/ >> /root/background.log
 
 helm install  --set persistence.enabled=false \
  --set buckets[0].name=input,buckets[0].policy=none,buckets[0].purge=false \
@@ -8,10 +7,10 @@ helm install  --set persistence.enabled=false \
 --set replicas=4 \
 --set resources.requests.memory=500M \
 minio \
-minio/minio
+minio/minio >> /root/background.log
 
-wget https://dl.min.io/client/mc/release/linux-amd64/mc
-chmod +x mc
+wget https://dl.min.io/client/mc/release/linux-amd64/mc >> /root/background.log
+chmod +x mc >> /root/background.log
 
 sleep 5;
 
@@ -27,6 +26,4 @@ metadata:
   namespace: argo-events
 EOF
 
-kubectl apply -n argo-events -f secret-minio.yaml
-
-touch /root/backgroundDone.txt
+kubectl apply -n argo-events -f secret-minio.yaml >> /root/background.log
