@@ -27,7 +27,7 @@
       {
         "title": "Installer Argo events",
         "text": "1-installation.md",
-        "course": "background.sh"
+        "code": "background.sh"
       },
       {
         "title": "Notre premier event",
