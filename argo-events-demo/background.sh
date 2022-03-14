@@ -1,12 +1,16 @@
 #/bin/bash
 helm repo add minio https://charts.min.io/ >> /root/background.log
 
+helm repo update >> /root/background.log
+
+sleep 5;
+
 helm install  --set persistence.enabled=false \
  --set rootUser=rootuser,rootPassword=rootpass123 \
 --set replicas=4 \
 --set resources.requests.memory=500M \
 minio \
-quay.io/minio/minio >> /root/background.log
+minio/minio >> /root/background.log
 
 wget https://dl.min.io/client/mc/release/linux-amd64/mc >> /root/background.log
 chmod +x mc >> /root/background.log

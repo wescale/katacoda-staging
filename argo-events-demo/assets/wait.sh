@@ -27,9 +27,9 @@ show_progress()
   clear && echo -n "[Etape 2/9] Les noeuds rejoignent le cluster K8S"
   echo -n " "
 
-  docker pull alpine
-  docker pull redis
-  docker pull quay.io/argoproj/argocli:latest
+  #docker pull alpine
+  #docker pull redis
+  #docker pull quay.io/argoproj/argocli:latest
 
   kubectl wait --for=condition=Ready nodes --all --timeout=120s
   ssh -q $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}) 'mkdir -p /root/.kube'
