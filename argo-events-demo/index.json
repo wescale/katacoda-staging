@@ -4,6 +4,7 @@
   "details": {
     "assets": {
       "host01": [
+          {"file": "mc", "chmod": "+x"},
           {"file": "wait.sh", "chmod": "+x"},
           {"file": "ingress.yaml"},
           {"file": "deployment.yaml"},
