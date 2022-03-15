@@ -1,8 +1,19 @@
-`export POD_NAME=$(kubectl get pods --namespace default -l "release=minio" -o jsonpath="{.items[0].metadata.name}")`{{execute HOST1}}
+Découvrons un troisième type d'évènement, le dépôt d'un fichier dans un ObjectStorage.
+Pour cela, nous avons installé en arrière plan le projet open source Minio.
 
-`kubectl port-forward $POD_NAME 9000 --namespace default &`{{execute HOST1}}
+Pour des besoin de démonstration, nous allons exposer le service Minio directement sur le cluster, ceci afin de bénéficier simplement de la commande line. En revanche, pour le reste des opérations, nous passerons par le service Minio exposé en interne.
 
+On récupère le nom du pod et on réalise un port forward.
+`kubectl port-forward $(kubectl get pods --namespace default -l "release=minio" -o jsonpath="{.items[0].metadata.name}") 9000 &`{{execute HOST1}}
+
+On configure ensuite la CLI afin que notre stockage local soit identifié par l'alias **minio**. Pour cela, on utilise le secret créer lors de l'installation de Minio.
 `./mc config host add minio http://localhost:9000 $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootUser}" | base64 --decode) $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootPassword}" | base64 --decode)`{{execute HOST1}}
+
+On créé notre bucket :
+`./mc mb minio/input >> /root/background.log`{{execute HOST1}}
+
+
+Ces actions préliminaires ayant été réalisée, attaquons nous maintenant à l'évènement correspondant à la création d'un fichier dans le bucket input :
 
 ```sh
 cat << EOF > event-minio.yaml
@@ -31,6 +42,9 @@ EOF
 ```{{execute HOST1}}
 
 `kubectl apply -n argo-events -f event-minio.yaml`{{execute HOST1}}
+
+
+Ajoutons maintenant un simple conteneur d'écho, afin de voir les résultats produits.
 
 ```sh
 cat << EOF > trigger-minio.yaml
@@ -80,12 +94,13 @@ EOF
 
 `kubectl apply -n argo-events -f trigger-minio.yaml`{{execute HOST1}}
 
-
-`kubectl apply -n argo-events -f https://raw.githubusercontent.com/argoproj/argo-events/stable/examples/sensors/minio.yaml`{{execute HOST1}}
+La chaine étant complète, déposons un fichier dans notre bucket :
 
 `touch start.txt`{{execute HOST1}}
 
-`./mc cp start.txt minio/input`{{execute HOST1}}
+`until kubectl --namespace argo-events get pods --selector sensor-name=minio --field-selector=status.phase=Running | grep "minio"; do : sleep 1 ; done && sleep 3 && ./mc cp start.txt minio/input`{{execute HOST1}}
 
-`kubectl --namespace argo-events logs \
-    --selector app=echo-payload`{{execute HOST1}}
+`kubectl --namespace argo-events logs --selector app=echo-payload`{{execute HOST1}}
+
+On peut confirmer que le fichier est réellement présent en utilisant la CLI :
+`./mc ls minio/input`{{execute HOST1}}

@@ -5,11 +5,15 @@ metadata:
   name: argo-server
   annotations:
     ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/backend-protocol: https # ingress-nginx
+    #nginx.ingress.kubernetes.io/backend-protocol: https # ingress-nginx
 spec:
   rules:
     - http:
         paths:
+          - path: /flask
+            backend:
+              serviceName: flask-service
+              servicePort: 5000
           - backend:
               serviceName: argo-server
               servicePort: 2746
