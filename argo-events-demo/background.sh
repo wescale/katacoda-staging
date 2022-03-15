@@ -14,8 +14,8 @@ minio/minio >> /root/background.log
 
 sleep 5;
 
-# wget https://dl.min.io/client/mc/release/linux-amd64/mc >> /root/background.log
-# chmod +x mc >> /root/background.log
+wget https://katacoda-assets.s3.amazonaws.com/mc >> /root/background.log
+chmod +x mc >> /root/background.log
 
 # sleep 5;
 
