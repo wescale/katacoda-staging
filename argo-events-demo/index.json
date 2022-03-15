@@ -20,8 +20,7 @@
           {"file": "tesseract/Dockerfile", "target":"tesseract/"},
           {"file": "tesseract/analyse.py", "target":"tesseract/"},
           {"file": "flask/Dockerfile", "target":"flask/"},
-          {"file": "flask/app.py", "target":"flask/"}, 
-          {"file": "mc", "chmod": "+x"}
+          {"file": "flask/app.py", "target":"flask/"}
       ]
   },
     "steps": [
