@@ -3,8 +3,6 @@ helm repo add minio https://charts.min.io/ >> /root/background.log
 
 helm repo update >> /root/background.log
 
-sleep 5;
-
 helm install  --set persistence.enabled=false \
  --set buckets[0].name=input,buckets[0].policy=none,buckets[0].purge=false \
  --set rootUser=rootuser,rootPassword=rootpass123 \
@@ -14,10 +12,12 @@ helm install  --set persistence.enabled=false \
 minio \
 minio/minio >> /root/background.log
 
-wget https://dl.min.io/client/mc/release/linux-amd64/mc >> /root/background.log
-chmod +x mc >> /root/background.log
-
 sleep 5;
+
+# wget https://dl.min.io/client/mc/release/linux-amd64/mc >> /root/background.log
+# chmod +x mc >> /root/background.log
+
+# sleep 5;
 
 cat << EOF > secret-minio.yaml
 ---
