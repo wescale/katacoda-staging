@@ -39,6 +39,6 @@
     "uilayout": "terminal"
   },
   "backend": {
-    "imageid": "bash1804"
+    "imageid": "bash1804" 
   }
 }
