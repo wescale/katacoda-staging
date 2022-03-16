@@ -1,0 +1,1 @@
+Bienvenue dans ce scénario de **WeShare** !
