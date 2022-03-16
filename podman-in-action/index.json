@@ -7,18 +7,9 @@
   "details": {
     "steps": [
       {
-        "title": "Etape 1 - Exo Bato",
+        "title": "Etape 1 - Installation Podman",
         "text": "step1.md",
         "verify": "scripts/step1-verify.sh"
-      },
-      {
-        "title": "Etape 2 - Set-up",
-        "text": "step2.md",
-        "courseData": "scripts/step2-coursedata.sh"
-      },
-      {
-        "title": "Etape 3 - Quiz",
-        "text": "step3.md"
       }
     ],
     "intro": {
@@ -39,6 +30,6 @@
     "uilayout": "terminal"
   },
   "backend": {
-    "imageid": "bash1804" 
+    "imageid": "ubuntu"
   }
 }
