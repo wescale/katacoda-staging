@@ -1,6 +1,22 @@
 
 **Démarrer un conteneur avec Podman**
 
-`podman run hello-world`{{execute}}
+
+`podman pull docker.io/nginx`{{execute}}
+
+`podman  run --name podman-nginx -p 8080:80 docker.io/nginx`{{execute}}
+
+`podman port -l`{{execute}}
+
+`podman inspect -l`{{execute}}
+
+`podman images`{{execute}}
+
+`podman ps`{{execute}}
+
 `podman ps -a`{{execute}}
+
+`podman stop podman-nginx `{{execute}}
+
+`podman rm podman-nginx `{{execute}}
 
