@@ -1,2 +1,2 @@
 #!/bin/bash
-[ -f toto.txt ] && echo "done"
+echo "done"

@@ -12,9 +12,12 @@
         "verify": "scripts/step1-verify.sh"
       },
       {
-        "title": "Podman alias Docker",
-        "text": "step2.md",
-        "verify": "scripts/step2-verify.sh"
+        "title": "Demarrer un conteneur",
+        "text": "step2.md"
+      },
+      {
+        "title": "Construire une image",
+        "text": "step3.md"
       }
     ],
     "intro": {
