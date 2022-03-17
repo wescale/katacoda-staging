@@ -10,6 +10,11 @@
         "title": "Etape 1 - Installation Podman",
         "text": "step1.md",
         "verify": "scripts/step1-verify.sh"
+      },
+      {
+        "title": "Podman alias Docker",
+        "text": "step2.md",
+        "verify": "scripts/step2-verify.sh"
       }
     ],
     "intro": {
