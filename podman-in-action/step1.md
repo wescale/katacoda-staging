@@ -1,6 +1,6 @@
 
 
-First, let's add Kubic project repository to our Ubuntu 20.04
+D'abord, nous rajoutons le repo Kubic projoet à notre ubuntu 20.4 :
 
 `. /etc/os-release`{{execute}}
 
@@ -8,11 +8,11 @@ First, let's add Kubic project repository to our Ubuntu 20.04
 
 `curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -`{{execute}}
 
-Secon install Podman in the system
+Ensuite, nous installons Podman dans le system:
 `sudo apt-get -y update`{{execute}}
 
 `sudo apt-get -y install podman`{{execute}}
 
-To verify the installation, let's display the version of podman deployed
+Enfin, nous vérifions que l'installation est réalisée et nous vérifions la version: 
 
 `podman --version`{{execute}}
