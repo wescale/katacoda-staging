@@ -14,8 +14,7 @@
     ],
     "intro": {
       "text": "intro.md",
-      "code": "scripts/intro-foreground.sh",
-      "credits": "par Gug et Pabz"
+      "credits": "akram.blouza@wescale.fr"
     },
     "finish": {
       "text": "finish.md"
