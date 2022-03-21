@@ -18,6 +18,10 @@
       {
         "title": "Construire une image",
         "text": "step3.md"
+      },
+      {
+        "title": "Possible de faire du docker-compose",
+        "text": "step4.md"
       }
     ],
     "intro": {
