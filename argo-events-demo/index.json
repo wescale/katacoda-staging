@@ -1,11 +1,15 @@
 {
   "title": "Argo events : une architecture asynchrone, orientée évènements, sauce Cloud Native",
   "description": "Argo Events permet d'apporter une mécanique évènementielle de manière simple et contrôlée au sein de votre cluster Kubernetes.",
+  "difficulty": "Intermediate",
+  "time": "30 minutes",
+  "icon": "fa-bars-staggered",
   "details": {
     "assets": {
       "host01": [
           {"file": "wait.sh", "chmod": "+x"},
           {"file": "ingress.yaml"},
+          {"file": "redis.yaml"},
           {"file": "deployment.yaml"},
           {"file": "deployment-flask.yaml"},
           {"file": "addNamespace.png"},

@@ -7,9 +7,12 @@ On récupère le nom du pod et on réalise un port forward.
 `kubectl port-forward $(kubectl get pods --namespace default -l "release=minio" -o jsonpath="{.items[0].metadata.name}") 9000 &`{{execute HOST1}}
 
 On configure ensuite la CLI afin que notre stockage local soit identifié par l'alias **minio**. Pour cela, on utilise le secret créer lors de l'installation de Minio.
-`./mc config host add minio http://localhost:9000 $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootUser}" | base64 --decode) $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootPassword}" | base64 --decode)`{{execute HOST1}}
+`./mc config host \
+add minio http://localhost:9000 \
+$(kubectl get secret --namespace default minio -o jsonpath="{.data.rootUser}" | base64 --decode) \
+$(kubectl get secret --namespace default minio -o jsonpath="{.data.rootPassword}" | base64 --decode)`{{execute HOST1}}
 
-Ces actions préliminaires ayant été réalisée, attaquons nous maintenant à l'évènement correspondant à la création d'un fichier dans le bucket input :
+Ces actions préliminaires ayant été réalisées, attaquons nous maintenant à l'évènement correspondant à la création d'un fichier dans le bucket input :
 
 ```sh
 cat << EOF > event-minio.yaml
@@ -20,7 +23,7 @@ metadata:
   name: minio
 spec:
   minio:
-    example:
+    add-file-as-input:
       bucket:
         name: input
       endpoint: minio-svc.default:9000
@@ -55,7 +58,7 @@ spec:
   dependencies:
     - name: echo-payload
       eventSourceName: minio
-      eventName: example
+      eventName: add-file-as-input
   triggers:
   - template:
       name: echo-payload
@@ -94,9 +97,14 @@ La chaine étant complète, déposons un fichier dans notre bucket :
 
 `touch start.txt`{{execute HOST1}}
 
-`until kubectl --namespace argo-events get pods --selector sensor-name=minio --field-selector=status.phase=Running | grep "minio"; do : sleep 1 ; done && sleep 3 && ./mc cp start.txt minio/input`{{execute HOST1}}
+`until kubectl --namespace argo-events get pods --selector sensor-name=minio --field-selector=status.phase=Running | grep "minio"; \
+do : sleep 1 ; done && sleep 3 && \
+./mc cp start.txt minio/input`{{execute HOST1}}
 
 `kubectl --namespace argo-events logs --selector app=echo-payload`{{execute HOST1}}
 
 On peut confirmer que le fichier est réellement présent en utilisant la CLI :
 `./mc ls minio/input`{{execute HOST1}}
+
+Faisons une dernière fois le ménage
+`kubectl --namespace argo-events delete pods --selector app=echo-payload`{{execute HOST1}}

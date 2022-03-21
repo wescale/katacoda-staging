@@ -29,7 +29,6 @@ On peut confirmer à l'aide de la ligne de commande.
 
 `kubectl --namespace argo-events get eventsources`{{execute HOST1}}
 
-
 `kubectl --namespace argo-events get services`{{execute HOST1}}
 
 `kubectl --namespace argo-events get pods`{{execute HOST1}}
@@ -59,9 +58,11 @@ EOF
 
 `kubectl apply -f ingress.yaml`{{execute HOST1}}
 
-Nous pouvons maintenant envoyer des évènements à notre hook :
+Nous pouvons maintenant envoyer des évènements à notre hook (les commandes until permettent d'attendre que les évènements ArgoEvents soient prêts) :
 
-`until kubectl -n argo-events get ingress --output=jsonpath='{.items[0].status.loadBalancer}' | grep "ingress"; do : sleep 1 ; done && sleep 3 && curl -X POST -H "Content-Type: application/json" -d '{"message":"My first message"}' http://controlplane/notify-me`{{execute HOST1}}
+`until kubectl -n argo-events get ingress --output=jsonpath='{.items[0].status.loadBalancer}' | grep "ingress"; \
+do : sleep 1 ; done && sleep 3 && \
+curl -X POST -H "Content-Type: application/json" -d '{"message":"My first message"}' http://controlplane/notify-me`{{execute HOST1}}
 
 
 En consultant les logs de notre pod, on constate que l'évènement est reçu.
@@ -121,7 +122,9 @@ EOF
 Dans l'interface graphique, on constate que la chaine se complète.
 
 Renvoyons un évènement à notre Webhook quand il est prêt :
-`until kubectl --namespace argo-events get pods --selector sensor-name=webhook --field-selector=status.phase=Running | grep "webhook-sensor"; do : sleep 1 ; done && sleep 3 && curl -X POST -H "Content-Type: application/json" -d '{"message":"My first message"}' http://controlplane/notify-me`{{execute HOST1}}
+`until kubectl --namespace argo-events get pods --selector sensor-name=webhook --field-selector=status.phase=Running | grep "webhook-sensor"; \
+do : sleep 1 ; done && sleep 3 && \
+curl -X POST -H "Content-Type: application/json" -d '{"message":"My first message"}' http://controlplane/notify-me`{{execute HOST1}}
 
 On constate que de nouveux pods sont créés
 
