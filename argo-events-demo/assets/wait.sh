@@ -53,20 +53,19 @@ show_progress()
 
   kubectl apply -f argo-server-sa.yaml
 
-  clear && echo -n "[Etape 6/10] Installation de ArgoWorkflow (suppression des messages d'erreur de l'UI)"
-  kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/install.yaml
-
-
-  clear && echo -n "[Etape 7/10] Déploiement de l'interface graphique ArgoServer"
+  clear && echo -n "[Etape 6/10] Déploiement de l'interface graphique ArgoServer"
   echo -n " "
 
   kubectl apply -f deployment.yaml
 
-  clear && echo -n "[Etape 8/10] Déploiement des services Argo"
+  clear && echo -n "[Etape 7/10] Déploiement des services Argo"
   echo -n " "
 
   wget -q https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/base/argo-server/argo-server-service.yaml
   kubectl apply -f argo-server-service.yaml
+
+  clear && echo -n "[Etape 8/10] Installation de ArgoWorkflow (suppression des messages d'erreur de l'UI)"
+  #kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/install.yaml
 
   clear && echo -n "[Etape 9/10] En attente de l'ingress Nginx"
   echo -n " "
