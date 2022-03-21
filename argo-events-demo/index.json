@@ -31,7 +31,7 @@
       {
         "title": "Notre premier event",
         "text": "2-webhook.md",
-        "code": "background.sh"
+        "courseData": "background.sh"
       },
       {
         "title": "Découvrir d'autres events : Redis",

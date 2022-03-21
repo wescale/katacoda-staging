@@ -1,0 +1,37 @@
+{
+  "title": "Podman in action",
+  "description": "Weshare Avril - Un ensemble d'exercices Wescale pour montrer le Podman in action",
+  "difficulty": "Débutant",
+  "time": "20 minutes",
+  "icon": "fa-unlock-alt",
+  "details": {
+    "steps": [
+      {
+        "title": "Etape 1 - Installation Podman",
+        "text": "step1.md",
+        "verify": "scripts/step1-verify.sh"
+      },
+      {
+        "title": "Demarrer un conteneur",
+        "text": "step2.md"
+      },
+      {
+        "title": "Construire une image",
+        "text": "step3.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "akram.blouza@wescale.fr"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal"
+  },
+  "backend": {
+    "imageid": "ubuntu:2004"
+  }
+}
