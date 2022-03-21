@@ -8,7 +8,7 @@ Comme l’ensemble de la suite Argo, ce framework est open-source et indépendan
 
 ## Description
 
-Dans ce tutoriel, nous explorerons les mécanismes internes de ArgoEvents à travers quelques exemples simples et nous terminierons en construisant une architecture "complexe"
+Dans ce tutoriel, nous explorerons les mécanismes internes de ArgoEvents à travers quelques exemples simples et nous terminerons en construisant une architecture "complexe"
 
 ## Sommaire
 
