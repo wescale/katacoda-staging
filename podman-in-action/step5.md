@@ -32,3 +32,8 @@
 # List containers
 
 `podman container ls`{{execute}}
+
+# Generate manifest 
+
+`podman generate kube -f pod.yml pod01`{{execute}}
+`less pod.yml`{{execute}}
