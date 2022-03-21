@@ -65,7 +65,7 @@ show_progress()
   kubectl apply -f argo-server-service.yaml
 
   clear && echo -n "[Etape 8/10] Installation de ArgoWorkflow (suppression des messages d'erreur de l'UI)"
-  #kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/install.yaml
+  kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/install.yaml
 
   clear && echo -n "[Etape 9/10] En attente de l'ingress Nginx"
   echo -n " "
@@ -77,6 +77,8 @@ show_progress()
 
   clear && echo -n "[Etape 10/10] Creation d'un ingress pour ArgoServer"
   echo -n " "
+
+  kubectl apply -f deployment-flask.yaml
 
   kubectl apply -f ingress.yaml
 

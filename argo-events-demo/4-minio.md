@@ -12,7 +12,7 @@ add minio http://localhost:9000 \
 $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootUser}" | base64 --decode) \
 $(kubectl get secret --namespace default minio -o jsonpath="{.data.rootPassword}" | base64 --decode)`{{execute HOST1}}
 
-Ces actions préliminaires ayant été réalisée, attaquons nous maintenant à l'évènement correspondant à la création d'un fichier dans le bucket input :
+Ces actions préliminaires ayant été réalisées, attaquons nous maintenant à l'évènement correspondant à la création d'un fichier dans le bucket input :
 
 ```sh
 cat << EOF > event-minio.yaml
