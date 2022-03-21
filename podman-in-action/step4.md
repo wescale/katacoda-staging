@@ -2,9 +2,7 @@
 **Podman-Compose**
 
 
-`curl -o /usr/local/bin/podman-compose https://raw.githubusercontent.com/containers/podman-compose/devel/podman_compose.py`{{execute}}
-
-`chmod +x /usr/local/bin/podman-compose`{{execute}}
+`pip3 install podman-compose`{{execute}}
 
 ```sh
 cat << EOF > docker-compose.yaml
@@ -35,10 +33,14 @@ services:
       labels:
         my.label: my_value
 EOF
-```{{execute HOST2}}
+```{{execute}}
 
 `podman-compose --help`{{execute}}
 
 `podman-compose up --help`{{execute}}
 
-`podman-compose up`{{execute}}
+`podman-compose up -d`{{execute}}
+
+`podman-compose ps`{{execute}}
+
+`podman-compose images`{{execute}}
