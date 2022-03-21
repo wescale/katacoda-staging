@@ -6,7 +6,9 @@ Katacoda prend parfois son temps, soyez patient !
 # C'est parti
 Tout d'abord, nous allons nous authentifier auprès de Argo Server. Rafraichissez la fenêtre supérieure (lien Try Again ou bouton Display Port). Exécutez la ligne ci après.
 
-`clear && kubectl exec $(kubectl get pods -l app=argo-server -o=jsonpath='{.items[0].metadata.name}') -- argo auth token && printf "\n\n"`{{execute HOST1}}
+`clear && \
+kubectl exec $(kubectl get pods -l app=argo-server -o=jsonpath='{.items[0].metadata.name}') -- argo auth token && \
+printf "\n\n"`{{execute HOST1}}
 
 et copiez / collez le résultat ("Bearer xxx...xxx...") dans la case du milieu  (argo auth token), puis cliquez sur login.
 Fermez les deux fenêtres d'information et cliquez sur "Event Flow".
