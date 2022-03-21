@@ -3,7 +3,7 @@
   "description": "Argo Events permet d'apporter une mécanique évènementielle de manière simple et contrôlée au sein de votre cluster Kubernetes.",
   "difficulty": "Intermediate",
   "time": "30 minutes",
-  "icon": "fa-align-center",
+  "icon": "fa-bars-staggered",
   "details": {
     "assets": {
       "host01": [
