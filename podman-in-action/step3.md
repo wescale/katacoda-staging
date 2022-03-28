@@ -1,12 +1,18 @@
 
-**Construction d'une image avec Podman**
+**How to use Podman to run containers in separate user namespaces.**
 
 
-`git clone https://github.com/scriptcamp/podman.git`{{execute}}
+`sudo bash -c "echo Test > /tmp/test"`{{execute}}
 
-`cd podman/nginx-image`{{execute}}
+`sudo chmod 600 /tmp/test`{{execute}}
 
-`podman build -t scriptcamp/nginx .`{{execute}}
+`sudo ls -l /tmp/test`{{execute}}
 
-`podman push scriptcamp/nginx`{{execute}}
+`sudo podman run -ti -v /tmp/test:/tmp/test:Z --uidmap 0:100000:5000 fedora sh`{{execute}}
+
+`id`{{execute}}
+
+`ls -l /tmp/test`{{execute}}
+
+`cat /tmp/test`{{execute}}
 
