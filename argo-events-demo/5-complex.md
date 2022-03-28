@@ -6,7 +6,7 @@ Nous allons donc enchainer les étapes suivantes :
 WebHook -> conteneur de téléchargement et dépot dans S3 -> conteneur OCR et notification Redis -> mise à jour du serveur Web
 (remplacer par un joli dessin)
 
-Pour réduire la variance des résultats, nous nous limiterons à 5 images prétestées, qui donne d'excellent résultats au passage par l'OCR. Nous utiliserons les cinq émotions du film Vice et Versa de Pixar.
+Pour réduire la variance des résultats, nous nous limiterons à 5 images prétestées, qui donne d'excellents résultats au passage par l'OCR. Nous utiliserons les cinq émotions du film Vice et Versa de Pixar.
 
 Vous êtes prêts ? C'est parti !
 
