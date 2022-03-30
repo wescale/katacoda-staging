@@ -59,9 +59,19 @@
 
 `ls -al / | grep sonatype-work`{{execute}}
 
+`touch /sonatype-work/test`{{execute}}
+
 `exit`{{execute}}
 
 `podman unshare chown 200:200 -R $HOME/nexus-repo-wescale`{{execute}}
 
 `podman run -it --rm --name nexus2 -v  $HOME/nexus-repo-wescale:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
+
+`ls -al / | grep sonatype-work`{{execute}}
+
+`touch /sonatype-work/test`{{execute}}
+
+`exit`{{execute}}
+
+`ls -al nexus-repo-wescale/`{{execute}}
 
