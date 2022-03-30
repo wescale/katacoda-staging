@@ -31,6 +31,3 @@
 `cd podman/nginx-image`{{execute}}
 
 `podman build -t scriptcamp/nginx .`{{execute}}
-
-`podman push scriptcamp/nginx`{{execute}}
-
