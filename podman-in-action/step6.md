@@ -39,8 +39,6 @@
 
 `less pod.yml`{{execute}}
 
-`podman generate kube -f pod.yml pod01`{{execute}}
-
 ` podman generate kube --service pod01 > service.yml `{{execute}}
 
 `less service.yml`{{execute}}
