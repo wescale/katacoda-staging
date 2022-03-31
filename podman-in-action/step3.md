@@ -21,7 +21,14 @@
 `podman rmi --all`{{execute}}
 
 - **You can remove all containers even if they are running with the Podman command below:**
-`podman rm --all -t 0 --force`{{execute}}
+  
+`podman run -d nginx`{{execute}}
+
+`podman ps`{{execute}}
+
+`podman rm --all --force`{{execute}}
+
+`podman ps`{{execute}}
 
 
 
@@ -33,9 +40,7 @@
 
 `podman rm test1 test2 test3`{{execute}}
 
-`podman run --name test1 ubi8`{{execute}}
-
-`podman run --name test3 ubi8`{{execute}}
+`podman ps -a`{{execute}}
 
 `podman rm --ignore test1 test2 test3`{{execute}}
 

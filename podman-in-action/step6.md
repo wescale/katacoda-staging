@@ -36,4 +36,5 @@
 # Generate manifest 
 
 `podman generate kube -f pod.yml pod01`{{execute}}
+
 `less pod.yml`{{execute}}

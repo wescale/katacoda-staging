@@ -37,10 +37,6 @@ EOF
 
 `podman-compose --help`{{execute}}
 
-`podman-compose up --help`{{execute}}
-
 `podman-compose up -d`{{execute}}
 
 `podman-compose ps`{{execute}}
-
-`podman-compose images`{{execute}}
