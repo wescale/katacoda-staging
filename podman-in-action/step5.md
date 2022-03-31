@@ -1,39 +1,77 @@
 
-**A container in a pod**
+**How to use Podman to run containers in separate user namespaces.**
 
-# Create a pod
 
-`podman pod create -p 8080:80 --name pod01`{{execute}}
+`sudo bash -c "echo Test > /tmp/test"`{{execute}}
 
-# List Pods 
+`sudo chmod 600 /tmp/test`{{execute}}
 
-`podman pod ls`{{execute}}
+`sudo ls -l /tmp/test`{{execute}}
 
-# Start a container in the pod
+`sudo podman run -ti -v /tmp/test:/tmp/test:Z --uidmap 0:100000:5000 fedora sh`{{execute}}
 
-`podman container run -d --name container01 --pod pod01 docker.io/library/httpd`{{execute}}
+`id`{{execute}}
 
-# List containers
+`ls -l /tmp/test`{{execute}}
 
-`podman container ls`{{execute}}
+`cat /tmp/test`{{execute}}
 
-# Let's add two more containers to the pod.
+`exit`{{execute}}
 
-`podman container run -d --name container02 --pod pod01 docker.io/library/mariadb`{{execute}}
 
-# Start a third container in the pod
+**Tutorial to run containers in rootless.**
 
-`podman container run -d --name container03 --pod pod01 docker.io/library/redis`{{execute}}
 
-# List pods
+`mkdir $HOME/nexus-repo-root`{{execute}}
 
-`podman pod ls`{{execute}}
+`id -u $(whoami)`{{execute}}
 
-# List containers
+`podman run -it --rm --name nexus2 -v $HOME/nexus-repo-root:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
 
-`podman container ls`{{execute}}
+## The directory is owned by root – not user “200”, or my user ID.
+`id -u $(whoami)`{{execute}}
 
-# Generate manifest 
+`ls -al / | grep sonatype-work`{{execute}}
 
-`podman generate kube -f pod.yml pod01`{{execute}}
-`less pod.yml`{{execute}}
+`touch /sonatype-work/test`{{execute}}
+
+`exit`{{execute}}
+
+`podman unshare chown 200:200 -R $HOME/nexus-repo-root`{{execute}}
+
+## This means that if you’re running your container process as a non-root user, it won’t be able to write to that directory.
+
+## So how do we change the owner of the directory in the container, so the user can write to it?
+
+## And how can we troubleshoot and run commands in that same user namespace, when things go wrong – without having to start a container?
+
+`podman ps -a`{{execute}}
+
+`sudo adduser wescale`{{execute}}
+
+`su - wescale`{{execute}}
+
+`podman ps -a`{{execute}}
+
+`mkdir $HOME/nexus-repo-wescale`{{execute}}
+
+`podman run -it --rm --name nexus2 -v $HOME/nexus-repo-wescale:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
+
+`ls -al / | grep sonatype-work`{{execute}}
+
+`touch /sonatype-work/test`{{execute}}
+
+`exit`{{execute}}
+
+`podman unshare chown 200:200 -R $HOME/nexus-repo-wescale`{{execute}}
+
+`podman run -it --rm --name nexus2 -v  $HOME/nexus-repo-wescale:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
+
+`ls -al / | grep sonatype-work`{{execute}}
+
+`touch /sonatype-work/test`{{execute}}
+
+`exit`{{execute}}
+
+`ls -al nexus-repo-wescale/`{{execute}}
+

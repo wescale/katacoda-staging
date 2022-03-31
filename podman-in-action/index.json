@@ -16,7 +16,7 @@
         "text": "step2.md"
       },
       {
-        "title": "Construire une image",
+        "title": "Des commandes utiles",
         "text": "step3.md"
       },
       {
@@ -24,8 +24,12 @@
         "text": "step4.md"
       },
       {
-        "title": "Possible de faire du docker-compose",
+        "title": "Rootless",
         "text": "step5.md"
+      },
+      {
+        "title": "k8s avec Podman",
+        "text": "step6.md"
       }
     ],
     "intro": {

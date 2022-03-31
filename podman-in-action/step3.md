@@ -1,77 +1,42 @@
 
-**How to use Podman to run containers in separate user namespaces.**
+**The --replace flag**
 
 
-`sudo bash -c "echo Test > /tmp/test"`{{execute}}
+`podman run --name test ubi8 echo hello`{{execute}}
 
-`sudo chmod 600 /tmp/test`{{execute}}
+`podman run --name test ubi8 echo goodbye`{{execute}}
 
-`sudo ls -l /tmp/test`{{execute}}
-
-`sudo podman run -ti -v /tmp/test:/tmp/test:Z --uidmap 0:100000:5000 fedora sh`{{execute}}
-
-`id`{{execute}}
-
-`ls -l /tmp/test`{{execute}}
-
-`cat /tmp/test`{{execute}}
-
-`exit`{{execute}}
+`podman run --replace --name test ubi8 echo goodbye`{{execute}}
 
 
-**Tutorial to run containers in rootless.**
+**The --all flag**
+
+- **Stop all Podman containers**
+`podman stop --all`{{execute}}
+
+- **Remove all Podman containers**
+`podman rm --all`{{execute}}
+
+- **Remove all Podman images** 
+`podman rmi --all`{{execute}}
+
+- **You can remove all containers even if they are running with the Podman command below:**
+`podman rm --all -t 0 --force`{{execute}}
 
 
-`mkdir $HOME/nexus-repo-root`{{execute}}
 
-`id -u $(whoami)`{{execute}}
+**The --ignore flag**
 
-`podman run -it --rm --name nexus2 -v $HOME/nexus-repo-root:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
+`podman run --name test1 ubi8`{{execute}}
 
-## The directory is owned by root – not user “200”, or my user ID.
-`id -u $(whoami)`{{execute}}
+`podman run --name test3 ubi8`{{execute}}
 
-`ls -al / | grep sonatype-work`{{execute}}
+`podman rm test1 test2 test3`{{execute}}
 
-`touch /sonatype-work/test`{{execute}}
+`podman run --name test1 ubi8`{{execute}}
 
-`exit`{{execute}}
+`podman run --name test3 ubi8`{{execute}}
 
-`podman unshare chown 200:200 -R $HOME/nexus-repo-root`{{execute}}
+`podman rm --ignore test1 test2 test3`{{execute}}
 
-## This means that if you’re running your container process as a non-root user, it won’t be able to write to that directory.
-
-## So how do we change the owner of the directory in the container, so the user can write to it?
-
-## And how can we troubleshoot and run commands in that same user namespace, when things go wrong – without having to start a container?
-
-`podman ps -a`{{execute}}
-
-`sudo adduser wescale`{{execute}}
-
-`su - wescale`{{execute}}
-
-`podman ps -a`{{execute}}
-
-`mkdir $HOME/nexus-repo-wescale`{{execute}}
-
-`podman run -it --rm --name nexus2 -v $HOME/nexus-repo-wescale:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
-
-`ls -al / | grep sonatype-work`{{execute}}
-
-`touch /sonatype-work/test`{{execute}}
-
-`exit`{{execute}}
-
-`podman unshare chown 200:200 -R $HOME/nexus-repo-wescale`{{execute}}
-
-`podman run -it --rm --name nexus2 -v  $HOME/nexus-repo-wescale:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
-
-`ls -al / | grep sonatype-work`{{execute}}
-
-`touch /sonatype-work/test`{{execute}}
-
-`exit`{{execute}}
-
-`ls -al nexus-repo-wescale/`{{execute}}
 
