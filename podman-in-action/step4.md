@@ -1,8 +1,12 @@
 
 **Docker-Compose AS Podman-Compose**
 
+podman-compose est apparu à partir de la version 3.0. Il fonctionne de la même manière que docker-compose.
+Voici un exemple du fonctionnement de podman-compose:
 
-`pip3 install podman-compose`{{execute}}
+Installation podman-compose: `pip3 install podman-compose`{{execute}}
+
+podman-compose continue à utiliser un docker-compose.yaml:
 
 ```sh
 cat << EOF > docker-compose.yaml
@@ -35,8 +39,6 @@ services:
 EOF
 ```{{execute}}
 
-`podman-compose --help`{{execute}}
+Up du podman-compose: `podman-compose up -d`{{execute}}
 
-`podman-compose up -d`{{execute}}
-
-`podman-compose ps`{{execute}}
+Vérfier que tout est bon: `podman-compose ps`{{execute}}

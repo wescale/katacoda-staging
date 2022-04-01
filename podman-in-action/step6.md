@@ -1,39 +1,39 @@
 
-**A container in a pod**
+**Simuler les objets k8s avec Podman, oui c'est possible !**
 
-# Create a pod
+# Créer un pod
 
 `podman pod create -p 8080:80 --name pod01`{{execute}}
 
-# List Pods 
+# Lister l'ensemble des Pods 
 
 `podman pod ls`{{execute}}
 
-# Start a container in the pod
+# Lancer un conteneur dans un pod 
 
 `podman container run -d --name container01 --pod pod01 docker.io/library/httpd`{{execute}}
 
-# List containers
+# Lister l'ensemble des conteneurs 
 
 `podman container ls`{{execute}}
 
-# Let's add two more containers to the pod.
+# Rajoutons deux autres conteneurs dans le pod
 
 `podman container run -d --name container02 --pod pod01 docker.io/library/mariadb`{{execute}}
 
-# Start a third container in the pod
+#  et un troisième ...
 
 `podman container run -d --name container03 --pod pod01 docker.io/library/redis`{{execute}}
 
-# List pods
+# lister l'ensemble des pods
 
 `podman pod ls`{{execute}}
 
-# List containers
+# lister l'ensemble des conteneurs
 
 `podman container ls`{{execute}}
 
-# Generate manifest 
+# Générons les manifests: Pod et Service
 
 `podman generate kube -f pod.yml pod01`{{execute}}
 
@@ -43,8 +43,12 @@
 
 `less service.yml`{{execute}}
 
+# stop et arreter tout
+
 `podman pod stop --all`{{execute}}
 
 `podman pod rm -f --all`{{execute}}
+
+# Recréer l'ensemble en une seule commande: 
 
 `podman play kube pod.yml`{{execute}}
