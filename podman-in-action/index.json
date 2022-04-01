@@ -12,27 +12,27 @@
         "verify": "scripts/step1-verify.sh"
       },
       {
-        "title": "Etape 2 - Docker AS Podman, pas FAUX ! ",
+        "title": "Etape 2 - Docker AS Podman, pas FAUX !",
         "text": "step2.md",
         "code": "scripts/clear.sh"
       },
       {
-        "title": "Des commandes utiles",
+        "title": "Quelques commandes utiles:",
         "text": "step3.md",
         "code": "scripts/clear.sh"
       },
       {
-        "title": "Possible de faire du docker-compose",
+        "title": "podman-compose ? Oui, ça existe !",
         "text": "step4.md",
         "code": "scripts/clear.sh"
       },
       {
-        "title": "Rootless",
+        "title": "Podman et la sécurité:",
         "text": "step5.md",
         "code": "scripts/clear.sh"
       },
       {
-        "title": "k8s avec Podman",
+        "title": "Préparer ces objets k8s avec Podman:",
         "text": "step6.md",
         "code": "scripts/clear.sh"
       }
