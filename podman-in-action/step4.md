@@ -2,7 +2,7 @@
 **Docker-Compose AS Podman-Compose**
 
 podman-compose est apparu à partir de la version 3.0. Il fonctionne de la même manière que docker-compose.
-Voici un exemple du fonctionnement de podman-compose:
+Voici un exemple, et vous allez voir que le podman-compose est un équivalent de docker-compose mais en mieux: deamonless et rootless
 
 Installation podman-compose: `pip3 install podman-compose`{{execute}}
 
