@@ -34,7 +34,7 @@
     ],
     "intro": {
       "text": "intro.md",
-      "credits": "akram.blouza@wescale.fr"
+      "credits": "Présentation & Exos crées créée par [akram.blouza@wescale.fr](akram.blouza@wescale.fr)"
     },
     "finish": {
       "text": "finish.md"
