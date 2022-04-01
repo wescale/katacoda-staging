@@ -14,7 +14,7 @@ Voici ce qu'est un user namespace dans la documentation officielle:
 
 Le "user namespace" permet d'isoler les UIDs et GIDs entre les conteneurs. Il est ainsi possible de configurer le user namespace pour donner la possibilité au conteneur à voir uniquement un sous ensemble des UIDs/GIDs de la machine Host. Voici un exemple permettant d'illustrer ceci: 
 
-**Comment utilser Podman afin de lancer les conteneurs ayant des users namespaces différents:**
+**Comment utilser Podman afin de lancer un conteneurs isolant les UIDs/GIds gràce au "users namespaces":**
 
 `sudo bash -c "echo Test > /tmp/test"`{{execute}}
 
@@ -42,7 +42,7 @@ Lançons le conteneur fedora avec un mapping de namespace utilisateur 0:100000:5
 **Testons concrétement ce que c'est un rootless:**
 
 Nous lancons un conteneur Nexus, et souhaitons que les artefacts seront copiés dans un dossier au niveau du Host.
-Nous démarrons par lançer le conteneur nexus autant que root et un volume qui ne peut pas être partagé à d'autres conteneurs (:Z)
+Nous démarrons le conteneur nexus autant que root et un volume qui ne peut pas être partagé à d'autres conteneurs (:Z)
 
 `mkdir $HOME/nexus-repo-root`{{execute}}
 
