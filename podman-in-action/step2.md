@@ -1,5 +1,5 @@
 
-**"FIND" et RUN" un conteneur avec Podman**
+**"FIND" et RUN" un conteneur avec Podman**: 
 
 
 `podman pull docker.io/nginx`{{execute}}
@@ -13,8 +13,6 @@
 `podman images`{{execute}}
 
 `podman ps`{{execute}}
-
-`podman ps -a`{{execute}}
 
 `curl 127.0.0.1:8080`{{execute}}
 
