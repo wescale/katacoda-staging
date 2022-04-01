@@ -8,9 +8,9 @@ Rajouter le repo kubic: `echo "deb https://download.opensuse.org/repositories/de
 
 Ajouter la clé GPG:  `curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -`{{execute}}
 
-Mise à jour du system: `sudo apt-get -y update`{{execute}}
+Mettre à jour le system: `sudo apt-get -y update`{{execute}}
 
-Installation de Podman: `sudo apt-get -y install podman`{{execute}}
+Installation de la dernière version de Podman: `sudo apt-get -y install podman`{{execute}}
 
 Enfin, nous vérifions que l'installation est réalisée et nous vérifions la version: 
 
