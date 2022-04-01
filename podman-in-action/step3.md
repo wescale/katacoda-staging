@@ -1,5 +1,5 @@
 
-**The --replace flag**
+**Le flag --replace**
 
 
 `podman run --name test ubi8 echo hello`{{execute}}
@@ -9,19 +9,16 @@
 `podman run --replace --name test ubi8 echo goodbye`{{execute}}
 
 
-**The --all flag**
+**Le flag --all**
 
-- **Stop all Podman containers**
-`podman stop --all`{{execute}}
+Arrêter l'ensemble des conteneurs: `podman stop --all`{{execute}}
 
-- **Remove all Podman containers**
-`podman rm --all`{{execute}}
+Supprimer l'ensemble des conteneurs: `podman rm --all`{{execute}}
 
-- **Remove all Podman images** 
-`podman rmi --all`{{execute}}
+Supprimer l'ensemble des images: `podman rmi --all`{{execute}}
 
-- **You can remove all containers even if they are running with the Podman command below:**
-  
+Supprimer l'ensemble des conteneurs, même s'ils sont déja démarrées:
+
 `podman run -d nginx`{{execute}}
 
 `podman ps`{{execute}}
@@ -31,8 +28,7 @@
 `podman ps`{{execute}}
 
 
-
-**The --ignore flag**
+**Le flag --ignore**
 
 `podman run --name test1 ubi8`{{execute}}
 

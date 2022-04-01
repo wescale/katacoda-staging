@@ -1,5 +1,5 @@
 
-**Podman-Compose**
+**Docker-Compose AS Podman-Compose**
 
 
 `pip3 install podman-compose`{{execute}}

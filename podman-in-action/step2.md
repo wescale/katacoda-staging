@@ -1,5 +1,5 @@
 
-**Démarrer un conteneur avec Podman**
+**"FIND" et RUN" un conteneur avec Podman**
 
 
 `podman pull docker.io/nginx`{{execute}}
@@ -23,7 +23,7 @@
 `podman rm podman-nginx `{{execute}}
 
 
-**Construction d'une image avec Podman**
+**"Build" d'une image avec Podman**
 
 
 `git clone https://github.com/scriptcamp/podman.git`{{execute}}
@@ -31,3 +31,8 @@
 `cd podman/nginx-image`{{execute}}
 
 `podman build -t scriptcamp/nginx .`{{execute}}
+
+**Un peu de nettoyage**
+
+`podman rm --all --force`{{execute}}
+`podman rmi --all`{{execute}}

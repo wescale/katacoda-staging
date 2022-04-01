@@ -9,8 +9,7 @@
       {
         "title": "Etape 1 - Installation Podman",
         "text": "step1.md",
-        "verify": "scripts/step1-verify.sh",
-        "code": "scripts/clear.sh"
+        "verify": "scripts/step1-verify.sh"
       },
       {
         "title": "Demarrer un conteneur",
@@ -34,7 +33,8 @@
       },
       {
         "title": "k8s avec Podman",
-        "text": "step6.md"
+        "text": "step6.md",
+        "code": "scripts/clear.sh"
       }
     ],
     "intro": {
