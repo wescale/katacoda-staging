@@ -8,8 +8,6 @@
 
 `podman port -l`{{execute}}
 
-`podman inspect -l`{{execute}}
-
 `podman images`{{execute}}
 
 `podman ps`{{execute}}
@@ -30,7 +28,10 @@
 
 `podman build -t scriptcamp/nginx .`{{execute}}
 
+`podman images`{{execute}}
+
 **Un peu de nettoyage**
 
 `podman rm --all --force`{{execute}}
+
 `podman rmi --all`{{execute}}

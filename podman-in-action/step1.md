@@ -12,6 +12,6 @@ Nous mettons à jour le system: `sudo apt-get -y update`{{execute}}
 
 Et enfin, nous lançons l'installation de la dernière version de Podman: `sudo apt-get -y install podman`{{execute}}
 
-Vérifions maintenant que podman c'est bien installé:  
+Vérifions maintenant que podman est bien installé:  
 
 `podman --version`{{execute}}
