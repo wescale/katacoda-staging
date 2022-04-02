@@ -44,7 +44,7 @@ L'ensemble des conteneurs rootless lancés par un utilisateur (non root évideme
 
 Donc, si l'un de ces conteneurs démarre avec un volume, il apparait à l'interieur de l'user namaspace appartenant à root. (--uidmap 0:<uid utilisateur:1> c'est à dire appartenant à root à l'interieur du conteneur, et appartenantn à l'utilisateur au niveau de la machine host).
 
-Ainsi, si vous lancez votre utilisateur avec un utilisateur non root, il n'est pas possible d'écrire dans un volume.
+Ainsi, si vous lancez votre conteneur avec un utilisateur non root, il n'est pas possible d'écrire dans un volume.
 
 Comment peut-on faire pour changer le proprièataire de ce dossier dans le conteneur, pour que le conteneur à écrire dans ce dossier ?
 Et comment, peut-on faire pour lancer des commandes dans le conteneur avec le même "user namespace", quand il y a des erreurs et pour ne pas avoir besoin de démarrer le conteneur ?
@@ -72,9 +72,14 @@ Nous démarrons le conteneur nexus autant que root et un volume qui ne peut pas 
 
 `exit`{{execute}}
 
-## Utilisons l'option unshare pour lancer une commande qui utilisera le même namespace utilisateur que le conteneur, dans notre cas l'UID 200.
+## Utilisons l'option unshare
+
+L'option unshare permet de lancer une commande dans le même user namespace que celui du conteneur (root dans notre cas:  0:uid utilisateur). 
+Utilisons donc podman unshare pour que l'utilisateur 200 dans le conteneur nexus ait les droits à écrire dans ce dossier: 
 
 `podman unshare chown 200:200 -R $HOME/nexus-repo-root`{{execute}}
+
+Ceci ne fonctionne pas, effectictement on ne peut pas lancer unshare uniquement que rootless: 
 
 `podman ps -a`{{execute}}
 
