@@ -41,7 +41,7 @@ Générons maintenant le manifest du service
 
 `less service.yml`{{execute}}
 
-On supprime tout ce qu'on a créer: 
+On supprime tout ce qu'on a crée: 
 
 `podman pod stop --all`{{execute}}
 

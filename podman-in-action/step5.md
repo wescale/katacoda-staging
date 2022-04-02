@@ -1,16 +1,7 @@
 **C'est quoi l'user namespace**
 Voici ce qu'est un user namespace dans la documentation officielle:        
        
-       "User namespaces isolate security-related identifiers and
-       attributes, in particular, user IDs and group IDs (see
-       credentials(7)), the root directory, keys (see keyrings(7)), and
-       capabilities (see capabilities(7)).  A process's user and group
-       IDs can be different inside and outside a user namespace.  In
-       particular, a process can have a normal unprivileged user ID
-       outside a user namespace while at the same time having a user ID
-       of 0 inside the namespace; in other words, the process has full
-       privileges for operations inside the user namespace, but is
-       unprivileged for operations outside the namespace."
+"User namespaces **isolate** security-related identifiers and attributes, in particular, **user IDs** and **group IDs**, the **root directory**, and **capabilities**.A process's user and group IDs can be different inside and outside a user namespace. In particular, a process can have a normal unprivileged user ID outside a user namespace while at the same time having a user ID of 0 inside the namespace; in other words, the process has full privileges for operations inside the user namespace, but is unprivileged for operations outside the namespace."
 
 Le "user namespace" permet d'isoler les UIDs et GIDs entre les conteneurs. Il est ainsi possible de configurer le user namespace pour donner la possibilité au conteneur à voir uniquement un sous ensemble des UIDs/GIDs de la machine Host. Voici un exemple permettant d'illustrer ceci: 
 
