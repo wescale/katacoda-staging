@@ -1,7 +1,4 @@
 **C'est quoi l'user namespace**
-Voici ce qu'est un user namespace dans la documentation officielle:        
-       
-"User namespaces **isolate** security-related identifiers and attributes, in particular, **user IDs** and **group IDs**, the **root directory**, and **capabilities**.A process's user and group IDs can be different inside and outside a user namespace. In particular, a process can have a normal unprivileged user ID outside a user namespace while at the same time having a user ID of 0 inside the namespace; in other words, the process has full privileges for operations inside the user namespace, but is unprivileged for operations outside the namespace."
 
 Le "user namespace" permet d'isoler les UIDs et GIDs entre vos conteneurs et votre host. Il est possible de voir ce mapping en observant le fichier /proc/self/uid_map dans votre conteneur.
 
