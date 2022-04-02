@@ -76,6 +76,8 @@ Utilisons donc podman unshare pour que l'utilisateur 200 dans le conteneur nexus
 
 `podman unshare chown 200:200 -R $HOME/nexus-repo-root`{{execute}}
 
+`cat /proc/self/uid_map`{{execute}}
+
 Ceci ne fonctionne pas, effectictement on ne peut pas lancer unshare uniquement que rootless: 
 
 `podman ps -a`{{execute}}
@@ -85,11 +87,15 @@ Ceci ne fonctionne pas, effectictement on ne peut pas lancer unshare uniquement 
 
 `su - wescale`{{execute}}
 
+`id -u $(whoami)`{{execute}}
+
 `podman ps -a`{{execute}}
 
 `mkdir $HOME/nexus-repo-wescale`{{execute}}
 
 `podman run -it --rm --name nexus2 -v $HOME/nexus-repo-wescale:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
+
+`cat /proc/self/uid_map`{{execute}}
 
 `ls -al / | grep sonatype-work`{{execute}}
 
