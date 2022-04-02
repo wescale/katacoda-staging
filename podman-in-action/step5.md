@@ -3,7 +3,9 @@ Voici ce qu'est un user namespace dans la documentation officielle:
        
 "User namespaces **isolate** security-related identifiers and attributes, in particular, **user IDs** and **group IDs**, the **root directory**, and **capabilities**.A process's user and group IDs can be different inside and outside a user namespace. In particular, a process can have a normal unprivileged user ID outside a user namespace while at the same time having a user ID of 0 inside the namespace; in other words, the process has full privileges for operations inside the user namespace, but is unprivileged for operations outside the namespace."
 
-Le "user namespace" permet d'isoler les UIDs et GIDs entre les conteneurs. Il est ainsi possible de configurer le user namespace pour donner la possibilité au conteneur à voir uniquement un sous ensemble des UIDs/GIDs de la machine Host. Voici un exemple permettant d'illustrer ceci: 
+Le "user namespace" permet d'isoler les UIDs et GIDs entre vos conteneurs et votre host. Il est possible de voir ce mapping en observant le fichier /proc/self/uid_map dans votre conteneur.
+
+Il est ainsi possible de configurer le user namespace pour donner la possibilité au conteneur à voir uniquement un sous ensemble des UIDs/GIDs de la machine Host. Voici un exemple permettant d'illustrer ceci: 
 
 **Comment utilser Podman afin de lancer un conteneurs isolant les UIDs/GIds gràce au "users namespaces":**
 
@@ -21,6 +23,8 @@ Lançons le conteneur fedora avec un mapping de namespace utilisateur 0:100000:5
 
 `sudo podman run -ti -v /tmp/test:/tmp/test:Z --uidmap 0:100000:5000 fedora sh`{{execute}}
 
+`cat /proc/self/uid_map`{{execute}}
+
 `id`{{execute}}
 
 `ls -l /tmp/test`{{execute}}
@@ -32,6 +36,11 @@ Lançons le conteneur fedora avec un mapping de namespace utilisateur 0:100000:5
 
 **Testons concrétement ce que c'est un rootless:**
 
+Pour obtenir un conteneur Rootless, nous devrons lancer Podman par un utilisateur non root.
+Quand vous lancez un rootless podman, il utilise **user namespace** pour mapper entre les utilisateurs ID dans le conteneur et les utilisateurs ID dans le host.
+L'ensemble des conteneurs rootless lancés par un utilisateur (non root évidement), sont lancés avec le même "user namespace". L'ensemble de ces conteneurs peuvent partager les ressources sans demander un privilége root.
+Ce mapping d'utilisateurs fonctionne très bien, sauf quand le conteneur a besoin de partager quelque chose avec la machine host, tels qu'un volume.  Pourquoi ?
+Quand un conteneur démarre avec un volume, il apparait à l'interieur de l'user namaspace comme appartenant à root/root.       
 Nous lancons un conteneur Nexus, et souhaitons que les artefacts seront copiés dans un dossier au niveau du Host.
 Nous démarrons le conteneur nexus autant que root et un volume qui ne peut pas être partagé à d'autres conteneurs (:Z)
 
