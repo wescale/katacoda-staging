@@ -37,10 +37,20 @@ Lançons le conteneur fedora avec un mapping de namespace utilisateur 0:100000:5
 **Testons concrétement ce que c'est un rootless:**
 
 Pour obtenir un conteneur Rootless, nous devrons lancer Podman par un utilisateur non root.
+
 Quand vous lancez un rootless podman, il utilise **user namespace** pour mapper entre les utilisateurs ID dans le conteneur et les utilisateurs ID dans le host.
-L'ensemble des conteneurs rootless lancés par un utilisateur (non root évidement), sont lancés avec le même "user namespace". L'ensemble de ces conteneurs peuvent partager les ressources sans demander un privilége root.
-Ce mapping d'utilisateurs fonctionne très bien, sauf quand le conteneur a besoin de partager quelque chose avec la machine host, tels qu'un volume.  Pourquoi ?
-Quand un conteneur démarre avec un volume, il apparait à l'interieur de l'user namaspace comme appartenant à root/root.       
+
+L'ensemble des conteneurs rootless lancés par un utilisateur (non root évidement), sont lancés avec le même "user namespace". (comme si on a passé --uidmap 0:<uid utilisateur:1>). 
+
+Donc, si l'un de ces conteneurs démarre avec un volume, il apparait à l'interieur de l'user namaspace appartenant à root. (--uidmap 0:<uid utilisateur:1> c'est à dire appartenant à root à l'interieur du conteneur, et appartenantn à l'utilisateur au niveau de la machine host).
+
+Ainsi, si vous lancez votre utilisateur avec un utilisateur non root, il n'est pas possible d'écrire dans un volume.
+
+Comment peut-on faire pour changer le proprièataire de ce dossier dans le conteneur, pour que le conteneur à écrire dans ce dossier ?
+Et comment, peut-on faire pour lancer des commandes dans le conteneur avec le même "user namespace", quand il y a des erreurs et pour ne pas avoir besoin de démarrer le conteneur ?
+
+La réponse sera donné dans l'exemple suivant: 
+
 Nous lancons un conteneur Nexus, et souhaitons que les artefacts seront copiés dans un dossier au niveau du Host.
 Nous démarrons le conteneur nexus autant que root et un volume qui ne peut pas être partagé à d'autres conteneurs (:Z)
 
