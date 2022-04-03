@@ -1,8 +1,8 @@
 **C'est quoi l'user namespace**
 
-Le "user namespace" permet d'isoler les UIDs et GIDs entre vos conteneurs et votre host. Il est possible de voir ce mapping en observant le fichier /proc/self/uid_map dans votre conteneur.
+Le **user namespace** permet d'isoler les UIDs et GIDs entre vos conteneurs et votre host. Il est possible de voir ce mapping en observant le fichier /proc/self/uid_map dans votre conteneur.
 
-Il est ainsi possible de configurer le user namespace pour donner la possibilité au conteneur à voir uniquement un sous ensemble des UIDs/GIDs de la machine Host. Voici un exemple permettant d'illustrer ceci: 
+Il est ainsi possible de configurer le **user namespace** pour donner la possibilité au conteneur à voir uniquement un sous ensemble des UIDs/GIDs de la machine Host. Voici un exemple permettant d'illustrer ceci: 
 
 **Comment utilser Podman afin de lancer un conteneurs isolant les UIDs/GIds gràce au "users namespaces":**
 
@@ -12,11 +12,12 @@ Il est ainsi possible de configurer le user namespace pour donner la possibilit�
 
 `sudo ls -l /tmp/test`{{execute}}
 
-Lançons le conteneur fedora avec un mapping de namespace utilisateur 0:100000:5000. Ici On mappe 5000 utilisateur, et en démarrant avec l'UID 100000 à l'exterieur du POD, qui correspondera à l'utilisateur 0 (root) dans le conteneur. 
-(UID Out) 10000 -> 0  (UID IN)
-(UID Out) 10001 -> 1  (UID IN)
+Lançons le conteneur fedora avec un mapping **user namespace** 0:100000:5000. Ici on mappe 5000 utilisateur, et en démarrant avec l'UID 100000 à l'exterieur du conteneur, qui correspondera à l'utilisateur 0 (root) dans le conteneur. 
+
+- (UID Out) 10000 -> 0  (UID IN)
+- (UID Out) 10001 -> 1  (UID IN)
 ...
-(UID Out) 14999 -> 4999  (UID IN)
+- (UID Out) 14999 -> 4999  (UID IN)
 
 `sudo podman run -ti -v /tmp/test:/tmp/test:Z --uidmap 0:100000:5000 fedora sh`{{execute}}
 
@@ -33,18 +34,19 @@ Lançons le conteneur fedora avec un mapping de namespace utilisateur 0:100000:5
 
 **Testons concrétement ce que c'est un rootless:**
 
-Pour obtenir un conteneur Rootless, nous devrons lancer Podman par un utilisateur non root.
+Pour obtenir un conteneur **Rootless**, nous devrons lancer Podman par un utilisateur non root.
 
-Quand vous lancez un rootless podman, il utilise **user namespace** pour mapper entre les utilisateurs ID dans le conteneur et les utilisateurs ID dans le host.
+Quand vous lancez un conteneur en rootless, Le **user namespace** est activé pour mapper entre les utilisateurs UID dans le conteneur et les utilisateurs UID dans le host.
 
-L'ensemble des conteneurs rootless lancés par un utilisateur (non root évidement), sont lancés avec le même "user namespace". (comme si on a passé --uidmap 0:<uid utilisateur:1>). 
+L'ensemble des conteneurs rootless lancés par un utilisateur (non root évidement), sont lancés avec le même "user namespace", avec le mapping suivant pour le root dans le conteneur 0:<uid utilisateur host machine:1>. 
 
-Donc, si l'un de ces conteneurs démarre avec un volume, il apparait à l'interieur de l'user namaspace appartenant à root. (--uidmap 0:<uid utilisateur:1> c'est à dire appartenant à root à l'interieur du conteneur, et appartenantn à l'utilisateur au niveau de la machine host).
+Donc, si l'un de ces conteneurs démarre avec un volume, il apparait appartenant à root à l'interieur du conteneur qui mappe l'UID de l'utilisateur non root au niveau de la machine host.
 
-Ainsi, si vous lancez votre conteneur avec un utilisateur non root, il n'est pas possible d'écrire dans un volume.
+Ainsi, si vous lancez votre conteneur avec un utilisateur non root (soit avec **--user** en lancant le conteneur, soit avec **USER** dans le Dockerfile), il ne pourra pas écrire dans un volume.
 
-Comment peut-on faire pour changer le proprièataire de ce dossier dans le conteneur, pour que le conteneur à écrire dans ce dossier ?
-Et comment, peut-on faire pour lancer des commandes dans le conteneur avec le même "user namespace", quand il y a des erreurs et pour ne pas avoir besoin de démarrer le conteneur ?
+- Comment peut-on faire pour changer le proprièataire du volume dans le conteneur ?
+
+- Cmment, peut-on faire pour lancer des commandes dans le conteneur utilisant le "user namespace", pour effectuer du troubleshooting sans avoir besoin de démarrer le conteneur ?
 
 La réponse sera donné dans l'exemple suivant: 
 
