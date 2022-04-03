@@ -59,7 +59,7 @@ Nous démarrons le conteneur nexus autant que root et un volume qui ne peut pas 
 
 `podman run -it --rm --name nexus2 -v $HOME/nexus-repo-root:/sonatype-work:Z sonatype/nexus /bin/sh`{{execute}}
 
-## Le propriètaire du dossier est root, et non l'ID 200 ou mon ID utilisateur
+## Vérifions que le  propriètaire du dossier est bien root
 
 `id -u $(whoami)`{{execute}}
 
