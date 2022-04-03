@@ -7,6 +7,4 @@ Voici la définition dans la documentation de [https://docs.podman.io/en/latest/
  ![Architecture Podman]](assets/architecture.png)
 
 
- **Podman vs Docker**
-
  ![Podman vs Docker]](assets/podman vs Docker.png)
