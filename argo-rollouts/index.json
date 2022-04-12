@@ -7,15 +7,17 @@
   "details": {
     "assets": {
       "host01": [
-          {"file": "00.init_script_runner.sh", "chmod": "+x"},
-          {"file": "ingress.yaml"},
-          {"file": "downloader/Dockerfile", "target":"downloader/"}
+        {
+          "file": "00.init_script_runner.sh",
+          "chmod": "+x",
+          "target": "/assets/"
+        }
       ]
-  },
-  "intro": {
-    "text": "steps/00.intro.md",
-    "code": "assets/00.init_script.sh"
-  },
+    },
+    "intro": {
+      "text": "steps/00.intro.md",
+      "code": "assets/00.init_script.sh"
+    },
     "steps": [
       {
         "title": "Installer Argo Rollouts",
@@ -29,7 +31,7 @@
   "environment": {
     "uilayout": "terminal-iframe-split",
     "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n"
-},
+  },
   "backend": {
     "imageid": "kubernetes-cluster-running:1.18",
     "port": 80

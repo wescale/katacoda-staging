@@ -6,11 +6,11 @@
 echo "Waiting for files to be uploaded on the VM."
 
 # Wait for the Katacoda VM to start
-while [ ! -f ./00.init_script_runner.sh ]; do 
+while [ ! -f /assets/00.init_script_runner.sh ]; do 
     sleep 1; 
 done;
 
 echo "Files found. executing."
 
 # Execute the script on the runner
-./00.init_script_runner.sh
+/assets/00.init_script_runner.sh
