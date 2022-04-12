@@ -19,7 +19,7 @@
     "steps": [
       {
         "title": "Installer Argo Rollouts",
-        "text": "steps/01-installation.md"
+        "text": "steps/01.installation.md"
       }
     ],
     "finish": {
