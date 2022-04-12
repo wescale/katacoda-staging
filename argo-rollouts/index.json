@@ -1,0 +1,37 @@
+{
+  "title": "Argo rollouts : des déploiements Kubernetes avancés",
+  "description": "Argo Events permet d'apporter une mécanique évènementielle de manière simple et contrôlée au sein de votre cluster Kubernetes.",
+  "difficulty": "Intermediate",
+  "time": "30 minutes",
+  "icon": "fa-bars-staggered",
+  "details": {
+    "assets": {
+      "host01": [
+          {"file": "00.init_script_runner.sh", "chmod": "+x"},
+          {"file": "ingress.yaml"},
+          {"file": "downloader/Dockerfile", "target":"downloader/"}
+      ]
+  },
+  "intro": {
+    "text": "steps/00.intro.md",
+    "code": "assets/00.init_script.sh"
+  },
+    "steps": [
+      {
+        "title": "Installer Argo Rollouts",
+        "text": "01-installation.md"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal-iframe-split",
+    "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n"
+},
+  "backend": {
+    "imageid": "kubernetes-cluster-running:1.18",
+    "port": 80
+  }
+}
