@@ -54,8 +54,8 @@ show_progress()
 
   clear && echo -n "[Etape 4/4] Installation de l'interface Argo-rollouts \n\n"
  
-  # Install the Dashboard
-  kubectl apply -n "${NAMESPACE}" -f https://github.com/argoproj/argo-rollouts/releases/download/${ARGO_VERSION}/dashboard-install.yaml
+  # Install the Dashboard - should be installed in the current namespace
+  kubectl apply -f https://github.com/argoproj/argo-rollouts/releases/download/${ARGO_VERSION}/dashboard-install.yaml
 
   # Wait for ingress to be available
   kubectl wait --namespace ingress-nginx \
