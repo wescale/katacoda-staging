@@ -11,6 +11,10 @@
           "file": "00.init_script_runner.sh",
           "chmod": "+x",
           "target": "/assets/"
+        },
+        {
+          "file": "00.argo-rollouts-dashboard-ingress.yml",
+          "target": "/assets/"
         }
       ]
     },
