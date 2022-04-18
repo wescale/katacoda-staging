@@ -53,12 +53,15 @@ show_progress()
   # ===================== Installation of the Argo-Rollouts CRD ==========================
 
   clear && echo -n "[Etape 4/4] Installation de l'interface Argo-rollouts \n\n"
-
-  # Install the CRDs
-  # kubectl apply -n "${NAMESPACE}" -f https://github.com/argoproj/argo-rollouts/releases/download/${ARGO_VERSION}/install.yaml
-  
+ 
   # Install the Dashboard
   kubectl apply -n "${NAMESPACE}" -f https://github.com/argoproj/argo-rollouts/releases/download/${ARGO_VERSION}/dashboard-install.yaml
+
+  # Wait for ingress to be available
+  kubectl wait --namespace ingress-nginx \
+    --for=condition=ready pod \
+    --selector=app.kubernetes.io/component=controller \
+    --timeout=120s
 
   # Install the ingress
   kubectl apply -f "$(dirname $0)/00.argo-rollouts-dashboard-ingress.yml"
