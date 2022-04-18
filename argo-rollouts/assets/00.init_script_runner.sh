@@ -5,10 +5,11 @@ ARGO_VERSION=v1.2.0
 
 show_progress()
 {
+  clear
   echo "Il reste 10 étapes à paramétrer avant de démarrer ce tuto"
   echo -n " "
 
-  echo -n "[Etape 1/10] K8S est en train de chauffer"
+  echo -n "[Etape 1/4] K8S est en train de chauffer"
   local -r pid="${1}"
   local -r delay='0.75'
   local spinstr='\|/-'
@@ -27,7 +28,7 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
-  clear && echo -n "[Etape 2/10] Les noeuds rejoignent le cluster K8S"
+  clear && echo -n "[Etape 2/4] Les noeuds rejoignent le cluster K8S"
   echo -n " "
 
   kubectl wait --for=condition=Ready nodes --all --timeout=120s
@@ -35,19 +36,32 @@ show_progress()
   scp -q /root/.kube/config $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}):/root/.kube/config
   
 
+  #  ===================== Create the NGINX Ingress ==========================
+  clear && echo -n "[Etape 4/10] Déploiement des CRDs de l'ingress Nginx"
+  echo -n " "
+
+  kubectl create namespace ingress-nginx
+
+  helm upgrade --install ingress-nginx ingress-nginx \
+    --repo https://kubernetes.github.io/ingress-nginx \
+    --namespace ingress-nginx --version='<4'
+
   # ===================== Create the K8S namespace ==========================
-  clear && echo -n "[Etape 3/10] Création du namespace dédié au tuto\n\n"
+  clear && echo -n "[Etape 3/4] Création du namespace dédié au tuto\n\n"
   kubectl create namespace "${NAMESPACE}"
 
   # ===================== Installation of the Argo-Rollouts CRD ==========================
 
-  clear && echo -n "[Etape 3/10] Installation de l'interface Argo-rollouts \n\n"
+  clear && echo -n "[Etape 4/4] Installation de l'interface Argo-rollouts \n\n"
 
   # Install the CRDs
   # kubectl apply -n "${NAMESPACE}" -f https://github.com/argoproj/argo-rollouts/releases/download/${ARGO_VERSION}/install.yaml
   
   # Install the Dashboard
   kubectl apply -n "${NAMESPACE}" -f https://github.com/argoproj/argo-rollouts/releases/download/${ARGO_VERSION}/dashboard-install.yaml
+
+  # Install the ingress
+  kubectl apply -f "$(dirname $0)/00.argo-rollouts-dashboard-ingress.yml"
 
   echo -n "Paramétrage effectué, paré au lancement"
   echo -n ""
