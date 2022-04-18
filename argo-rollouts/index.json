@@ -26,6 +26,10 @@
       {
         "title": "Installer Argo Rollouts",
         "text": "steps/01.installation.md"
+      },
+      {
+        "title": "Les déploiements Canary",
+        "text": "steps/02.canary.md"
       }
     ],
     "finish": {
