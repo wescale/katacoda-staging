@@ -8,12 +8,7 @@
     "assets": {
       "host01": [
         {
-          "file": "00.init_script_runner.sh",
-          "chmod": "+x",
-          "target": "/assets/"
-        },
-        {
-          "file": "00.argo-rollouts-dashboard-ingress.yml",
+          "file": "assets/*",
           "target": "/assets/"
         }
       ]
@@ -29,7 +24,12 @@
       },
       {
         "title": "Les déploiements Canary",
-        "text": "steps/02.canary.md"
+        "text": "steps/02.canary.md",
+        "verify": "assets/02.cleanup-script.sh"
+      },
+      {
+        "title": "Les déploiements Canary Avancés",
+        "text": "steps/03.canary-advanced.md"
       }
     ],
     "finish": {
@@ -38,7 +38,13 @@
   },
   "environment": {
     "uilayout": "terminal-iframe-split",
-    "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n"
+    "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n",
+    "showdashboard": true,
+    "dashboards": [
+        {"name": "Dashboard Argo Rollouts", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com"},
+        {"name": "Stable release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/stable"},
+        {"name": "Preview release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/preview"}
+    ]
   },
   "backend": {
     "imageid": "kubernetes-cluster-running:1.18",
