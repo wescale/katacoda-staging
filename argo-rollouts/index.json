@@ -8,7 +8,7 @@
     "assets": {
       "host01": [
         {
-          "file": "assets/*",
+          "file": "**/*.*",
           "target": "/assets/"
         }
       ]
