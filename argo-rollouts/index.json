@@ -9,7 +9,8 @@
       "host01": [
         {
           "file": "**/*.*",
-          "target": "/assets/"
+          "target": "/assets/",
+          "chmod": "+x"
         }
       ]
     },
