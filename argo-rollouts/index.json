@@ -43,8 +43,8 @@
     "showdashboard": true,
     "dashboards": [
         {"name": "Dashboard Argo Rollouts", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com"},
-        {"name": "Stable release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/stable"},
-        {"name": "Preview release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/preview"}
+        {"name": "Stable release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/stable/"},
+        {"name": "Preview release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/preview/"}
     ]
   },
   "backend": {
