@@ -65,7 +65,8 @@ show_progress()
 
   # Install the ingress
   kubectl apply -f "$(dirname $0)/00.argo-rollouts-dashboard-ingress.yml"
-
+  
+  clear
   echo -n "Paramétrage effectué, paré au lancement"
   echo -n ""
 }

@@ -5,7 +5,7 @@ kind: Rollout
 metadata:
   name: example-rollout
 spec:
-  replicas: 10
+  replicas: 3
   selector:
     matchLabels:
       app: nginx
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.15.4
+        image: kalioz/canary-deployment-ui:v1.1.0-ying
         ports:
         - containerPort: 80
   minReadySeconds: 30

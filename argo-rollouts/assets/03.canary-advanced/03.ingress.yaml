@@ -7,10 +7,9 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-  - host: rollouts-demo.local
-    http:
+  - http:
       paths:
-      - path: /canary-advanced(/|$)(.*)
+      - path: /stable(/|$)(.*)
         backend:
           serviceName: rollouts-demo-stable
           servicePort: 80

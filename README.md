@@ -8,3 +8,5 @@ To create a new course, you simply need to create a folder at the root and put a
 
 You should disable your adblock to use katacoda, as some script might not work otherwise.
 > all developments need to be done / merged on the master branch to appear in katacoda.
+
+The documentation of Katacoda is available on [katacoda.community](https://www.katacoda.community/essentials/scenario-syntax.html#markdown-101).
