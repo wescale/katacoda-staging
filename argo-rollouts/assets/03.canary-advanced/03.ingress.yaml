@@ -12,4 +12,4 @@ spec:
       - path: /stable(/|$)(.*)
         backend:
           serviceName: rollouts-demo-stable
-          servicePort: 80
+          servicePort: 8080

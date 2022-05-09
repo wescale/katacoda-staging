@@ -4,7 +4,7 @@ metadata:
   name: rollouts-demo-canary
 spec:
   ports:
-  - port: 80
+  - port: 8080
     targetPort: http
     protocol: TCP
     name: http
@@ -20,7 +20,7 @@ metadata:
   name: rollouts-demo-stable
 spec:
   ports:
-  - port: 80
+  - port: 8080
     targetPort: http
     protocol: TCP
     name: http
