@@ -3,4 +3,4 @@
 # cleanup current Rollout
 kubectl delete Rollout --all
 
-exit 0
+echo "done" && exit 0
