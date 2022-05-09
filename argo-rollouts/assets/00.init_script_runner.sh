@@ -44,7 +44,7 @@ show_progress()
 
   helm upgrade --install ingress-nginx ingress-nginx \
     --repo https://kubernetes.github.io/ingress-nginx \
-    --namespace ingress-nginx --version='<4'
+    --namespace ingress-nginx --version="4.1.0"
 
   # ===================== Create the K8S namespace ==========================
   clear && echo -n "[Etape 4/5] Création du namespace dédié au tuto\n\n"
