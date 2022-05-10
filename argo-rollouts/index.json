@@ -31,6 +31,26 @@
       {
         "title": "Les déploiements Canary Avancés",
         "text": "steps/03.canary-advanced.md"
+      },
+      {
+        "title": "Les déploiements Blue/Green",
+        "text": "steps/04.blue-green.md"
+      },
+      {
+        "title": "Les Analysis",
+        "text": "steps/05.analysis.md"
+      },
+      {
+        "title": "Les déploiements Canary automatiquement testés",
+        "text": "steps/06.analysis-canary.md"
+      },
+      {
+        "title": "Les Experiments",
+        "text": "steps/07.experiments.md"
+      },
+      {
+        "title": "Les déploiements Canary et le traffic routing",
+        "text": "steps/08.traffic-routing-canary.md"
       }
     ],
     "finish": {

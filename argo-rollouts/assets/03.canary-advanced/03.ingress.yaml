@@ -17,5 +17,5 @@ spec:
       paths:
       - path: /preview/(.*)
         backend:
-          serviceName: rollouts-demo-canary
+          serviceName: rollouts-demo-preview
           servicePort: 8080
