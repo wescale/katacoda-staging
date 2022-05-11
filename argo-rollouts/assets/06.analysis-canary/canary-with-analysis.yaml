@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: example-rollout
+  name: canary-with-analysis
 spec:
   replicas: 3
   selector:
@@ -25,12 +25,18 @@ spec:
     canary: #Indicates that the rollout should use the Canary strategy
       stableService: rollouts-demo-stable
       canaryService: rollouts-demo-preview
-      maxSurge: "25%"
-      maxUnavailable: 0
       steps:
       - setWeight: 25
       - pause:
-          duration: 30s
+          duration: 10s
       - setWeight: 75
-      - pause: {} # pause indefinitly - wait for manual input.
+      - analysis:
+          templates:
+          - templateName: linkchecker
+          args:
+          - name: fqdn
+            value: rollouts-demo-preview
+      - pause:
+          duration: 30s
+      - setWeight: 100 # the analysis needs to success to complete the deployment.
 

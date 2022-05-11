@@ -64,7 +64,7 @@ show_progress()
     --timeout=120s
 
   # Install the ingress
-  kubectl apply -f "$(dirname $0)/00.argo-rollouts-dashboard-ingress.yml"
+  kubectl apply -f "$(dirname $0)/00.global-components/"
   
   clear
   echo -n "Paramétrage effectué, paré au lancement"

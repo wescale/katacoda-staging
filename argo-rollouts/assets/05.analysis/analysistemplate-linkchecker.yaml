@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: linkchecker
+spec:
+  # here we define the arguments that will be passed to the analysis
+  args:
+  - name: fqdn
+
+  # here we define the metrics the analysis will use to determine if the run should be succesful.
+  metrics:
+    # checks that the server is responsive on the provided fqdn
+    - name: webmetric
+      successCondition: result == 'true'
+      provider:
+      web:
+        url: "{{ args.fqdn }}/index.html"
+        jsonPath: "{$.results.ok}"
+    # checks that there are no broken links in the server
+    - name: check-broken-links
+      provider:
+        job:
+          spec:
+            backoffLimit: 1
+            template:
+              spec:
+                containers:
+                - name: linkchecker
+                  image: linkchecker/linkchecker
+                  args: ["--verbose", "--check-extern", "{{ args.fqdn }}"]
+                restartPolicy: Never
