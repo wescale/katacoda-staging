@@ -2,12 +2,12 @@
 
 ec=0
 
-if ! kubectl get Rollouts; then
+if ! kubectl get Rollouts > /dev/null 2>&1; then
     echo "Please Install the Rollouts CRD in the server"
     ec=1
 fi
 
-if ! kubectl argo rollouts version; then
+if ! kubectl argo rollouts version > /dev/null 2>&1; then
     echo "Install the kubectl plugin for argo rollouts"
     ec=1
 fi
