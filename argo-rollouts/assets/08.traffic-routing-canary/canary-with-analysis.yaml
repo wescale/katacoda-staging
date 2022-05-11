@@ -24,6 +24,11 @@ spec:
   strategy:
     canary: #Indicates that the rollout should use the Canary strategy
       canaryService: rollouts-demo-preview
+      # here we also set the "stable" service, which will always point to the stable release.
+      stableService: rollouts-demo-stable
+      trafficRouting:
+        nginx:
+          stableIngress: rollouts-demo # name of the ingress I use
       steps:
       - setCanaryScale:
           replicas: 1
@@ -34,7 +39,7 @@ spec:
           - templateName: linkchecker
           args:
           - name: fqdn
-            value: rollouts-demo-preview
+            value: http://rollouts-demo-preview.default.svc.cluster.local:8080
       - pause:
           duration: 30s
       # if the analysis succeed, gradually increase the weight of the deployment

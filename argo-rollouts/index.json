@@ -21,7 +21,8 @@
     "steps": [
       {
         "title": "Installer Argo Rollouts",
-        "text": "steps/01.installation.md"
+        "text": "steps/01.installation.md",
+        "verify": "assets/01.installation/check.sh"
       },
       {
         "title": "Les déploiements Canary",
