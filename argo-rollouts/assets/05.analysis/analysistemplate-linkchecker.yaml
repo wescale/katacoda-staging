@@ -13,9 +13,9 @@ spec:
     - name: webmetric
       successCondition: result == 'true'
       provider:
-      web:
-        url: "{{ args.fqdn }}/index.html"
-        jsonPath: "{$.results.ok}"
+        web:
+          url: "{{ args.fqdn }}/index.html"
+          jsonPath: "{$.results.ok}"
     # checks that there are no broken links in the server
     - name: check-broken-links
       provider:

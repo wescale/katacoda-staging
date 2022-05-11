@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if kubectl get AnalysisTemplate linkchecker > /dev/null;
+if kubectl get AnalysisTemplate linkchecker > /dev/null; then
   echo "done"
   exit 0
 fi

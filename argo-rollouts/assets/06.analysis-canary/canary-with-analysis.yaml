@@ -23,7 +23,6 @@ spec:
   revisionHistoryLimit: 3
   strategy:
     canary: #Indicates that the rollout should use the Canary strategy
-      stableService: rollouts-demo-stable
       canaryService: rollouts-demo-preview
       steps:
       - setWeight: 25
