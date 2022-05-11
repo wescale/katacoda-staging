@@ -67,8 +67,8 @@ show_progress()
   kubectl apply -f "$(dirname $0)/00.global-components/"
   
   clear
-  echo -n "Paramétrage effectué, paré au lancement"
-  echo -n ""
+  echo "Paramétrage effectué, paré au lancement"
+  echo ""
 }
 
 show_progress
