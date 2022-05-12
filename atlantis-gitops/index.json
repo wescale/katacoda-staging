@@ -3,7 +3,7 @@
   "description": "Venez apprendre comment mettre en place le GitOps avec Terraform pour gérer votre infrastructure",
   "difficulty": "Beginner",
   "time": "10 minutes",
-  "icon": "fa-bars-staggered",
+  "icon": "fa-check-square-o",
   "details": {
     "steps": [
       {
