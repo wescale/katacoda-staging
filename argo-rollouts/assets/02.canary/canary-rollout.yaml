@@ -1,11 +1,9 @@
----
-# Rollout
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: example-rollout
+  name: canary
 spec:
-  replicas: 3
+  replicas: 10
   selector:
     matchLabels:
       app: rollouts-demo
@@ -18,7 +16,7 @@ spec:
       - name: nginx
         image: kalioz/canary-deployment-ui:v1.1.0-ying
         ports:
-        - containerPort: 8080
+        - containerPort: 80
   minReadySeconds: 30
   revisionHistoryLimit: 3
   strategy:
@@ -32,4 +30,3 @@ spec:
           duration: 30s
       - setWeight: 75
       - pause: {} # pause indefinitly - wait for manual input.
-

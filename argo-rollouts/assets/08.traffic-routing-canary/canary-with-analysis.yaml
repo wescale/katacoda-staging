@@ -1,0 +1,51 @@
+---
+# Rollout
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: canary-with-analysis
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: rollouts-demo
+  template:
+    metadata:
+      labels:
+        app: rollouts-demo
+    spec:
+      containers:
+      - name: nginx
+        image: kalioz/canary-deployment-ui:v1.1.0-ying
+        ports:
+        - containerPort: 8080
+  minReadySeconds: 30
+  revisionHistoryLimit: 3
+  strategy:
+    canary: #Indicates that the rollout should use the Canary strategy
+      canaryService: rollouts-demo-preview
+      # here we also set the "stable" service, which will always point to the stable release.
+      stableService: rollouts-demo-stable
+      trafficRouting:
+        nginx:
+          stableIngress: rollouts-demo # name of the ingress I use
+      steps:
+      - setCanaryScale:
+          replicas: 1
+      # note that 1 canary pod is deployed, and 0% of the traffic will go to it for now
+      # run the analysis on that pod
+      - analysis:
+          templates:
+          - templateName: linkchecker
+          args:
+          - name: fqdn
+            value: http://rollouts-demo-preview.default.svc.cluster.local:8080
+      - pause:
+          duration: 30s
+      # if the analysis succeed, gradually increase the weight of the deployment
+      - setCanaryScale:
+          # don't forget to restore the pods<->traffic link
+          matchTrafficWeight: true
+      - setWeight: 50
+      - setWeight: 100
+

@@ -21,28 +21,33 @@
     "steps": [
       {
         "title": "Installer Argo Rollouts",
-        "text": "steps/01.installation.md"
+        "text": "steps/01.installation.md",
+        "verify": "assets/01.installation/check.sh"
       },
       {
         "title": "Les déploiements Canary",
         "text": "steps/02.canary.md",
-        "verify": "assets/02.cleanup-script.sh"
+        "verify": "assets/0x.cleanup-rollout.sh"
       },
       {
         "title": "Les déploiements Canary Avancés",
-        "text": "steps/03.canary-advanced.md"
+        "text": "steps/03.canary-advanced.md",
+        "verify": "assets/0x.cleanup-rollout.sh"
       },
       {
         "title": "Les déploiements Blue/Green",
-        "text": "steps/04.blue-green.md"
+        "text": "steps/04.blue-green.md",
+        "verify": "assets/0x.cleanup-rollout.sh"
       },
       {
         "title": "Les Analysis",
-        "text": "steps/05.analysis.md"
+        "text": "steps/05.analysis.md",
+        "verify": "assets/05.analysis/check.sh"
       },
       {
         "title": "Les déploiements Canary automatiquement testés",
-        "text": "steps/06.analysis-canary.md"
+        "text": "steps/06.analysis-canary.md",
+        "verify": "assets/0x.cleanup-rollout.sh"
       },
       {
         "title": "Les Experiments",
