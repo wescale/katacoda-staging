@@ -1,6 +1,6 @@
 {
   "title": "Atlantis : Terraform pour GitOps",
-  "description": "Venez apprendre comment mettre en place le GitOps avec Terraform pour votre infrastructure",
+  "description": "Venez apprendre comment mettre en place le GitOps avec Terraform pour gérer votre infrastructure",
   "difficulty": "Beginner",
   "time": "10 minutes",
   "icon": "fa-bars-staggered",
