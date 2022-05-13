@@ -1,22 +1,22 @@
 {
-  "title": "Trivy WIP",
-  "backend": {
-    "imageid": "ubuntu20.04"
-  },
-  "details": {
-    "intro": {
-      "text": "intro.md",
-      "foreground": "displayWait.sh",
-      "background": "updatePackages.sh"
-    },
-    "steps": [
-      {
-        "title": "Install Trivy",
-        "text": "step1.md"
+   "title":"Trivy WIP",
+   "backend":{
+      "imageid":"ubuntu20.04"
+   },
+   "details":{
+      "intro":{
+         "text":"intro.md",
+         "foreground":"displayWait.sh",
+         "background":"updatePackages.sh"
+      },
+      "steps":[
+         {
+            "title":"Install Trivy",
+            "text":"step1.md"
+         }
+      ],
+      "finish":{
+         "text":"finish.md"
       }
-    ],
-    "finish": {
-      "text": "finish.md"
-    }
-  }
+   }
 }
