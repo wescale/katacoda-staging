@@ -12,25 +12,34 @@
         "verify": "scripts/step1-verify.sh"
       },
       {
-        "title": "Demarrer un conteneur",
-        "text": "step2.md"
+        "title": "Etape 2 - Docker AS Podman, pas FAUX !",
+        "text": "step2.md",
+        "code": "scripts/clear.sh"
       },
       {
-        "title": "Construire une image",
-        "text": "step3.md"
+        "title": "Quelques commandes utiles:",
+        "text": "step3.md",
+        "code": "scripts/clear.sh"
       },
       {
-        "title": "Possible de faire du docker-compose",
-        "text": "step4.md"
+        "title": "podman-compose ? Oui, ça existe !",
+        "text": "step4.md",
+        "code": "scripts/clear.sh"
       },
       {
-        "title": "Possible de faire du docker-compose",
-        "text": "step5.md"
+        "title": "Podman et la sécurité:",
+        "text": "step5.md",
+        "code": "scripts/clear.sh"
+      },
+      {
+        "title": "Préparer ces objets k8s avec Podman:",
+        "text": "step6.md",
+        "code": "scripts/clear.sh"
       }
     ],
     "intro": {
       "text": "intro.md",
-      "credits": "akram.blouza@wescale.fr"
+      "credits": "Présentation & Exos crées par [akram.blouza@wescale.fr](akram.blouza@wescale.fr)"
     },
     "finish": {
       "text": "finish.md"

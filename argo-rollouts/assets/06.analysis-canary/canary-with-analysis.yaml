@@ -1,0 +1,41 @@
+---
+# Rollout
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: canary-with-analysis
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rollouts-demo
+  template:
+    metadata:
+      labels:
+        app: rollouts-demo
+    spec:
+      containers:
+      - name: nginx
+        image: kalioz/canary-deployment-ui:v1.1.0-ying
+        ports:
+        - containerPort: 8080
+  minReadySeconds: 30
+  revisionHistoryLimit: 3
+  strategy:
+    canary: #Indicates that the rollout should use the Canary strategy
+      canaryService: rollouts-demo-preview
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 10s
+      - analysis:
+          templates:
+          - templateName: linkchecker
+          args:
+          - name: fqdn
+            value: http://rollouts-demo-preview.default.svc.cluster.local:8080
+      - setWeight: 75
+      - pause:
+          duration: 30s
+      - setWeight: 100 # the analysis needs to success to complete the deployment.
+

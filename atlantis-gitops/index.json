@@ -1,0 +1,30 @@
+{
+  "title": "Atlantis : Terraform pour GitOps",
+  "description": "Venez apprendre comment mettre en place le GitOps avec Terraform pour gérer votre infrastructure",
+  "difficulty": "Beginner",
+  "time": "10 minutes",
+  "icon": "fa-check-square-o",
+  "details": {
+    "steps": [
+      {
+        "title": "Installer Atlantis",
+        "text": "1-installation.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "code": "waitForKub.sh"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal-iframe-split",
+    "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n"
+},
+  "backend": {
+    "imageid": "kubernetes-cluster-running:1.18",
+    "port": 80
+  }
+}

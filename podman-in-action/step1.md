@@ -1,18 +1,17 @@
 
+**Installation Podman dans Ubuntu**
 
-D'abord, nous rajoutons le repo Kubic projoet à notre ubuntu 20.4 :
 
-`. /etc/os-release`{{execute}}
+Nous commençons par sourcer l'os-release:  `. /etc/os-release`{{execute}}
 
-`echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list`{{execute}}
+Ensuite nous ajouter le repo kubic qui contiendra podman, ainsi que la clé GPG: `echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list`{{execute}}
 
 `curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -`{{execute}}
 
-Ensuite, nous installons Podman dans le system:
-`sudo apt-get -y update`{{execute}}
+Nous mettons à jour le system: `sudo apt-get -y update`{{execute}}
 
-`sudo apt-get -y install podman`{{execute}}
+Et enfin, nous lançons l'installation de la dernière version de Podman: `sudo apt-get -y install podman`{{execute}}
 
-Enfin, nous vérifions que l'installation est réalisée et nous vérifions la version: 
+Vérifions maintenant que podman est bien installé:  
 
 `podman --version`{{execute}}

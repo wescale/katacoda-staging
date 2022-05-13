@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: rollouts-demo
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /stable/(.*)
+        backend:
+          serviceName: rollouts-demo-stable
+          servicePort: 8080
+
+---
+# note: separating the two ingress is needed if you want to do some traffic control.
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: rollouts-demo-preview
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /preview/(.*)
+        backend:
+          serviceName: rollouts-demo-preview
+          servicePort: 8080

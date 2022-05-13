@@ -1,0 +1,79 @@
+{
+  "title": "Argo rollouts : des déploiements Kubernetes avancés",
+  "description": "Argo Events permet d'apporter une mécanique évènementielle de manière simple et contrôlée au sein de votre cluster Kubernetes.",
+  "difficulty": "Intermediate",
+  "time": "30 minutes",
+  "icon": "fa-bars-staggered",
+  "details": {
+    "assets": {
+      "host01": [
+        {
+          "file": "**/*.*",
+          "target": "/assets/",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "intro": {
+      "text": "steps/00.intro.md",
+      "code": "assets/00.init_script.sh"
+    },
+    "steps": [
+      {
+        "title": "Installer Argo Rollouts",
+        "text": "steps/01.installation.md",
+        "verify": "assets/01.installation/check.sh"
+      },
+      {
+        "title": "Les déploiements Canary",
+        "text": "steps/02.canary.md",
+        "verify": "assets/0x.cleanup-rollout.sh"
+      },
+      {
+        "title": "Les déploiements Canary Avancés",
+        "text": "steps/03.canary-advanced.md",
+        "verify": "assets/0x.cleanup-rollout.sh"
+      },
+      {
+        "title": "Les déploiements Blue/Green",
+        "text": "steps/04.blue-green.md",
+        "verify": "assets/0x.cleanup-rollout.sh"
+      },
+      {
+        "title": "Les Analysis",
+        "text": "steps/05.analysis.md",
+        "verify": "assets/05.analysis/check.sh"
+      },
+      {
+        "title": "Les déploiements Canary automatiquement testés",
+        "text": "steps/06.analysis-canary.md",
+        "verify": "assets/0x.cleanup-rollout.sh"
+      },
+      {
+        "title": "Les Experiments",
+        "text": "steps/07.experiments.md"
+      },
+      {
+        "title": "Les déploiements Canary et le traffic routing",
+        "text": "steps/08.traffic-routing-canary.md"
+      }
+    ],
+    "finish": {
+      "text": "steps/99.finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal-iframe-split",
+    "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n",
+    "showdashboard": true,
+    "dashboards": [
+        {"name": "Dashboard Argo Rollouts", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com"},
+        {"name": "Stable release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/stable/"},
+        {"name": "Preview release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/preview/"}
+    ]
+  },
+  "backend": {
+    "imageid": "kubernetes-cluster-running:1.18",
+    "port": 80
+  }
+}

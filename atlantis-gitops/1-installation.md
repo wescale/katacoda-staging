@@ -1,0 +1,1 @@
+Veuillez patienter en attendant que nous installions Gitea, une version allégée de Git.

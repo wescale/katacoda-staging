@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: blue-green
+spec:
+  replicas: 3
+  strategy:
+    blueGreen:
+      activeService: rollouts-demo-stable
+      previewService: rollouts-demo-preview
+      autoPromotionEnabled: false
+      scaleDownDelaySeconds: 60
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollouts-demo
+  template:
+    metadata:
+      labels:
+        app: rollouts-demo
+    spec:
+      containers:
+      - name: webserver
+        image: kalioz/canary-deployment-ui:v1.1.0-ying
+        ports:
+        - containerPort: 8080
+
+
