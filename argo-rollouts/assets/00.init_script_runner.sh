@@ -7,9 +7,9 @@ show_progress()
 {
   clear
   echo "Il reste 5 étapes à paramétrer avant de démarrer ce tuto"
-  echo -n " "
+  echo " "
 
-  echo -n "[Etape 1/5] K8S est en train de chauffer"
+  echo "[Etape 1/5] K8S est en train de chauffer"
   local -r pid="${1}"
   local -r delay='0.75'
   local spinstr='\|/-'
@@ -28,7 +28,7 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
-  clear && echo -n "[Etape 2/5] Les noeuds rejoignent le cluster K8S"
+  clear && echo "[Etape 2/5] Les noeuds rejoignent le cluster K8S"
   echo -n " "
 
   kubectl wait --for=condition=Ready nodes --all --timeout=120s
@@ -37,8 +37,8 @@ show_progress()
   
 
   #  ===================== Create the NGINX Ingress ==========================
-  clear && echo -n "[Etape 3/5] Déploiement des CRDs de l'ingress Nginx"
-  echo -n " "
+  clear && echo "[Etape 3/5] Déploiement des CRDs de l'ingress Nginx"
+  echo " "
 
   kubectl create namespace ingress-nginx
 
@@ -47,12 +47,12 @@ show_progress()
     --namespace ingress-nginx --version='<4'
 
   # ===================== Create the K8S namespace ==========================
-  clear && echo -n "[Etape 4/5] Création du namespace dédié au tuto\n\n"
+  clear && echo -e "[Etape 4/5] Création du namespace dédié au tuto\n\n"
   kubectl create namespace "${NAMESPACE}"
 
   # ===================== Installation of the Argo-Rollouts CRD ==========================
 
-  clear && echo -n "[Etape 5/5] Installation de l'interface Argo-rollouts \n\n"
+  clear && echo -e "[Etape 5/5] Installation de l'interface Argo-rollouts \n\n"
  
   # Install the Dashboard - should be installed in the current namespace
   kubectl apply -f https://github.com/argoproj/argo-rollouts/releases/download/${ARGO_VERSION}/dashboard-install.yaml

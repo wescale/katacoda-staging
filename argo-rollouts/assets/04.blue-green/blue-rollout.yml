@@ -6,7 +6,7 @@ spec:
   replicas: 3
   strategy:
     blueGreen:
-      activeService: rollouts-demo-stable
+      activeService: rollouts-demo-live
       previewService: rollouts-demo-preview
       autoPromotionEnabled: false
       scaleDownDelaySeconds: 60

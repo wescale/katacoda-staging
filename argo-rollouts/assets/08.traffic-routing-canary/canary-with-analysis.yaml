@@ -40,8 +40,7 @@ spec:
           args:
           - name: fqdn
             value: http://rollouts-demo-preview.default.svc.cluster.local:8080
-      - pause:
-          duration: 30s
+      - pause: {}
       # if the analysis succeed, gradually increase the weight of the deployment
       - setCanaryScale:
           # don't forget to restore the pods<->traffic link
