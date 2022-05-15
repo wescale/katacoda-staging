@@ -14,6 +14,10 @@ show_progress()
   local -r delay='0.75'
   local spinstr='\|/-'
   local temp
+  
+  # this script is in the path of the image
+  launch.sh
+  
   while true; do
     kubectl version &> /dev/null
     if [[ "$?" -ne 0 ]]; then
