@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: canary
 spec:
-  replicas: 10
+  replicas: 4
   selector:
     matchLabels:
       app: rollouts-demo
