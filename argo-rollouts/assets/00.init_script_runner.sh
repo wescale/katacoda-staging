@@ -10,41 +10,32 @@ show_progress()
   echo " "
 
   echo "[Etape 1/5] K8S est en train de chauffer"
-  local -r pid="${1}"
-  local -r delay='0.75'
-  local spinstr='\|/-'
-  local temp
   
-  # this script is in the path of the image
+  # this script is in the path of the image for katacoda
   launch.sh
   
   while true; do
     kubectl version &> /dev/null
     if [[ "$?" -ne 0 ]]; then
-      temp="${spinstr#?}"
-      printf " [%c]  " "${spinstr}"
-      spinstr=${temp}${spinstr%"${temp}"}
       sleep "${delay}"
-      printf "\b\b\b\b\b\b"
     else
       break
     fi
   done
-  printf "    \b\b\b\b"
+
   echo ""
   echo "[Etape 2/5] Les noeuds rejoignent le cluster K8S"
   echo -n " "
 
   kubectl wait --for=condition=Ready nodes --all --timeout=120s
-  ssh -q $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}) 'mkdir -p /root/.kube'
-  scp -q /root/.kube/config $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}):/root/.kube/config
-  
 
   #  ===================== Create the NGINX Ingress ==========================
   echo "[Etape 3/5] Déploiement des CRDs de l'ingress Nginx"
   echo " "
 
   kubectl create namespace ingress-nginx
+
+  /assets/00.install_helm.sh
 
   helm upgrade --install ingress-nginx ingress-nginx \
     --repo https://kubernetes.github.io/ingress-nginx \
