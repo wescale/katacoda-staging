@@ -1,5 +1,5 @@
 #!/bin/bash
-# isntalls helm if it isn't already present
+# installs helm if it isn't already present
 
 set -e
 
@@ -28,4 +28,6 @@ tar xf /tmp/helm.tar.gz -C /tmp/helm
 cp "/tmp/helm/$BINARY_FOLDER/helm" /usr/local/bin/helm
 chmod +x /usr/local/bin/helm
 
+echo -n "Installed Helm :"
 helm version
+echo ""
