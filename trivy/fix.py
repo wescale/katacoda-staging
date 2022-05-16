@@ -6,7 +6,7 @@ import shutil
 from tempfile import mkstemp
 import shlex
 
-installers = {"debian":"RUN apt update -y", "ubuntu":"RUN apt update -y", "alpine":"RUN apk upgrade --no-cache --update"}
+installers = {"debian":"RUN apt update -y ", "ubuntu":"RUN apt update -y ", "alpine":"RUN apk upgrade --no-cache --update "}
 
 def sed(pattern, replace, source, dest=None, count=0):
     """Reads a source file and writes the destination file.
@@ -58,7 +58,13 @@ def main() -> int:
 
     print(installers.get(image_os, "not found"))
 
-    sed("CMD ", installers.get(image_os) + "\n\nCMD ", "Dockerfile", "Dockerfile.patch")
+    packages_to_update = ""
+
+    for i in range(2, len(sys.argv)):
+        # i is a number, from 1 to len(inputArgs)-1
+        packages_to_update += sys.argv[i] + " "
+
+    sed("CMD ", installers.get(image_os) + packages_to_update + "\n\nCMD ", "Dockerfile", "Dockerfile.patch")
 
     return 0
 
