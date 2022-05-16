@@ -11,8 +11,10 @@ spec:
       paths:
       - path: /stable/(.*)
         backend:
-          serviceName: rollouts-demo-stable
-          servicePort: 8080
+          service:
+            name: rollouts-demo-stable
+            port:
+             number: 8080
 
 ---
 # note: separating the two ingress is needed if you want to do some traffic control.
@@ -29,5 +31,7 @@ spec:
       paths:
       - path: /preview/(.*)
         backend:
-          serviceName: rollouts-demo-preview
-          servicePort: 8080
+          service:
+            name: rollouts-demo-preview
+            port:
+              number: 8080
