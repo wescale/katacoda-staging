@@ -10,6 +10,7 @@ spec:
   - http:
       paths:
       - path: /stable/(.*)
+        pathType: Prefix
         backend:
           service:
             name: rollouts-demo-stable
@@ -30,6 +31,7 @@ spec:
   - http:
       paths:
       - path: /preview/(.*)
+        pathType: Prefix
         backend:
           service:
             name: rollouts-demo-preview
