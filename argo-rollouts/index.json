@@ -2,7 +2,7 @@
   "title": "Argo rollouts : des déploiements Kubernetes avancés",
   "description": "Argo Events permet d'apporter une mécanique évènementielle de manière simple et contrôlée au sein de votre cluster Kubernetes.",
   "difficulty": "Intermediate",
-  "time": "30 minutes",
+  "time": "15 minutes",
   "icon": "fa-bars-staggered",
   "details": {
     "assets": {
@@ -20,41 +20,36 @@
     },
     "steps": [
       {
-        "title": "Installer Argo Rollouts",
+        "title": "Installing Argo Rollouts",
         "text": "steps/01.installation.md",
         "verify": "assets/01.installation/check.sh"
       },
       {
-        "title": "Les déploiements Canary",
+        "title": "Canary deployments",
         "text": "steps/02.canary.md",
         "verify": "assets/0x.cleanup-rollout.sh"
       },
       {
-        "title": "Les déploiements Canary Avancés",
-        "text": "steps/03.canary-advanced.md",
-        "verify": "assets/0x.cleanup-rollout.sh"
-      },
-      {
-        "title": "Les déploiements Blue/Green",
+        "title": "Blue/Green deployments",
         "text": "steps/04.blue-green.md",
         "verify": "assets/0x.cleanup-rollout.sh"
       },
       {
-        "title": "Les Analysis",
+        "title": "Analysis",
         "text": "steps/05.analysis.md",
         "verify": "assets/05.analysis/check.sh"
       },
       {
-        "title": "Les déploiements Canary automatiquement testés",
+        "title": "Canary deployments with automated testing",
         "text": "steps/06.analysis-canary.md",
         "verify": "assets/0x.cleanup-rollout.sh"
       },
       {
-        "title": "Les Experiments",
+        "title": "Experiments",
         "text": "steps/07.experiments.md"
       },
       {
-        "title": "Les déploiements Canary et le traffic routing",
+        "title": "Canary deployments and traffic routing",
         "text": "steps/08.traffic-routing-canary.md"
       }
     ],
