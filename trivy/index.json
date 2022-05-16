@@ -20,9 +20,9 @@
       },
       "assets": {
       "host01": [
-        {"file": "fix.py", "target": "/root"},
-        {"file": "fix.sh", "target": "/root", "chmod": "+x"},
-        {"file": "Dockerfile", "target": "/root"}
+        {"file": "fix.py", "target": "/root/filesystem/home/ubuntu/"},
+        {"file": "fix.sh", "target": "/root/filesystem/home/ubuntu/", "chmod": "+x"},
+        {"file": "Dockerfile", "target": "/root/filesystem/home/ubuntu/"}
       ]
     }
    }
