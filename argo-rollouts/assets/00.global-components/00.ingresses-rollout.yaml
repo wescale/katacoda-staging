@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rollouts-demo
@@ -10,13 +10,16 @@ spec:
   - http:
       paths:
       - path: /stable/(.*)
+        pathType: Prefix
         backend:
-          serviceName: rollouts-demo-stable
-          servicePort: 8080
+          service:
+            name: rollouts-demo-stable
+            port:
+             number: 8080
 
 ---
 # note: separating the two ingress is needed if you want to do some traffic control.
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rollouts-demo-preview
@@ -28,6 +31,9 @@ spec:
   - http:
       paths:
       - path: /preview/(.*)
+        pathType: Prefix
         backend:
-          serviceName: rollouts-demo-preview
-          servicePort: 8080
+          service:
+            name: rollouts-demo-preview
+            port:
+              number: 8080

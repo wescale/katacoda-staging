@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argo-rollouts-dashboard
@@ -10,6 +10,9 @@ spec:
     - http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: argo-rollouts-dashboard
-              servicePort: 3100
+              service:
+                name: argo-rollouts-dashboard
+                port:
+                  number: 3100

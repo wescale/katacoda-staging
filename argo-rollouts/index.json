@@ -8,8 +8,48 @@
     "assets": {
       "host01": [
         {
-          "file": "**/*.*",
+          "file": "*",
           "target": "/assets/",
+          "chmod": "+x"
+        },
+        {
+          "file": "00.global-components/*",
+          "target": "/assets/00.global-components/",
+          "chmod": "+x"
+        },
+        {
+          "file": "01.installation/*",
+          "target": "/assets/01.installation/",
+          "chmod": "+x"
+        },
+        {
+          "file": "02.canary/*",
+          "target": "/assets/02.canary/",
+          "chmod": "+x"
+        },
+        {
+          "file": "04.blue-green/*",
+          "target": "/assets/04.blue-green/",
+          "chmod": "+x"
+        },
+        {
+          "file": "05.analysis/*",
+          "target": "/assets/05.analysis/",
+          "chmod": "+x"
+        },
+        {
+          "file": "06.analysis-canary/*",
+          "target": "/assets/06.analysis-canary/",
+          "chmod": "+x"
+        },
+        {
+          "file": "07.experiments/*",
+          "target": "/assets/07.experiments/",
+          "chmod": "+x"
+        },
+        {
+          "file": "08.traffic-routing-canary/*",
+          "target": "/assets/08.traffic-routing-canary/",
           "chmod": "+x"
         }
       ]
@@ -62,9 +102,18 @@
     "uimessage1": "\u001b[32mTerminal interactif - K8S Master.\u001b[m\r\n",
     "showdashboard": true,
     "dashboards": [
-        {"name": "Dashboard Argo Rollouts", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com"},
-        {"name": "Stable release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/stable/"},
-        {"name": "Preview release", "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/preview/"}
+      {
+        "name": "Dashboard Argo Rollouts",
+        "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com"
+      },
+      {
+        "name": "Stable release",
+        "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/stable/"
+      },
+      {
+        "name": "Preview release",
+        "href": "https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/preview/"
+      }
     ]
   },
   "backend": {
