@@ -2,6 +2,8 @@
 
 docker build . --tag trivy-tested-image:latest
 
+trivy -q image trivy-tested-image:latest
+
 export input=$(trivy -q image --format template --template '{{- $pkg := list }}{{- $os := ""}}{{- $image := ""}}{{ range . }}{{- $os = regexFind "\\(([a-z]+)" .Target }}{{ range .Vulnerabilities }}{{- $pkg = append $pkg .PkgName }}{{ end }}{{ end }}{{ trimPrefix "(" $os }} {{ range uniq $pkg }}{{ . }} {{ end }}' trivy-tested-image:latest)
 
 python fix.py $input
