@@ -32,4 +32,11 @@ Vérifiez la signature :
 
 Vous devriez obtenir le résultat suivant :
 
-![Check Signature](assets/check-signature-ok.png)
+```
+gpg: Signature made Fri Feb 11 10:56:40 2022 UTC
+gpg:                using RSA key D66B222A3EA4C25D5D1A097FC34ACEFB46EC39CE
+gpg: Good signature from "Tfsec Signing (Code signing for tfsec) <signing@tfsec.dev>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: D66B 222A 3EA4 C25D 5D1A  097F C34A CEFB 46EC 39CE
+```
