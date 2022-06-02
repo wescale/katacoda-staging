@@ -1,2 +1,2 @@
 #!/bin/bash
-[ -f main.tf ]
+stat main.tf
