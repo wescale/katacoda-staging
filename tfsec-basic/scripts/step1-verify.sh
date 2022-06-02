@@ -1,2 +1,2 @@
 #!/bin/bash
-tfsec -v &> /dev/null
+tfsec -v
