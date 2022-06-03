@@ -95,8 +95,8 @@ cp registry/certs/tls.crt /etc/docker/certs.d/docker-registry:5000/.
 
 sleep 2
 
-ssh -q $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}) 'mkdir -p /etc/docker/certs.d/docker-registry:5000'
-scp -q registry/certs/tls.crt $(kubectl get node --selector='!node-role.kubernetes.io/master' -o jsonpath={.items[*].status.addresses[?\(@.type==\"InternalIP\"\)].address}):/etc/docker/certs.d/docker-registry:5000/.
+ssh -q 	172.30.2.2 'mkdir -p /etc/docker/certs.d/docker-registry:5000'
+scp -q registry/certs/tls.crt 172.30.2.2:/etc/docker/certs.d/docker-registry:5000/.
 
 sleep 2
 
