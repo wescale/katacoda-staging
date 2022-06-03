@@ -22,7 +22,8 @@ sleep 2
 #!/bin/bash
 mkdir -p ./registry/certs ./registry/auth
 
-openssl req -x509 -newkey rsa:4096 -days 365 -nodes -sha256 -keyout registry/certs/tls.key -out registry/certs/tls.crt -subj "/CN=docker-registry"
+openssl req -x509 -newkey rsa:4096 -days 365 -nodes -sha256 -keyout registry/certs/tls.key -out registry/certs/tls.crt -subj "/CN=docker-registry" -extensions EXT -config <( \printf "[dn]\nCN=docker-registry\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:docker-registry\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+
 SECRETMANIFEST="secrets-auth.yaml"
 
 sleep 2
