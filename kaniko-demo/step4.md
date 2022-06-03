@@ -10,7 +10,7 @@ Essayons cet outil localement.
 FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive and built by Kaniko!!!\u001b[m\r\n"]
 EOF
-`{{execute HOST2}}
+`{{exec}}
 
 Construisons notre image avec Kaniko, qui dispose d'un conteneur officiel, héberger sur la registry Google :
 ```
@@ -20,7 +20,7 @@ docker run \
   --destination=my-new-super-image:latest \
   --no-push \
   --tarPath=/workspace/my-new-super-image.tar
-```{{execute HOST2}}
+```{{exec}}
 
 Nous avons utilisé des options particulières pour exporter l'image localement sous forme de tar, et ne pas la pousser dans une registry (à des fins d'exemple).
 Nous pouvons maintenant charger ce tar dans notre démon Docker local et l'exécuter
@@ -28,6 +28,6 @@ Nous pouvons maintenant charger ce tar dans notre démon Docker local et l'exéc
 clear
 docker load --input my-new-super-image.tar
 docker run  my-new-super-image
-```{{execute HOST2}}
+```{{exec}}
 
 Retour au point de départ, nous sommes capables de construire des images localement, mais cette fois avec Kaniko.

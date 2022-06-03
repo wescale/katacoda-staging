@@ -7,16 +7,16 @@ Utilisons un Dockerfile simple (voire simpliste):
 FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive !!!\u001b[m\r\n"]
 EOF
-`{{execute HOST2}}
+`{{exec}}
 
 
 Et construisons l'image qu'il définit :
-`docker build -t my-super-image .`{{execute HOST2}}
+`docker build -t my-super-image .`{{exec}}
 
 L'image existe maintenant localement, et nous pouvons l'exécuter :
 ```sh
 clear
 docker run my-super-image
-```{{execute HOST2}}
+```{{exec}}
 
 Yeah !

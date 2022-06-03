@@ -22,17 +22,17 @@ spec:
     args: ["sleep", "10000"]
   restartPolicy: Never
 EOF
-```{{execute HOST2}}
+```{{exec}}
 
 et nous l'exécutons sur notre cluster :
 
-`kubectl apply -f docker.yaml`{{execute HOST2}}
+`kubectl apply -f docker.yaml`{{exec}}
 
 Le conteneur démarre, attendons qu'il soit disponible :
-`kubectl wait --timeout=90s --for condition=containersready pod docker`{{execute HOST1}}
+`kubectl wait --timeout=90s --for condition=containersready pod docker`{{exec}}
 
 Exécutons un shell dans le conteneur :
-`kubectl exec -ti docker -- sh`{{execute HOST2}}
+`kubectl exec -ti docker -- sh`{{exec}}
 
 et construisons notre image comme nous l'avons fait à l'étape précédente :
 ```sh
@@ -42,7 +42,7 @@ FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive !!!\u001b[m\r\n"]
 EOF
 docker build -t my-super-image .
-```{{execute HOST2}}
+```{{exec}}
 
 Cela conduit à une erreur. Pourquoi ? Parce que le démon Docker ne s'exécute pas dans le conteneur. Celui ci contient seulement la CLI.
 
@@ -54,4 +54,4 @@ Cela conduit à une erreur. Pourquoi ? Parce que le démon Docker ne s'exécute 
 ```sh
 kubectl delete -f docker.yaml &
 sleep 2 && clear
-```{{execute HOST2}}
+```{{exec}}
