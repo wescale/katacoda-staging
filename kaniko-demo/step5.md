@@ -8,11 +8,12 @@ docker images | grep my-super-kaniko-image
 ```{{exec}}
 
 Créons notre Dockerfile. Pour la démo, nous le stockons dans une ConfigMap K8S.
-`cat << EOF > Dockerfile
+```
+cat << EOF > Dockerfile
 FROM rg.fr-par.scw.cloud/katacoda/alpine:latest
 CMD ["/bin/echo", "\u001b[31mIt is alive and built by Kaniko on K8S!!!\u001b[m\r\n"]
 EOF
-`{{exec}}
+```{{exec}}
 
 `kubectl create configmap kaniko-demo --from-file=Dockerfile`{{exec}}
 
