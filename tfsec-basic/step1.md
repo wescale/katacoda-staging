@@ -32,6 +32,8 @@ Vérifiez la signature :
 
 Vous devriez obtenir le résultat suivant :
 
+![Check Signature](./assets/check-signature-ok.png)
+
 ```
 gpg: Signature made Fri Feb 11 10:56:40 2022 UTC
 gpg:                using RSA key D66B222A3EA4C25D5D1A097FC34ACEFB46EC39CE
