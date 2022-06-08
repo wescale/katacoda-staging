@@ -6,7 +6,7 @@ Merci d'avoir suivi ce cours, j'espère qu'il vous a plu !
 
 Nous avons vu que Pre-commit est un outil qui permet d'automatiser les scans TFSec côté client comme garde-fou bloquant.
 
-Pour en savoir plus, consultez les documentations officielles [TFSec](https://aquasecurity.github.io/tfsec/v1.1.5/) et [Pre-commit](https://pre-commit.com/)].
+Pour en savoir plus, consultez les documentations officielles [TFSec](https://aquasecurity.github.io/tfsec/v1.1.5/) et [Pre-commit](https://pre-commit.com/).
 
 ## Pour aller plus loin
 
