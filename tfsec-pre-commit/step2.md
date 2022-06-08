@@ -1,7 +1,4 @@
-Un répertoire git nommé **demo** a été créé. Il nous servira pour installer, configurer et tester Pre-commit.
-
-Placez-vous dans le dossier **demo** :
-`cd demo`{{execute}}
+Un répertoire git a été initialisé.
 
 Ajoutez la configuration **pre-commit** :
 ```
