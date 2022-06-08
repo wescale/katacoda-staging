@@ -3,7 +3,7 @@
 show_progress()
 {
 
-  echo "Please wait until everything is ready."
+  echo "Please wait until everything is ready [~10s]"
 
   # Update packages
   echo -n "[1/4] Updating packages..."
@@ -27,7 +27,7 @@ resource "aws_kms_key" "this" {
   enable_key_rotation     = false
 }
 EOF
-  echo " Done !"
+  echo "Done !"
 
   # Install the TFSec binary
   echo -n "[4/4] Installating TFSec..."
