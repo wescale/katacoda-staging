@@ -1,16 +1,29 @@
-#WIP Step 1
+Il existe plusieurs façons d'installer **Trivy** : gestionnaire de paquets, brew, MacPorts, Docker, les binaires, etc. Pour ce tutoriel nous allons directement télécharger le binaire.
 
-`apt-get install -y trivy`{{exec}}
+# Installer Trivy via un gestionnaire de paquet
 
-`trivy --version`{{exec}}
+Téléchargez les dépendances nécessaires:
 
-`trivy image --help`{{exec}}
+`sudo apt-get -y install wget apt-transport-https gnupg lsb-release`{{execute}}
 
-`trivy image nginx:1.21.6-alpine`{{exec}}
+Téléchargez et installez la clé GPG du repo `Trivy`:
 
-`trivy -q image --format template --template '{{- $pkg := list }}{{- $os := ""}}{{ range . }}{{- $os = regexFind "\\(([a-z]+)" .Target }}{{ range .Vulnerabilities }}{{- $pkg = append $pkg .PkgName }}{{ end }}{{ end }}{{ trimPrefix "(" $os }} || {{ range uniq $pkg }}{{ . }} {{ end }}'  nginx:1.21.6-alpine`{{exec}}
+`wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null`{{execute}}
 
+Ajoutez Trivy comme source pour `apt`:
 
-trivy -q image --format template --template '{{- $os := ""}}{{ range . }}{{- $os = regexFind "\\(([a-z]+)" .Target }}{{ end }}{{ trimPrefix "(" $os }} '  rg.fr-par.scw.cloud/katacoda/alpine:latest
+`echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list`{{execute}}
 
-trivy -q image --format template --template '{{- $pkg := list }}{{- $os := ""}}{{- $image := ""}}{{ range . }}{{- $os = regexFind "\\(([a-z]+)" .Target }}{{ range .Vulnerabilities }}{{- $pkg = append $pkg .PkgName }}{{ end }}{{ end }}{{ trimPrefix "(" $os }} ** {{ range uniq $pkg }}{{ . }} {{ end }}' rg.fr-par.scw.cloud/katacoda/alpine:latest
+Mettez à jour le repo et installez `Trivy`:
+
+`sudo apt-get update && sudo apt-get install trivy`{{execute}}
+
+Vérifiez que `Trivy` est bien installé :
+
+`trivy --version`{{execute}}
+
+Vous devriez obtenir :
+```
+$ trivy --version
+Version: 0.33.0
+```

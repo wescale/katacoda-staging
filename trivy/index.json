@@ -1,5 +1,5 @@
 {
-   "title":"Trivy WIP",
+   "title":"Trivy - Simple, basique",
    "backend":{
       "imageid":"ubuntu20.04"
    },
@@ -13,6 +13,14 @@
          {
             "title":"Install Trivy",
             "text":"step1.md"
+         },
+         {
+            "title":"Analyser une image",
+            "text":"step2.md"
+         },
+         {
+            "title":"Détecter un secret",
+            "text":"step3.md"
          }
       ],
       "finish":{
@@ -20,9 +28,6 @@
       },
       "assets": {
       "host01": [
-        {"file": "fix.py", "target": "/root"},
-        {"file": "fix.sh", "target": "/root", "chmod": "+x"},
-        {"file": "Dockerfile", "target": "/root"}
       ]
     }
    }
