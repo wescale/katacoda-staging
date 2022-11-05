@@ -6,29 +6,51 @@
    "details":{
       "intro":{
          "text":"intro.md",
-         "foreground":"displayWait.sh",
-         "background":"updatePackages.sh"
+         "background":"setup.sh"
       },
       "steps":[
          {
-            "title":"Install Trivy",
+            "title":"Installer",
             "text":"step1.md"
          },
          {
-            "title":"Analyser une image",
+            "title":"Image de conteneur",
             "text":"step2.md"
          },
          {
-            "title":"Détecter un secret",
+            "title":"IaC",
             "text":"step3.md"
+         },
+         {
+            "title":"Système de fichiers",
+            "text":"step4.md"
+         },
+         {
+            "title":"Secret",
+            "text":"step5.md"
+         },
+         {
+            "title":"Git",
+            "text":"step6.md"
+         },
+         {
+            "title":"Configuration",
+            "text":"step7.md"
+         },
+         {
+            "title":"SBOM",
+            "text":"step8.md"
+         },
+         {
+            "title":"Plus loin",
+            "text":"step9.md"
          }
       ],
       "finish":{
          "text":"finish.md"
       },
       "assets": {
-      "host01": [
-      ]
-    }
+         "host01": []
+      }
    }
 }

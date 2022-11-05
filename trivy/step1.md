@@ -31,4 +31,4 @@ Version: 0.33.0
 
 Vous pouvez obtenir un aperçu des possibilités de Trivy avec le drapeau `--help`:
 
-`trivy image --help`{{execute}}
+`trivy --help`{{execute}}

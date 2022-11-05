@@ -10,9 +10,7 @@ Pour en savoir plus consultez la documentation officielle [Trivy](https://aquase
 
 ## Pour aller plus loin
 
-Vous souhaitez en savoir plus sur sur Trivy ? Nous avons rédigé un article de découverte du sujet :
-
-https://blog.wescale.fr/trivy-decouverte/
+- Ajoutez Trivy à vos CI: https://aquasecurity.github.io/trivy/v0.34/tutorials/integrations/
 
 ## Découvrez WeScale
 Retrouvez toute notre actualité :
