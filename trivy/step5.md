@@ -4,17 +4,17 @@ Par défaut, **chaque** scan Trivy tente de détecter des secrets. Que cela soit
 
 Pour rappel, un **secret**, c'est une information sensible qui permet d'accéder à un système confidentiel. Que ce soit un Token, une clé API ou encore un mot de passe.
 
-Faisons un test de détection de détection de secrets avec le scan de système de fichiers (fs) sur un dossier local, par hasard, celui de l'étape précédente:
+Faisons un test de détection de secrets avec le scan de système de fichiers (fs) sur un dossier local. Par hasard, celui de l'étape précédente:
 
 `trivy fs ./fs-scan`{{execute}}
 
 >**NB**: On peut remarquer que Trivy a la gentillesse de masquer les secrets dans son output. :) 
 
-## Note sur la détectabilité d'un secret
+## Détectabilité d'un secret
 
-Trivy possède une liste de règles intégrées pour détecter ou ignorer (notamment dans le cas d'exemples) des secrets.
+Trivy possède une liste de règles pour détecter ou ignorer (notamment dans le cas d'exemples) des secrets.
 
-Par exemple, notre scan n'a pas détecté ces mêmes identifiants dans le fichier `README.md`.
+Ici, notre scan n'a pas détecté ces identifiants dans le fichier `README.md` car il match avec la règle qui spécifie d'ignorer les fichiers en `.md`.
 
 `cat ./fs-scan/README.md`{{execute}}
 
