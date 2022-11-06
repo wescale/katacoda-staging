@@ -24,7 +24,7 @@ Vous pouvez activer ou désactiver (exclusif, la désactivation domine) des règ
 
 Vous pouvez spécifier les règles à prendre en compte, et uniquement celles-ci.
 
-Créez le fichier de configuration:
+Créez le fichier de configuration suivant:
 
 ```plain
 cat <<EOF> ./config/enable.yaml
@@ -32,6 +32,8 @@ enable-builtin-rules:
   - aws-access-key-id
 EOF
 ```{{execute}}
+
+Ici nous demandons à Trivy d'utiliser **uniquement** la règle intégrée "aws-access-key-id".
 
 Testez:
 
@@ -43,7 +45,24 @@ Trivy ne détecte plus notre clé secrète AWS comme un secret.
 
 Vous pouvez spécifier les règles à exclure.
 
-Créez le fichier de configuration:
+Créez le fichier de configuration suivant:
+
+```plain
+cat <<EOF> ./config/disable.yaml
+disable-allow-rules:
+  - markdown
+EOF
+```{{execute}}
+
+Ici nous demandons à Trivy de désactiver la règle de considération des markdowns comme autorisés à contenir des secrets.
+
+Testez:
+
+`trivy fs --secret-config ./config/disable.yaml fs-scan`{{execute}}
+
+Trivy détecte les 4 secrets.
+
+Allons plus loin:
 
 ```plain
 cat <<EOF> ./config/disable.yaml
@@ -56,11 +75,14 @@ disable-allow-rules:
 EOF
 ```{{execute}}
 
-Testez:
+Ici nous demandons à Trivy de désactiver les règles de détection de secrets AWS en plus de celle concernant les markdowns.
+
+Testez de nouveau:
 
 `trivy fs --secret-config ./config/disable.yaml fs-scan`{{execute}}
 
 Trivy ne détecte plus de secrets.
+
 
 ## Désactiver le scan de secrets
 
