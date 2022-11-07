@@ -14,7 +14,7 @@ Vous pouvez constater les différentes configurations possible via ce fichier:
 
 Définissez la valeur de la directive `generate-default-config` à `true` (sinon vous demandez à Trivy de générer une configuration).
 
-`sed -i 's/generate-default-config: false/generate-default-config: true/' trivy.yaml`{{execute}}
+`sed -i 's/generate-default-config: false/generate-default-config: true/' trivy-default.yaml`{{execute}}
 
 Vous pouvez spécificer le fichier de configuration à utiliser avec le drapeau `--config`:
 
