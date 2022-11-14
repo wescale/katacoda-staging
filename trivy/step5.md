@@ -24,7 +24,7 @@ Vous pouvez activer ou désactiver (exclusif, la désactivation domine) des règ
 
 Vous pouvez spécifier les règles à prendre en compte, et uniquement celles-ci.
 
-Créez le fichier de configuration suivant:
+Créez le fichier de configuration suivant :
 
 ```plain
 cat <<EOF> ./config/enable.yaml
@@ -35,7 +35,7 @@ EOF
 
 Ici nous demandons à Trivy d'utiliser **uniquement** la règle intégrée "aws-access-key-id".
 
-Testez:
+Testez :
 
 `trivy fs --secret-config ./config/enable.yaml fs-scan`{{execute}}
 
@@ -56,13 +56,13 @@ EOF
 
 Ici nous demandons à Trivy de désactiver la règle de considération des markdowns comme autorisés à contenir des secrets.
 
-Testez:
+Testez :
 
 `trivy fs --secret-config ./config/disable.yaml fs-scan`{{execute}}
 
 Trivy détecte les 4 secrets.
 
-Allons plus loin:
+Allons plus loin :
 
 ```plain
 cat <<EOF> ./config/disable.yaml
@@ -77,7 +77,7 @@ EOF
 
 Ici nous demandons à Trivy de désactiver les règles de détection de secrets AWS en plus de celle concernant les markdowns.
 
-Testez de nouveau:
+Testez de nouveau :
 
 `trivy fs --secret-config ./config/disable.yaml fs-scan`{{execute}}
 
@@ -94,7 +94,7 @@ Vous pouvez désactiver le scan des secrets avec le drapeau `--security-checks`.
 
 ## Documentations associées
 
-- Documentation officielle: https://aquasecurity.github.io/trivy/v0.34/docs/secret/scanning/
-- Règle de détection des secrets: https://github.com/aquasecurity/trivy/blob/main/pkg/fanal/secret/builtin-rules.go
-- Règle d'autorisation des secrets: https://github.com/aquasecurity/trivy/blob/main/pkg/fanal/secret/builtin-allow-rules.go
-- Recommandations pour accélerer la détection de secrets: https://aquasecurity.github.io/trivy/v0.34/docs/secret/scanning/#recommendation
+- Documentation officielle : https://aquasecurity.github.io/trivy/v0.34/docs/secret/scanning/
+- Règle de détection des secrets : https://github.com/aquasecurity/trivy/blob/main/pkg/fanal/secret/builtin-rules.go
+- Règle d'autorisation des secrets : https://github.com/aquasecurity/trivy/blob/main/pkg/fanal/secret/builtin-allow-rules.go
+- Recommandations pour accélerer la détection de secrets : https://aquasecurity.github.io/trivy/v0.34/docs/secret/scanning/#recommendation

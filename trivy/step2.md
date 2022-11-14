@@ -1,7 +1,7 @@
 # Analyser une image de conteneur
 
 L'une des premières utilité de Trivy est évidemment sa capacité à analyser une image de conteneur.
-Analysons la dernière image de conteneur Nginx:
+Analysons la dernière image de conteneur Nginx :
 
 `trivy image nginx:latest`{{execute}}
 
@@ -31,7 +31,7 @@ Avec le drapeau `--severity` on peut filtrer les sévérités selon leur niveau 
 
 ### Incorrigibles
 
-Avec le drapeau `--ignore-unfixed`: on peut ignorer les vulnérabilités qui n'ont pas de solutions connues. Evidemment une vulnérabilité critique, même sans solution, n'est pas à ignorer, mais ce drapeau a le mérite d'atténuer le bruit.
+Avec le drapeau `--ignore-unfixed` : on peut ignorer les vulnérabilités qui n'ont pas de solutions connues. Evidemment une vulnérabilité critique, même sans solution, n'est pas à ignorer, mais ce drapeau a le mérite d'atténuer le bruit.
 
 `trivy image nginx:latest --ignore-unfixed`{{execute}}
 
@@ -39,8 +39,9 @@ Avec le drapeau `--ignore-unfixed`: on peut ignorer les vulnérabilités qui n'o
 
 Avec le drapeau `--vuln-type os` vous pouvez sélectionner un type de vulnérabilité en particulier. Soit os ou librairie.
 
-`trivy image nginx:latest --vuln-type os`{{execute}}
-`trivy image nginx:latest --vuln-type library`{{execute}}
+OS : `trivy image nginx:latest --vuln-type os`{{execute}}
+
+Librairie : `trivy image nginx:latest --vuln-type library`{{execute}}
 
 ### Par CVE
 

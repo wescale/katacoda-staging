@@ -12,5 +12,5 @@ Vous pouvez trouver les différences entre `fs` et `rootfs` ici: https://aquasec
 
 ## Documentations associées
 
-- Documentation officielle `fs`: https://aquasecurity.github.io/trivy/v0.34/docs/vulnerability/scanning/filesystem/
-- Documentation officielle `rootfs`: https://aquasecurity.github.io/trivy/v0.34/docs/vulnerability/scanning/rootfs/
+- Documentation officielle `fs` : https://aquasecurity.github.io/trivy/v0.34/docs/vulnerability/scanning/filesystem/
+- Documentation officielle `rootfs` : https://aquasecurity.github.io/trivy/v0.34/docs/vulnerability/scanning/rootfs/

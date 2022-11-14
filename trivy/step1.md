@@ -16,6 +16,6 @@ $ trivy --version
 Version: 0.34.0
 ```
 
-Vous pouvez obtenir un aperçu des possibilités de Trivy avec le drapeau `--help`:
+Vous pouvez obtenir un aperçu des possibilités de Trivy avec le drapeau `--help` :
 
 `trivy --help`{{execute}}

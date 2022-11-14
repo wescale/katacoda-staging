@@ -9,7 +9,7 @@ Vous pouvez gagner en granluarité avec les flags suivants:
 - `--commit <condensat_commit>`: pour scanner un commit précis
 - `--tag <nom_tag>`: pour scanner un tag particulié
 
-Vous pouvez essayer ces options sur le répertoire mis à disposition:
+Vous pouvez essayer ces options sur le répertoire mis à disposition :
 
 - Branche: `trivy repo --branch=wescale https://github.com/wescale/killercoda-trivy-git-step`{{execute}}
 - Commit: `trivy repo --commit=84949f3f93a5f60f5d3534ab5d0d3172054a01b8 https://github.com/wescale/killercoda-trivy-git-step`{{execute}}
@@ -20,5 +20,5 @@ Vous pouvez essayer ces options sur le répertoire mis à disposition:
 
 ## Documentations associées
 
-- Documentation officielle `repo`: https://aquasecurity.github.io/trivy/v0.34/docs/vulnerability/scanning/git-repository/
-- Détection par option Trivy: https://aquasecurity.github.io/trivy/v0.34/docs/vulnerability/detection/language/
+- Documentation officielle `repo` : https://aquasecurity.github.io/trivy/v0.34/docs/vulnerability/scanning/git-repository/
+- Détection par option Trivy : https://aquasecurity.github.io/trivy/v0.34/docs/vulnerability/detection/language/

@@ -22,4 +22,4 @@ Vous pouvez spécificer le fichier de configuration à utiliser avec le drapeau 
 
 ## Documentations associées
 
-- Documentation officielle: https://aquasecurity.github.io/trivy/v0.34/docs/references/customization/config-file/
+- Documentation officielle : https://aquasecurity.github.io/trivy/v0.34/docs/references/customization/config-file/

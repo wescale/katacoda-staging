@@ -18,5 +18,5 @@ Selon la documentation officielle, Trivy utilise TFSec de manière interne mais 
 
 ## Documentations associées
 
-- Documentation officielle: https://aquasecurity.github.io/trivy/v0.34/docs/misconfiguration/scanning/#type-detection
-- Trivy vs TFSec: https://aquasecurity.github.io/trivy/v0.19.2/misconfiguration/comparison/tfsec/
+- Documentation officielle : https://aquasecurity.github.io/trivy/v0.34/docs/misconfiguration/scanning/#type-detection
+- Trivy vs TFSec : https://aquasecurity.github.io/trivy/v0.19.2/misconfiguration/comparison/tfsec/

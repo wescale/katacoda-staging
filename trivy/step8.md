@@ -9,11 +9,11 @@ Nous expliquons en détail l'intérêt et le fonctionnement d'un SCA dans cet ar
 
 ## Analyser un SBOM python
 
-Générez le SBOM d'un fichier de dépendance Python à l'aide de CycloneDX:
+Générez le SBOM d'un fichier de dépendance Python à l'aide de CycloneDX :
 
 `python3 -m cyclonedx_py -r --format json -i "sbom/requirements.txt" -o sbom/sbom.json`{{execute}}
 
-Analysez le SBOM à l'aide de Trivy:
+Analysez le SBOM à l'aide de Trivy :
 
 `trivy sbom ./sbom/sbom.json`{{execute}}
 
@@ -25,5 +25,5 @@ Nous aurions pu obtenir le même résultat directement avec `fs` par exemple:
 
 ## Documentations associées
 
-- Répertoire GitHub de CycloneDX: https://github.com/CycloneDX/cyclonedx-python
-- Documentation Trivy liée au SBOM: https://aquasecurity.github.io/trivy/v0.34/docs/references/cli/sbom/
+- Répertoire GitHub de CycloneDX : https://github.com/CycloneDX/cyclonedx-python
+- Documentation Trivy liée au SBOM : https://aquasecurity.github.io/trivy/v0.34/docs/references/cli/sbom/
