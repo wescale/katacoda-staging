@@ -12,9 +12,9 @@ Vous pouvez constater les différentes configurations possible via ce fichier:
 
 >**NB**: La configuration exportée est liée au type d'analyse que l'on souhaite effectuer, ici on exporte la configuration de l'analyse d'IaC mais cette option est valide pour tout type d'analyse.
 
-Définissez la valeur de la directive `generate-default-config` à `true` (sinon vous demandez à Trivy de générer une configuration).
+Définissez la valeur de la directive `generate-default-config` à `false` (sinon vous demandez à Trivy de générer une configuration).
 
-`sed -i 's/generate-default-config: false/generate-default-config: true/' trivy-default.yaml`{{execute}}
+`sed -i 's/generate-default-config: true/generate-default-config: false/' trivy-default.yaml`{{execute}}
 
 Vous pouvez spécificer le fichier de configuration à utiliser avec le drapeau `--config`:
 
