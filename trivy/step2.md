@@ -13,9 +13,9 @@ Par défaut il y a 4 colonnes :
 - **Fixed Version**: La version de la librairie n'étant plus vulnérable/patchée.
 - **Title**: Cette partie contient un très court extrait explicitant la vulnérabilité mais surtout un lien vers la "**Aqua vulnerability database**", une base de donnée de vulnérabilités d'Aqua Security. Elle contient tout ce qui a à savoir sur la vulnérabilité (nom, description, versions concernées, résolutions, etc.).
 
-***CVE**: Vulnérabilité spécifique d'un produit ou d'un système, et non les failles sous-jacentes.
+***CVE (Common Vulnerabilities and Exposures)**: Vulnérabilité spécifique d'un produit ou d'un système, et non les failles sous-jacentes.
 
-***CVSS**: est un système normalisé d'évaluation de la criticité des vulnérabilités (CVE) basé sur des critères objectifs et mesurables.
+***CVSS (Common Vulnerability Scoring System)**: est un système normalisé d'évaluation de la criticité des vulnérabilités (CVE) basé sur des critères objectifs et mesurables.
 
 Maintenant que nous comprenons mieux le résultat il est important de noter que même une image Nginx latest contient des paquets avec des vulnérabilités connues, même des critiques. D'où l'importance de sécuriser ses images et l'écosystème technique dans lequel elles évoluent.
 
