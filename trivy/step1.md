@@ -6,6 +6,8 @@ Pour cette démo nous l'installerons par un script fourni par Aqua Security.
 Installez Trivy :
 `curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.34.0`{{execute}}
 
+Vérifiez que Trivy est bien installé :
+
 `trivy --version`{{execute}}
 
 Vous devriez obtenir :
