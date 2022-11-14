@@ -90,7 +90,7 @@ Vous pouvez désactiver le scan des secrets avec le drapeau `--security-checks`.
 
 `trivy fs --security-checks vuln ./fs-scan`{{execute}}
 
->**NB**: Désactiver les secrets est une solution pour accélerer de manière notable la rapidité des scans Trivy. Évidemment, ce choix dépend de votre contexte.
+>**NB**: Désactiver le scan des secrets est une solution pour accélerer de manière notable la rapidité des scans Trivy. Évidemment, ce choix dépend de votre contexte.
 
 ## Documentations associées
 
